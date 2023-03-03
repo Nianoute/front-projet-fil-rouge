@@ -25,21 +25,25 @@ const RegisterPage = () => {
     };
 
     return (
-    <form onSubmit={onSubmitForm}>
-        <label>
-            email:
-            <input type="email" onChange={onChangeUser} value={user.email} name="email" />
-        </label>
-        <label>
-            Mdp:
-            <input type="password" onChange={onChangeUser} value={user.password} name="password" />
-        </label>
-        <label>
-            UserName:
-            <input type="text" onChange={onChangeUser} value={user.userName} name="userName" />
-        </label>
-        <input type="submit" value="Submit" />
-    </form>
+    <>
+        <h1>Register</h1>
+        <form onSubmit={onSubmitForm}>
+            <label>
+                email:
+                <input type="email" onChange={onChangeUser} value={user.email} name="email" />
+            </label>
+            <label>
+                Mdp:
+                <input type="password" onChange={onChangeUser} value={user.password} name="password" />
+            </label>
+            <label>
+                UserName:
+                <input type="text" onChange={onChangeUser} value={user.userName} name="userName" />
+            </label>
+            <input type="submit" value="Submit" />
+        </form>
+
+    </>
     
     )       
 };

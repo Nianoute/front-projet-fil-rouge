@@ -27,6 +27,7 @@ const CreateNewPost = (data) => {
       
     return (
       <>
+        <h1>Creation d'un post</h1>
         <form onSubmit={handleCreatePost}>
             <label>
                 Le titre:

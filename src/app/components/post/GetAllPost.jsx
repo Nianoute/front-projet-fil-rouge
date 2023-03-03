@@ -20,8 +20,8 @@ const GetAllPostHome = () => {
       <>
         <div>
           {posts?.map((post) => (
-            <div key={post._id}>
-              <Link to={`/${post?._id}`}>
+            <div key={post.id}>
+              <Link to={`/${post?.id}`}>
                 <GetAllPostDesign post={post} />
               </Link>
             </div>
