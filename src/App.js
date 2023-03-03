@@ -1,9 +1,15 @@
+import { BrowserRouter } from "react-router-dom";
+import MainLayout from "./app/layout/MainLayout";
+import MainRouter from "./app/routers/MainRouter";
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <div>Projet fil rouge</div>
-      </header>
+      <BrowserRouter>
+        <MainLayout>
+          <MainRouter />
+        </MainLayout>   
+      </BrowserRouter>
     </div>
   );
 }
