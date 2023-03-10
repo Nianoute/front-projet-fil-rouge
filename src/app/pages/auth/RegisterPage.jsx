@@ -18,7 +18,7 @@ const RegisterPage = () => {
       e.preventDefault();
       try {
         await register(user);
-        navigate("/auth/signin");
+        navigate("/auth/login");
       } catch (error) {
         console.log(error);
       }

@@ -4,7 +4,7 @@ const MainLayout = ({ children }) => {
     return (
       <>
         <NavbarMain />
-        <div maxWidth="lg">{children}</div>
+        <div>{children}</div>
       </>
     );
   };
