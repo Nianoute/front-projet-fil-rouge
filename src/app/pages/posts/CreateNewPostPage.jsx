@@ -32,9 +32,8 @@ const CreateNewPost = () => {
         title: "",
         description: "",
         author: "",
-        categories: [{
-          id: ""
-        }],
+        category: "",
+        category2: "",
     });
 
     const onChangePost = (e) => {
@@ -43,8 +42,16 @@ const CreateNewPost = () => {
     
       const handleCreatePost = (e) => {
         e.preventDefault();
-          post.author = user.id;
-          post.categories = [{id: +post.categories}]
+          if (user.id){
+            post.author = user.id;
+          }
+          if (post.category !== "") {
+            if (post.category2 !== "" && post.category2 !== post.category){ 
+              post.categories = [{id: +post.category}, {id: +post.category2}]
+            } else {   
+              post.categories = [{id: +post.category}]
+            }
+          }
           createPost(post)
             .then(() => {
               navigate(`/`);
@@ -69,14 +76,29 @@ const CreateNewPost = () => {
             </label>
 
             <label>
-              Choix catégorie
-              <select name="categories" onChange={onChangePost}>
+              Choix catégory
+              <select name="category" onChange={onChangePost}>
                   <option value="">--Aucun--</option>
                   {categories?.map((category) => (
                       <option value={category.id} key={category.id}>--{category.name}--</option>
                  ))}
               </select>
             </label>
+                  
+            
+            {post.category?  
+              <label>            
+                Choix catégory 2
+                <select name="category2" onChange={onChangePost}>
+                    <option value="">--Aucun--</option>
+                    {categories?.map((category) => (
+                        <option value={category.id} key={category.id}>--{category.name}--</option>
+                  ))}
+                </select>
+              </label>
+            : <></>}
+ 
+            
 
             <input type="submit" value="Submit" />
         </form>
