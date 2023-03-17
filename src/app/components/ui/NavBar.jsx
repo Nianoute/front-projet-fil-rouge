@@ -25,7 +25,9 @@ const NavbarMain = () => {
       {user && (
         <>
           <li>
-            Je suis {user.userName}
+            <Link to="/myaccount">
+              Je suis {user.userName}
+            </Link>
           </li>
           <li>
             <Link to="/newpost">
