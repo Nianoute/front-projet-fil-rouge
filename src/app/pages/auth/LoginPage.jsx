@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../../setup/services/auth.services";
+import TokenService from "../../../setup/services/token.services";
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -18,8 +19,11 @@ const LoginPage = () => {
       e.preventDefault();
       try {
         const res = await login(user);
-        localStorage.setItem("token", res.access_token);
-        navigate("/");
+        TokenService.setTokenInLocalStorage(res.access_token);
+        const userToken = TokenService.getUserInToken(res.access_token);
+        setUser(userToken)
+        navigate("/")
+        console.log(user, "te", userToken)
       } catch (error) {
         console.log(error);
       }

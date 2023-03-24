@@ -10,7 +10,7 @@ const CreateNewPost = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("access_token");
       if (token) {
         const decodedToken = jwtDecode(token);
         setUser(decodedToken);

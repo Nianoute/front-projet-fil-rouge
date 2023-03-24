@@ -6,7 +6,7 @@ const NavbarMain = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("access_token");
     if (token) {
       const decodedToken = jwtDecode(token);
       setUser(decodedToken);
