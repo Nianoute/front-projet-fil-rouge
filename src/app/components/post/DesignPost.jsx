@@ -6,7 +6,9 @@ export default function GetAllPostDesign({post}) {
           <ul>
             <li>la desc: {post.description}</li>
             <li>l'id: {post.id}</li>
-            <li>auteur: {post.author.userName}</li>
+            {post.author? 
+              <li>auteur: {post.author.userName}</li>
+            : <></>}
             {post.categories?.map((category, index)=> {
               return(
                 <li key={category.id}>catégorie {index + 1}: {category.name}</li>

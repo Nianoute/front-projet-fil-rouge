@@ -23,7 +23,6 @@ const LoginPage = () => {
         const userToken = TokenService.getUserInToken(res.access_token);
         setUser(userToken)
         navigate("/")
-        console.log(user, "te", userToken)
       } catch (error) {
         console.log(error);
       }

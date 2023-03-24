@@ -21,7 +21,6 @@ const CreateNewPost = () => {
       getAllCategories()
         .then((categories) => {
           setCategories([...categories]);
-          console.log(categories)
         })
         .catch((error) => {
           console.log(error);
@@ -31,7 +30,6 @@ const CreateNewPost = () => {
     const [post, setPost] = useState({
         title: "",
         description: "",
-        author: "",
         category: "",
         category2: "",
     });
@@ -42,8 +40,12 @@ const CreateNewPost = () => {
     
       const handleCreatePost = (e) => {
         e.preventDefault();
-          if (user.id){
-            post.author = user.id;
+          if (user){
+            if (user.id){
+              post.author = user.id;
+            } else {
+              post.author = "";
+            }
           }
           if (post.category !== "") {
             if (post.category2 !== "" && post.category2 !== post.category){ 

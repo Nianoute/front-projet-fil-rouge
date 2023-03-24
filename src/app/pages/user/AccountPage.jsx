@@ -19,7 +19,7 @@ const AccountPage = () => {
     }, []);
 
     useEffect(() => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("access_token");
       if (token) {
         const decodedToken = jwtDecode(token);
         setUser(decodedToken);
@@ -29,19 +29,21 @@ const AccountPage = () => {
     return (
         <div>
             {user && (
-            <h1>{user.userName}</h1>
+              <>
+                <h1>{user.userName}</h1>
+                <p>{user.email}</p>
+              </>
             )}
             <div>
                 Listes de mes post:
                 <div>
                 {posts?.map((post) => (
                     <div key={post.id}>
-                        if (condition) {
-                            
-                        }
-                        <Link to={`/${post?.id}`}>
+                        {post.author?.id === user.id && (
+                          <Link to={`/${post?.id}`}>
                             <GetAllPostDesign post={post} />
-                        </Link>
+                          </Link>
+                        )}
                     </div>
                 ))}
                 {posts?.length === 0 && (

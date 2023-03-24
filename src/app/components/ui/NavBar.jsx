@@ -26,7 +26,7 @@ const NavbarMain = () => {
         <>
           <li>
             <Link to="/myaccount">
-              Je suis {user.userName}
+              My account
             </Link>
           </li>
           <li>
