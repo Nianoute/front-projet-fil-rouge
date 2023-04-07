@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllPosts } from "../../../setup/services/post.services";
 import GetAllPostDesign from "./DesignPost";
+import { getAllCategories } from "../../../setup/services/category.service";
 
 const GetAllPostHome = () => {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState("");
+  const [allCategories, setAllCategories] = useState([]);
 
   const handleCategories = (e) => {
     setCategories(e.target.value);
@@ -24,16 +26,38 @@ const GetAllPostHome = () => {
       });
   }, [categories]);
 
+  useEffect(() => {
+    getAllCategories()
+      .then((allCategories) => {
+        setAllCategories([...allCategories]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
     return (
       <>
+        {allCategories?.length !== 0 && (
           <div>
-          <form>
-              <label>
+            <form>
+                <label>
                   FilterByCat:
                   <input type="text" onChange={handleCategories} value={categories} name="categories" />
-              </label>
-          </form>
-        </div>
+                </label>
+                <label>
+                  Choix catégory
+                  <select name="categories" onChange={handleCategories}>
+                      <option value="">--Aucun--</option>
+                      {allCategories?.map((category) => (
+                          <option value={category.name} key={category.id}>--{category.name}--</option>
+                      ))}
+                  </select>
+                </label>
+            </form>
+          </div>        
+        )}
+
         <div>
           {posts?.map((post) => (
             <div key={post.id}>
@@ -41,12 +65,12 @@ const GetAllPostHome = () => {
                 <GetAllPostDesign post={post} />
               </Link>
             </div>
-        ))}
-        {posts?.length === 0 && (
-          <div>
-            Aucun résultat
-          </div>
-         )}
+          ))}
+          {posts?.length === 0 && (
+            <div>
+              Aucun résultat
+            </div>
+          )}
         </div>
       </>
     );
