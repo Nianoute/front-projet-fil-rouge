@@ -1,0 +1,60 @@
+.auth{
+    align-items: center;
+    text-align: center;
+    background-color: $primaryLight;
+    height: auto;
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+    padding-bottom: 10px;
+
+    .logo{
+        width: 80px;
+        margin: auto;
+    }
+    
+    .auth__title{
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+    }
+
+    .formAuth{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        .inputForm{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 320px;
+            height: 40px;
+            margin: auto;
+            margin-bottom: 50px;
+            background: $primaryLight;
+            box-shadow: inset 6px 3px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+        .submit{
+            justify-content: center;
+            align-items: center;
+            padding: 15px 25px;
+            gap: 8px;
+            
+            background: #7B7B7B;
+            box-shadow: inset 6px 3px 12px 2px rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+            .submit:hover{
+                background: #fff;
+                cursor: pointer;
+            }
+        } 
+    }
+
+}

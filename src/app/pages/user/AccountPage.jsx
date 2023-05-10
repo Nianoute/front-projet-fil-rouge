@@ -27,29 +27,38 @@ const AccountPage = () => {
     }, []);
 
     return (
-        <div>
+        <div className='myAccount'>
             {user && (
-              <>
-                <h1>{user.userName}</h1>
-                <p>{user.email}</p>
-              </>
+              <div className='userInfos'>
+                <div className='userAvatar'>
+                  <img src=".img/account/default_userlogo.jpg" alt='avatar' />
+                </div>
+                <div>
+                  <h1>{user.userName}</h1>
+                  <p>{user.email}</p>
+                </div>
+                <div className='userInfosEdit'>
+                  <Link to='/account/edit'>Modifier mes informations</Link>
+                </div>
+              </div>
             )}
-            <div>
+
+            <div className='userPosts'>
                 Listes de mes post:
                 <div>
                 {posts?.map((post) => (
-                    <div key={post.id}>
-                        {post.author?.id === user.id && (
-                          <Link to={`/${post?.id}`}>
-                            <GetAllPostDesign post={post} />
-                          </Link>
-                        )}
-                    </div>
+                  <div key={post.id}>
+                      {post.author?.id === user.id && (
+                        <Link to={`/${post?.id}`}>
+                          <GetAllPostDesign post={post} />
+                        </Link>
+                      )}
+                  </div>
                 ))}
                 {posts?.length === 0 && (
-                <div>
-                    Aucun résultat
-                </div>
+                  <div>
+                      Aucun résultat
+                  </div>
                 )}
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../../setup/services/auth.services";
 import TokenService from "../../../setup/services/token.services";
 
@@ -29,26 +29,31 @@ const LoginPage = () => {
     };
 
     return (
-    <>
-        <h1>
-            Login
-        </h1>
-        <form onSubmit={onSubmitForm}>
+      <div className="auth">
+        <div className="auth__title">
+          <Link to="/">
+            <img src="./img/header/logo.png" className="logo" alt="logo de la marque" />
+          </Link>
+          <h1>Login</h1>
+        </div>
+
+        <form className="formAuth" onSubmit={onSubmitForm}>
             <label>
-                email:
-                <input type="email" onChange={onChangeUser} value={user.email} name="email" />
+                Email:
+                <input type="email" onChange={onChangeUser} value={user.email} name="email" className="inputForm" />
             </label>
             <label>
                 Mdp:
-                <input type="password" onChange={onChangeUser} value={user.password} name="password" />
+                <input type="password" onChange={onChangeUser} value={user.password} name="password" className="inputForm" />
             </label>
             <label>
                 UserName:
-                <input type="text" onChange={onChangeUser} value={user.userName} name="userName" />
+                <input type="text" onChange={onChangeUser} value={user.userName} name="userName" className="inputForm" />
             </label>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Login" className="submit"/>
+            <Link to="/auth/register">Register</Link>
         </form>
-    </>
+      </div>
     )
 }
 

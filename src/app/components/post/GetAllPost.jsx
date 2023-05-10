@@ -25,12 +25,12 @@ const GetAllPostHome = () => {
                 <GetAllPostDesign post={post} />
               </Link>
             </div>
-        ))}
-        {posts?.length === 0 && (
-          <div>
-            Aucun résultat
-          </div>
-         )}
+          ))}
+          {posts?.length === 0 && (
+            <div>
+              Aucun résultat
+            </div>
+          )}
         </div>
       </>
     );
