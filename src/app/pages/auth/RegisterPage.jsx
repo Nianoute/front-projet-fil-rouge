@@ -47,7 +47,7 @@ const RegisterPage = () => {
                 UserName:
                 <input type="text" onChange={onChangeUser} value={user.userName} name="userName" className="inputForm" />
             </label>
-            <input type="submit" value="Register" className="submit"/>
+            <input type="submit" value="Register" className="primaryBouton"/>
             <Link to="/auth/login">Login</Link>
         </form>
       </div>

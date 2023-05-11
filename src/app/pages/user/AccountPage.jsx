@@ -33,35 +33,51 @@ const AccountPage = () => {
                 <div className='userAvatar'>
                   <img src=".img/account/default_userlogo.jpg" alt='avatar' />
                 </div>
-                <div>
+                <div className='userInfosPrimary'>
                   <h1>{user.userName}</h1>
+                </div>
+                <div className='userInfosSecondary'>
                   <p>{user.email}</p>
                 </div>
                 <div className='userInfosEdit'>
-                  <Link to='/account/edit'>Modifier mes informations</Link>
+                  <Link to='/account/edit' className='primaryBouton'>
+                    <div className="divBouton">Modifier</div>
+                  </Link>
                 </div>
               </div>
             )}
 
-            <div className='userPosts'>
-                Listes de mes post:
-                <div>
-                {posts?.map((post) => (
-                  <div key={post.id}>
-                      {post.author?.id === user.id && (
-                        <Link to={`/${post?.id}`}>
-                          <GetAllPostDesign post={post} />
-                        </Link>
-                      )}
+            <div className='userBlock'>
+              <div className='userStats'>
+                  <div className='userStatsPrimary'>
+                    <h2>Statistiques</h2>
                   </div>
-                ))}
-                {posts?.length === 0 && (
+                  <div className='userStatsSecondary'>
+                    <p>Nombre de post: {posts?.length}</p>
+                  </div>
+              </div>
+
+              <div className='userPosts'>
+                  <h2>Listes de mes posts:</h2>
                   <div>
-                      Aucun résultat
+                    {posts?.map((post) => (
+                      <div key={post.id}>
+                          {post.author?.id === user.id && (
+                            <Link to={`/${post?.id}`}>
+                              <GetAllPostDesign post={post} />
+                            </Link>
+                          )}
+                      </div>
+                    ))}
+                    {posts?.length === 0 && (
+                      <div>
+                          Aucun résultat
+                      </div>
+                    )}
                   </div>
-                )}
-                </div>
+              </div>
             </div>
+
         </div>
     );
 };

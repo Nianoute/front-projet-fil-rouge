@@ -50,7 +50,7 @@ const LoginPage = () => {
                 UserName:
                 <input type="text" onChange={onChangeUser} value={user.userName} name="userName" className="inputForm" />
             </label>
-            <input type="submit" value="Login" className="submit"/>
+            <input type="submit" value="Login" className="primaryBouton"/>
             <Link to="/auth/register">Register</Link>
         </form>
       </div>
