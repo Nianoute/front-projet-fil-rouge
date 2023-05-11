@@ -1,0 +1,40 @@
+.post{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: $secondary;
+    width: 60%;
+    .postInfos{
+        display: block;
+        width: 80%;
+        .postInfosPrimary{
+            display: flex;
+            align-items: center;
+            .postAvatar{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+        }
+        .postInfosSecondary{
+            display: flex;
+            align-items: center;
+        }
+        .postInfosTertiary{
+            display: flex;
+            align-items: center;
+            p {
+                margin: 10px;
+            }
+        }
+    }
+    .postBouton{
+        display: block;
+        width: 20%;
+    }
+
+}

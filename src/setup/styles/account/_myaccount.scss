@@ -73,6 +73,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            .link{
+                text-decoration: none;
+                color: black;
+            }
+            .onePost{
+                width: 100%;
+            }
         }
     }
 }

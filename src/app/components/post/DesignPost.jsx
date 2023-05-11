@@ -6,7 +6,7 @@ export default function GetAllPostDesign({post}) {
           <div className='postInfos'>
             <div className='postInfosPrimary'>
               <div className='postAvatar'>
-                <img src=".img/account/default_userlogo.jpg" alt='avatar' />
+                <img src=".img/post/default_imagePost.png" alt='avatar' />
               </div>
               <div className='postTitle'>
                 <h2>{post.title}</h2>
@@ -19,7 +19,7 @@ export default function GetAllPostDesign({post}) {
 
             <div className='postInfosTertiary'>
               {post.author? 
-                <p>auteur: {post.author.userName}</p>
+                <p>auteur: {post.author.userName}, id: {post.author.id}</p>
               : <></>}
               {post.categories?.map((category, index)=> {
                 return(

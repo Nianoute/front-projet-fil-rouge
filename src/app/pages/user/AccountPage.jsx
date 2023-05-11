@@ -59,11 +59,11 @@ const AccountPage = () => {
 
               <div className='userPosts'>
                   <h2>Listes de mes posts:</h2>
-                  <div>
+                  <div className='onePost'>
                     {posts?.map((post) => (
                       <div key={post.id}>
                           {post.author?.id === user.id && (
-                            <Link to={`/${post?.id}`}>
+                            <Link to={`/${post?.id}`} className='link'>
                               <GetAllPostDesign post={post} />
                             </Link>
                           )}

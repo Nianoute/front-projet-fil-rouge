@@ -13,26 +13,24 @@ const GetAllPostHome = () => {
       })
       .catch((error) => {
         console.log(error);
-      });
+    });
   }, []);
 
-    return (
-      <>
-        <div>
-          {posts?.map((post) => (
-            <div key={post.id}>
-              <Link to={`/${post?.id}`}>
-                <GetAllPostDesign post={post} />
-              </Link>
-            </div>
-          ))}
-          {posts?.length === 0 && (
-            <div>
-              Aucun résultat
-            </div>
-          )}
-        </div>
-      </>
+    return (   
+      <div className="allPostDesign">
+        {posts?.map((post) => (
+          <div key={post.id}>
+            <Link to={`/${post?.id}`} className="link">
+              <GetAllPostDesign post={post} />
+            </Link>
+          </div>
+        ))}
+        {posts?.length === 0 && (
+          <div>
+            Aucun résultat
+          </div>
+        )}
+      </div>
     );
   };
   
