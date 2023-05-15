@@ -1,0 +1,62 @@
+.createPost{
+    text-align: center;
+    background-color: $primaryLight;
+    height: auto;
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+    padding-bottom: 10px;
+    .formCreatePost{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        .formStep{
+            display: inline;
+            width: 100%;
+            margin: auto;
+            margin-bottom: 50px;
+            h2{               
+                border-top: 1px solid $black;
+            }
+            .oneLabel{
+                display: inline-flex;
+                .inputForm{
+                    width: 320px;
+                    height: 40px;
+                    margin: 0 50px;
+                    background: $primaryLight;
+                    box-shadow: inset 6px 3px 12px rgba(0, 0, 0, 0.2);
+                    border-radius: 12px;
+                }
+                .select{
+                    display: flex;
+                    width: 320px;
+                    height: 40px;
+                    margin: 0 50px;
+                    background: $primaryLight;
+                    box-shadow: inset 6px 3px 12px rgba(0, 0, 0, 0.2);
+                    border-radius: 12px;
+                }
+            }
+        }
+        .primaryBouton{
+            justify-content: center;
+            align-items: center;
+            padding: 15px 25px;
+            gap: 8px;
+            
+            background: $primary;
+            box-shadow: inset 6px 3px 12px 2px rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+            :hover{
+                background: $primaryHover;
+                box-shadow: inset 6px 3px 12px 2px rgba(255, 255, 255, 0.25);
+                border-radius: 10px;
+            }
+        }
+    }
+}
