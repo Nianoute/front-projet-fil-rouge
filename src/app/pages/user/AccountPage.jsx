@@ -31,7 +31,7 @@ const AccountPage = () => {
             {user && (
               <div className='userInfos'>
                 <div className='userAvatar'>
-                  <img src=".img/account/default_userlogo.jpg" alt='avatar' />
+                  <img src="logo.png" alt='avatar' />
                 </div>
                 <div className='userInfosPrimary'>
                   <h1>{user.userName}</h1>
@@ -59,14 +59,13 @@ const AccountPage = () => {
 
               <div className='userPosts'>
                   <h2>Listes de mes posts:</h2>
-                  <div className='onePost'>
                     {posts?.map((post) => (
-                      <div key={post.id}>
-                          {post.author?.id === user.id && (
+                      <div key={post.id} className='onePost'>
+                        {post.author?.id === user.id && (
                             <Link to={`/${post?.id}`} className='link'>
                               <GetAllPostDesign post={post} />
                             </Link>
-                          )}
+                        )}
                       </div>
                     ))}
                     {posts?.length === 0 && (
@@ -74,7 +73,6 @@ const AccountPage = () => {
                           Aucun résultat
                       </div>
                     )}
-                  </div>
               </div>
             </div>
 

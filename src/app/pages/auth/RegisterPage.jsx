@@ -29,7 +29,7 @@ const RegisterPage = () => {
       <div className="auth">
         <div className="auth__title">
           <Link to="/">
-            <img src="./img/header/logo.png" className="logo" alt="logo de la marque" />
+            <img src="logo.png" className="logo" alt="logo de la marque" />
           </Link>
           <h1>Register</h1>
         </div>

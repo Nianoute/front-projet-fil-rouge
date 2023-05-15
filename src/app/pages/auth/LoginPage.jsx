@@ -7,8 +7,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({
       email: "",
-      password: "",
-      userName: "",
+      password: ""
     });
   
     const onChangeUser = (e) => {
@@ -32,7 +31,7 @@ const LoginPage = () => {
       <div className="auth">
         <div className="auth__title">
           <Link to="/">
-            <img src="./img/header/logo.png" className="logo" alt="logo de la marque" />
+            <img src="logo.png" className="logo" alt="logo de la marque" />
           </Link>
           <h1>Login</h1>
         </div>
@@ -45,10 +44,6 @@ const LoginPage = () => {
             <label>
                 Mdp:
                 <input type="password" onChange={onChangeUser} value={user.password} name="password" className="inputForm" />
-            </label>
-            <label>
-                UserName:
-                <input type="text" onChange={onChangeUser} value={user.userName} name="userName" className="inputForm" />
             </label>
             <input type="submit" value="Login" className="primaryBouton"/>
             <Link to="/auth/register">Register</Link>

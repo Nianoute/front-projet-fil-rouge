@@ -18,14 +18,14 @@ const NavbarMain = () => {
     <div className="navBar">
       <div className="navBar__left">
           <Link to="/">
-            <img src="./img/header/logo.png" className="logo" alt="logo de la marque" />
+            <img src="logo.png" className="logo" alt="logo de la marque" />
           </Link>
       </div>
 
       <div className="navBar__center">
         <div className="searchBar">
           <input type="search" placeholder="Recherche" />
-          <button><img src="./img/header/search.png" className="imgHeader" alt="search" /></button>
+          <button><img src="search.png" className="imgHeader" alt="search" /></button>
         </div>
       </div>
 
@@ -33,11 +33,11 @@ const NavbarMain = () => {
         {user && (
           <>
               <Link to="/newpost">
-                  <img src="./img/header/post.png" className="icon" alt="post" />
+                  <img src="post.png" className="icon" alt="post" />
               </Link>
 
               <Link to="/myaccount">
-                <img src="./img/header/default_userlogo.jpg" className="icon" alt="default_userlogo" />
+                <img src="default_userlogo.jpg" className="icon" alt="default_userlogo" />
               </Link>
           </>
 
@@ -46,7 +46,7 @@ const NavbarMain = () => {
         {!user && (
           <>
               <Link to="/auth/login">
-                <img src="./img/header/user.png" className="imgHeader" alt="user" />
+                <img src="user.png" className="imgHeader" alt="user" />
               </Link>
               
             
