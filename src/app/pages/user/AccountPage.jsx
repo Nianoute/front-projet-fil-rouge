@@ -62,9 +62,7 @@ const AccountPage = () => {
                     {posts?.map((post) => (
                       <div key={post.id} className='onePost'>
                         {post.author?.id === user.id && (
-                            <Link to={`/${post?.id}`} className='link'>
-                              <GetAllPostDesign post={post} />
-                            </Link>
+                            <GetAllPostDesign post={post} />
                         )}
                       </div>
                     ))}

@@ -18,8 +18,8 @@ const GetAllPostHome = () => {
     return (   
       <div className="allPostDesign">
         {posts?.map((post) => (
-          <div className='onePost'>
-            <div key={post.id}>
+          <div key={post.id}>
+            <div className='onePost'>
               <GetAllPostDesign post={post} />
             </div>
           </div>

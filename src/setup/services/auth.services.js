@@ -1,12 +1,5 @@
 import axios from "axios";
 
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + localStorage.getItem("token"),
-  },
-};
-
 const login = async (data) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API}/auth/signin`,
@@ -23,12 +16,14 @@ const register = async (data) => {
   return response.data;
 };
 
-const userMe = async () => {
-  const response = await axios.get(
-    `${process.env.REACT_APP_API}/auth/me`,
-    config
-  );
+const forgotPassword = async (data) => {
+  const response = await axios.post(`${process.env.REACT_APP_API}/auth/forgot-password`, data);
   return response.data;
 };
 
-export { login, register, userMe };
+const resetPassword = async (token, data) => {
+  const response = await axios.post(`${process.env.REACT_APP_API}/auth/reset-password/${token}`, data);
+  return response.data;
+};
+
+export { login, register, resetPassword, forgotPassword };
