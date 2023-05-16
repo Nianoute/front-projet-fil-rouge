@@ -3,12 +3,16 @@
     justify-content: center;
     margin: 20px;
     padding: 20px;
-    border: 1px solid black;
     border-radius: 10px;
-    background-color: $secondary;
+    box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
     .postInfos{
         display: block;
         width: 80%;
+        .separator{
+            flex: 1 1 0%;
+            height: 1px;
+            background-color: rgb(216, 218, 232);
+        }
         .postInfosPrimary{
             display: flex;
             .postLogo{
@@ -37,7 +41,6 @@
         .postInfosSecondary{
             display: flex;
             align-items: center;
-            border-bottom: 1px solid $black;
         }
         .postInfosTertiary{
             display: flex;
@@ -79,21 +82,33 @@
             display: flex;
             justify-content: space-around;
             background-color: $secondary;
-            border: 1px solid $black;
             text-align: center;
             font-weight: bold;
             color: $white;
             margin-bottom: 20px;
-            .postBoutonPolDown, .postBoutonPolUp{
+            border-radius: 50px;
+            .postBoutonPolUp{
                 p {
                     align-items: center;
-                    background-color: $secondaryLight;
+                    background-color: $greenLight;
                     padding: 5px 12px;
                     border-radius: 10px;
                     &:hover{
-                        background-color: $secondaryHover;
+                        background-color: $greenHover;
                     }
                 }
+            }
+            .postBoutonPolDown{
+                p {
+                    align-items: center;
+                    background-color: $redLight;
+                    padding: 5px 12px;
+                    border-radius: 10px;
+                    &:hover{
+                        background-color: $redHover;
+                    }
+                }
+            }
             }
         }
         .postBoutonComment{
@@ -103,8 +118,6 @@
             left: 10%;
             display: inline;
             text-align: center;
-            font-weight: bold;
-            color: $white;
             .postBoutonCommentIcon img{
                 width: 50px;
                 height: 50px;
@@ -115,23 +128,24 @@
         }
         .postBoutonUrl{
             position: absolute;
-            width: 80%;
-            display: inline;
-            background-color: $primary;
             text-align: center;
-            font-weight: bold;
-            color: $white;
-            border-radius: 10px;
             bottom: 0%;
-            left: 10%;
+            
+            background: $primary;
+            border-radius: 10px;
+            color: $white;
+            font-size: 1rem;
+            font-weight: 700;
+            width: 100%;
+            padding: 5px;
+            &:hover{
+                background: $primaryHover;
+                border-radius: 10px;
+                cursor: pointer;
+            }
             .postBoutonUrlIcon img{
                 width: 50px;
                 height: 50px;
             }
-            &:hover{
-                background-color: $primaryHover;
-            }
         }
-    }
-
 }

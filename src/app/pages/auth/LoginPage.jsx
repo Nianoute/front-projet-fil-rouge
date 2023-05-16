@@ -30,24 +30,26 @@ const LoginPage = () => {
     return (
       <div className="auth">
         <div className="auth__title">
-          <Link to="/">
-            <img src="logo.png" className="logo" alt="logo de la marque" />
-          </Link>
-          <h1>Login</h1>
+          <h1>Connecte-toi</h1>
         </div>
 
         <form className="formAuth" onSubmit={onSubmitForm}>
-            <label>
-                Email:
-                <input type="email" onChange={onChangeUser} value={user.email} name="email" className="inputForm" />
-            </label>
-            <label>
-                Mdp:
-                <input type="password" onChange={onChangeUser} value={user.password} name="password" className="inputForm" />
-            </label>
-            <input type="submit" value="Login" className="primaryBouton"/>
-            <Link to="/auth/register">Register</Link>
+          <div className="formAuthUserInfos">
+                <input type="email" onChange={onChangeUser} value={user.email} name="email" className="inputForm" placeholder="Ton adresse email"/>
+                <input type="password" onChange={onChangeUser} value={user.password} name="password" className="inputForm" placeholder="Ton mot de passe"/>
+                <Link to="/auth/forgot-password">Mot de passe oublié ?</Link>
+          </div>
+            <input type="submit" value="Je me connecte" className="primaryBouton"/>
         </form>
+
+        <div className="auth__footer">
+          <div className="auth__footer__separator">
+            <div className="separator"/>
+            <p className="separatorText">OU</p>
+            <div className="separator"/>
+          </div>
+          <p>Pas encore de compte ? <Link to="/auth/register">Inscris-toi</Link></p>
+        </div>
       </div>
     )
 }

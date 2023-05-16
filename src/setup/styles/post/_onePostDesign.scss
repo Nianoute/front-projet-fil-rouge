@@ -1,11 +1,12 @@
 .detailPost{
     text-align: center;
-    background-color: $primaryLight;
     height: auto;
     width: 50%;
     margin: auto;
     margin-top: 50px;
     padding-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
     .detailPostInfosPrimary{
         display: flex;
         flex-direction: row;

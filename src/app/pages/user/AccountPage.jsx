@@ -40,8 +40,8 @@ const AccountPage = () => {
                   <p>{user.email}</p>
                 </div>
                 <div className='userInfosEdit'>
-                  <Link to='/account/edit' className='primaryBouton'>
-                    <div className="divBouton">Modifier</div>
+                  <Link to='/account/edit'>
+                    <div className="primaryBouton">Modifier</div>
                   </Link>
                 </div>
               </div>

@@ -33,7 +33,8 @@ export default function GetAllPostDesign({post}) {
               <div className='postInfosSecondary'>
                 <p>Description: {post.description}</p>
               </div>
-
+              
+              <div className="separator"/>
               <div className='postInfosTertiary'>
                 <div className='postAuthor'>
                   {post.author?
@@ -90,11 +91,11 @@ export default function GetAllPostDesign({post}) {
             </div>
 
             <div className='postBoutonUrl'>
-              <div className='postBoutonUrlIcon'>
-                <Link to={post.webSite}>
+              <Link to={post.webSite}>
+                <div className='postBoutonUrlIcon'>
                   <img src="url.png" alt='avatar' />
-                </Link>
-              </div>
+                </div>
+              </Link>
             </div>
           </div>
         </div>

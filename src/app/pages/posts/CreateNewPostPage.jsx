@@ -72,52 +72,50 @@ const CreateNewPost = () => {
         <h1>Creation d'un post</h1>
         <form onSubmit={handleCreatePost} className="formCreatePost">
             <div className="formStep">
+              <div className="separator"/>
               <h2>Lien du site</h2>
               <div className="oneLabel">
                 <label>
-                    <p>webSite:</p>
-                    <input type="text" onChange={onChangePost} value={post.webSite} name="webSite" className="inputForm"/>
+                    <input type="text" onChange={onChangePost} value={post.webSite} name="webSite" className="inputForm" placeholder="webSite"/>
                 </label>
               </div>
             </div>
 
             <div className="formStep">
+              <div className="separator"/>
               <h2>Informations du post</h2>
               <div className="oneLabel">
                 <label>
-                    <p>Le titre:</p>
-                    <input type="text" onChange={onChangePost} value={post.title} name="title" className="inputForm"/>
+                    <input type="text" onChange={onChangePost} value={post.title} name="title" className="inputForm" placeholder="Le titre du post"/>
                 </label>
               </div>
               <div className="oneLabel">
                 <label>
-                    <p>La description:</p>
-                    <input type="text" onChange={onChangePost} value={post.description} name="description" className="inputForm"/>
+                    <input type="text" onChange={onChangePost} value={post.description} name="description" className="inputForm" placeholder="La description"/>
                 </label>
               </div>
             </div>
 
             <div className="formStep">
+              <div className="separator"/>
               <h2>Les prix</h2>
               <div className="oneLabel">
                 <label>
-                    <p>Le prix actuel:</p>
-                    <input type="number" onChange={onChangePost} value={post.priceNow} name="priceNow" className="inputForm"/>
+                    <input type="number" onChange={onChangePost} value={post.priceNow} name="priceNow" className="inputForm" placeholder="Le prix actuel"/>
                 </label>
               </div>
               <div className="oneLabel">
               <label>
-                  <p>Le prix initial:</p>
-                  <input type="number" onChange={onChangePost} value={post.priceInit} name="priceInit" className="inputForm"/>
+                  <input type="number" onChange={onChangePost} value={post.priceInit} name="priceInit" className="inputForm" placeholder="Le prix initial"/>
               </label>
               </div>
             </div>
 
             <div className="formStep">
+              <div className="separator"/>
               <h2>Les catégories</h2>
               <div className="oneLabel">
                 <label>
-                  <p>Choix catégory</p>
                   <select name="category" onChange={onChangePost} className="select">
                       <option value="">--Aucun--</option>
                       {categories?.map((category) => (
