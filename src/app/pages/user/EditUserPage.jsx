@@ -6,6 +6,11 @@ import { updateUser } from "../../../setup/services/user.services";
 const EditUserPage = () => {
     const navigate = useNavigate();
     const [userToken, setUserToken] = useState(null);
+    
+        const [user, setUser] = useState({
+                userName: "",
+                password: ""
+            });
 
     useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -14,11 +19,6 @@ const EditUserPage = () => {
         setUserToken(decodedToken);
     }
     }, []);
-
-    const [user, setUser] = useState({
-            userName: "",
-            password: ""
-        });
 
     
     const onChangeUser = (e) => {
@@ -29,6 +29,7 @@ const EditUserPage = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
+            localStorage.removeItem("access_token");
             await updateUser(userToken.id, user);
             navigate("/myaccount");
         } catch (error) {

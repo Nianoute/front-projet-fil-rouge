@@ -19,9 +19,9 @@ import axios from "axios";
   };
   
   const updatePost = async (id, data) => {
-    const response = await axios.patch(
-      `${process.env.REACT_APP_API}/posts/${id}`,data
-    );
+    console.log(data, id);
+    const response = await axios.put(`${process.env.REACT_APP_API}/posts/${id}`, data);
+    console.log(response.data);
     return response.data;
   };
   

@@ -87,6 +87,27 @@
             }
             .onePost{
                 width: 80%;
+                .updatePost{
+                    position: relative;
+                    .updateButton{
+                        position: absolute;
+                        top: 25px;
+                        right: 45%;
+                        background: $primary;
+                        border-radius: 10px;
+                        color: $white;
+                        font-size: 1rem;
+                        font-weight: 700;
+                        width: 10%;
+                        text-align: center;
+                        padding: 10px 0px;
+                        &:hover{
+                            background: $primaryHover;
+                            border-radius: 10px;
+                            cursor: pointer;
+                        }
+                    }
+                }
             }
         }
     }

@@ -62,7 +62,14 @@ const AccountPage = () => {
                     {posts?.map((post) => (
                       <div key={post.id} className='onePost'>
                         {post.author?.id === user.id && (
+                          <>
+                            <div className='updatePost'>
+                              <Link to={`/editpost/${post.id}`}>
+                                <div className='updateButton'>Modifier</div>
+                              </Link>
+                            </div>
                             <GetAllPostDesign post={post} />
+                          </>
                         )}
                       </div>
                     ))}
