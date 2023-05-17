@@ -27,32 +27,53 @@ const AccountPage = () => {
     }, []);
 
     return (
-        <div>
+        <div className='myAccount'>
             {user && (
-              <>
-                <h1>{user.userName}</h1>
-                <p>{user.email}</p>
-              </>
+              <div className='userInfos'>
+                <div className='userAvatar'>
+                  <img src="logo.png" alt='avatar' />
+                </div>
+                <div className='userInfosPrimary'>
+                  <h1>{user.userName}</h1>
+                </div>
+                <div className='userInfosSecondary'>
+                  <p>{user.email}</p>
+                </div>
+                <div className='userInfosEdit'>
+                  <Link to='/account/edit'>
+                    <div className="primaryBouton">Modifier</div>
+                  </Link>
+                </div>
+              </div>
             )}
-            <div>
-                Listes de mes post:
-                <div>
-                {posts?.map((post) => (
-                    <div key={post.id}>
+
+            <div className='userBlock'>
+              <div className='userStats'>
+                  <div className='userStatsPrimary'>
+                    <h2>Statistiques</h2>
+                  </div>
+                  <div className='userStatsSecondary'>
+                    <p>Nombre de post: {posts?.length}</p>
+                  </div>
+              </div>
+
+              <div className='userPosts'>
+                  <h2>Listes de mes posts:</h2>
+                    {posts?.map((post) => (
+                      <div key={post.id} className='onePost'>
                         {post.author?.id === user.id && (
-                          <Link to={`/${post?.id}`}>
                             <GetAllPostDesign post={post} />
-                          </Link>
                         )}
-                    </div>
-                ))}
-                {posts?.length === 0 && (
-                <div>
-                    Aucun résultat
-                </div>
-                )}
-                </div>
+                      </div>
+                    ))}
+                    {posts?.length === 0 && (
+                      <div>
+                          Aucun résultat
+                      </div>
+                    )}
+              </div>
             </div>
+
         </div>
     );
 };

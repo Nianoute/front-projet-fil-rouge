@@ -1,0 +1,93 @@
+.myAccount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0 auto;
+    width: 90%;
+    margin-top: 20px;
+    .userInfos{ 
+        width: 90%;
+        background-color: $white;
+        box-shadow: 0 0 0.5rem rgba($black, 0.2);
+        display: flex;
+        padding: 12px;
+        border-radius: 10px;
+        .userAvatar{
+            width: auto;
+            margin: 0 auto;
+            background-color: $white;
+            box-shadow: 0 0 0.5rem rgba($black, 0.2);
+            padding: 10px;
+            img{
+                width: 100px;
+                height: 100px;
+            }
+        }
+        .userInfosPrimary{
+            width: 10%;
+            margin: auto;
+        }
+        .userInfosSecondary{
+            width: 60%;
+            margin: auto;
+        }
+        .userInfosEdit{
+            width: 10%;
+            margin: auto;
+            a{
+                text-decoration: none;
+                .primaryBouton{
+                    background: $primary;
+                    border-radius: 10px;
+                    color: $white;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    width: 100%;
+                    text-align: center;
+                    padding: 10px 0px;
+                    &:hover{
+                        background: $primaryHover;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    .userBlock{
+        display: flex;
+        width: 90%;
+        background-color: $white;
+        margin: 10px 0px;
+        padding: 12px;
+        .userStats{
+            width: 20%;
+            margin: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            box-shadow: 0 0 0.5rem rgba($black, 0.2);
+            border-radius: 10px;
+        }
+        .userPosts{
+            width: 80%;
+            margin: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            box-shadow: 0 0 0.5rem rgba($black, 0.2);
+            border-radius: 10px;
+            .link{
+                text-decoration: none;
+                color: black;
+            }
+            .onePost{
+                width: 80%;
+            }
+        }
+    }
+}

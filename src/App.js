@@ -1,3 +1,4 @@
+import './App.scss';
 import { BrowserRouter } from "react-router-dom";
 import MainLayout from "./app/layout/MainLayout";
 import MainRouter from "./app/routers/MainRouter";

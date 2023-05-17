@@ -15,47 +15,50 @@ const NavbarMain = () => {
 
   return (
     <>
-    <ul>
-      <li>   
-        <Link to="/">
-          Home
-        </Link>
-      </li>
+    <div className="navBar">
+      <div className="navBar__left">
+          <Link to="/">
+            <img src="logo.png" className="logo" alt="logo de la marque" />
+          </Link>
+      </div>
 
-      {user && (
-        <>
-          <li>
-            <Link to="/myaccount">
-              My account
-            </Link>
-          </li>
-          <li>
-            <Link to="/newpost">
-              Créer un post
-            </Link>
-          </li>
-        </>
+      <div className="navBar__center">
+        <div className="searchBar">
+          <input type="search" placeholder="Recherche" />
+          <button><img src="search.png" className="imgHeader" alt="search" /></button>
+        </div>
+      </div>
 
-      )}
+      <div className="navBar__right">
+        {user && (
+          <>
+              <Link to="/newpost">
+                  <img src="post.png" className="icon" alt="post" />
+              </Link>
 
-      {!user && (
-        <>
-          <li> 
-            <Link to="/auth/login">
-              Login
-            </Link>
-          </li>
+              <Link to="/myaccount">
+                <img src="default_userlogo.jpg" className="icon" alt="default_userlogo" />
+              </Link>
+          </>
 
-          <li>
-           <Link to="/auth/register">
-              Register
-            </Link>
-          </li>
-        </>
+        )}
 
-      )}
+        {!user && (
+          <>
+              <Link to="/auth/login">
+                <img src="user.png" className="imgHeader" alt="user" />
+              </Link>
+              
+            
+              <Link to="/auth/register">
+                Register
+              </Link>
+          </>
 
-    </ul>
+        )}
+      </div>
+
+    </div>
     </>
   );
 };

@@ -1,0 +1,92 @@
+.auth{
+    align-items: center;
+    text-align: center;
+    height: auto;
+    width: 30%;
+    margin: auto;
+    margin-top: 50px;
+    padding-bottom: 10px;
+
+    .logo{
+        width: 80px;
+        margin: auto;
+    }
+    
+    .auth__title{
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+    }
+
+    a {
+        color: $primary;
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        &:hover{
+            color: $primaryHover;
+            text-decoration: underline;
+        }
+    }
+    .formAuth{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: auto;
+        margin-bottom: 20px;
+        .formAuthUserInfos{
+            width: 100%;
+            text-align: left;
+            .inputForm{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                height: 40px;
+                margin: auto;
+                margin-top: 20px;
+                border-radius: 12px;
+            }
+        }
+        .primaryBouton{
+            background: $primary;
+            border-radius: 10px;
+            color: $white;
+            font-size: 1rem;
+            font-weight: 700;
+            width: 70%;
+            height: 40px;
+            margin: 20px;
+            &:hover{
+                background: $primaryHover;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+    .auth__footer__separator{
+        display: flex;
+        box-sizing: border-box;
+        margin-bottom: 40px;
+        flex: 1 1 0%;
+        -webkit-box-align: center;
+        align-items: center;
+        width: 100%;
+        .separator{
+            flex: 1 1 0%;
+            height: 1px;
+            background-color: rgb(216, 218, 232);
+        }
+        .separatorText{
+            display: flex;
+            margin: 0px 16px;
+            font-size: 20px;
+            color: rgb(149, 157, 175);
+        }
+    }
+}

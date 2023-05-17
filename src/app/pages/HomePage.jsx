@@ -4,11 +4,11 @@ import TokenService from "../../setup/services/token.services";
 const HomePage = () => {
   TokenService.getTokenFromLocalStorage();
     return (
-      <>
-        <h1>Listes des posts</h1>
-        <GetAllPostHome></GetAllPostHome>
-
-      </>
+      <div className="homePage">
+        <div className="getAllPost">
+          <GetAllPostHome></GetAllPostHome>
+        </div>
+      </div>
     )
 }
 

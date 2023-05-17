@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getOnePost } from "../../../setup/services/post.services";
 
 const OnePostPage = () => {
@@ -11,15 +11,39 @@ const OnePostPage = () => {
             setPost(post);
         });
     }, [id])
+    
+
 
     return (
         <>
             {post && (
-            <>
-                <h1>{post.id}</h1>
-                <p>{post.createdAt}</p>
-                <p>{post.autor}</p>
-            </>
+                <div className="detailPost">
+                    <h1>{post.title}</h1>
+                    <div className="detailPostInfosPrimary">
+                        <div className="detailPostImage">
+                            <img src="logo192.png" alt={post.title} />
+                        </div>
+                        <div className="detailPostContent">
+                            <div className="postPrice">
+                                <p className="priceNow">{post.priceNow}€</p>
+                                {post.priceInit?
+                                    <>
+                                        <p className='priceInit'>{post.priceInit}€</p>
+                                    </>
+                                    : <></>
+                                }
+                            </div>
+
+                            <div className='postBoutonUrl'>
+                                <div className='postBoutonUrlIcon'>
+                                    <Link to={post.webSite}>
+                                        <img src="url.png" alt='avatar' />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             )}
         </>
     )
