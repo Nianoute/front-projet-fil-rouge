@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const getAllPosts = async () => {
+  const getAllPosts = async (filter = {categories: "", title: ""}) => {  
+    const { categories, title } = filter;
     const response = await axios.get(
-      `${process.env.REACT_APP_API}/posts`
+      `${process.env.REACT_APP_API}/posts?categories=${categories}&title=${title}`
     );
     return response.data;
   };

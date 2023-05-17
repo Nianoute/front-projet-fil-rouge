@@ -1,10 +1,26 @@
-.allPostDesign{
-    display: block;
-    .link{
-        text-decoration: none;
-        color: black;
+.home{
+    .allPostDesign{
+        display: block;
+        .link{
+            text-decoration: none;
+            color: black;
+        }
     }
-    .onePost{
-        width: 60%;
+    .layout{
+        display: flex;
+        justify-content: space-between;
+        .filter{
+            display: flex;
+            align-items: center;
+            .selectOption{
+                height: 32px;
+                min-inline-size: max-content;
+                border: 1px solid rgb(216, 218, 232);
+                border-radius: 4px;
+                color: rgb(105, 103, 115);
+                background-color: rgb(255, 255, 255);
+                margin: 0px 10px;
+            }
+        }
     }
 }
