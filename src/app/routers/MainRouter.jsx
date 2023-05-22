@@ -11,7 +11,7 @@ import EditUserPage from "../pages/user/EditUserPage"
 import UpdatePostPage from "../pages/posts/UpdatePostPage"
 
 
-const MainRouter = () => {
+const MainRouter = ({user, setUser}) => {
     return (
         <>
             <Routes>
@@ -26,7 +26,7 @@ const MainRouter = () => {
                 <Route path="/myaccount-edit" element={<EditUserPage />} />
 
                 <Route path="/auth/register" element={<RegisterPage />} />
-                <Route path="/auth/login" element={<LoginPage />} />
+                <Route path="/auth/login" element={<LoginPage user={user} setUser={setUser}/>} />
                 <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
                 <Route path="/auth/reset-password/:token" element={<ResetPasswordPage />} />
             </Routes>

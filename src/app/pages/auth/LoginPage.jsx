@@ -1,14 +1,9 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../../setup/services/auth.services";
 import TokenService from "../../../setup/services/token.services";
 
-const LoginPage = () => {
+const LoginPage = ({user, setUser}) => {
     const navigate = useNavigate();
-    const [user, setUser] = useState({
-      email: "",
-      password: ""
-    });
   
     const onChangeUser = (e) => {
       setUser({ ...user, [e.target.name]: e.target.value });

@@ -1,9 +1,8 @@
 import jwtDecode from "jwt-decode";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const NavbarMain = () => {
-  const [user, setUser] = useState(null);
+const NavbarMain = ({user, setUser}) => {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -12,20 +11,23 @@ const NavbarMain = () => {
       setUser(decodedToken);
     }
   }, []);
+  if (user.email === "" || user.password === "") {
+    user = null;
+  }
 
   return (
     <>
     <div className="navBar">
       <div className="navBar__left">
           <Link to="/">
-            <img src="logo.png" className="logo" alt="logo de la marque" />
+            <img src="/logo.png" className="logo" alt="logo de la marque" />
           </Link>
       </div>
 
       <div className="navBar__center">
         <div className="searchBar">
           <input type="search" placeholder="Recherche" />
-          <button><img src="search.png" className="imgHeader" alt="search" /></button>
+          <button><img src="/search.png" className="imgHeader" alt="search" /></button>
         </div>
       </div>
 
@@ -33,11 +35,11 @@ const NavbarMain = () => {
         {user && (
           <>
               <Link to="/newpost">
-                  <img src="post.png" className="icon" alt="post" />
+                  <img src="/post.png" className="icon" alt="post" />
               </Link>
 
               <Link to="/myaccount">
-                <img src="default_userlogo.jpg" className="icon" alt="default_userlogo" />
+                <img src="/default_userlogo.jpg" className="icon" alt="default_userlogo" />
               </Link>
           </>
 
@@ -46,7 +48,7 @@ const NavbarMain = () => {
         {!user && (
           <>
               <Link to="/auth/login">
-                <img src="user.png" className="imgHeader" alt="user" />
+                <img src="/user.png" className="imgHeader" alt="user" />
               </Link>
               
             

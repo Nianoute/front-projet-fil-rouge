@@ -1,10 +1,12 @@
 import jwtDecode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAllPosts } from '../../../setup/services/post.services';
 import GetAllPostDesign from '../../components/post/DesignPost';
+import TokenService from '../../../setup/services/token.services';
 
 const AccountPage = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [posts, setPosts] = useState([]);
 
@@ -25,6 +27,12 @@ const AccountPage = () => {
         setUser(decodedToken);
       }
     }, []);
+
+    const disconnect = async() => {
+      TokenService.removeTokenFromLocalStorage();
+      setUser({});
+      navigate("/auth/login");
+    }
 
     return (
         <div className='myAccount'>
@@ -54,6 +62,7 @@ const AccountPage = () => {
                   </div>
                   <div className='userStatsSecondary'>
                     <p>Nombre de post: {posts?.length}</p>
+                    <p onClick={disconnect}>Déconnexion</p>
                   </div>
               </div>
 

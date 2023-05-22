@@ -34,14 +34,13 @@ const UpdatePostPage = () => {
         description: "",
         priceNow: 0,
         priceInit: 0,
-        // category: "",
-        // category2: "",
+        categories: []
     });
 
     useEffect(()=>{
         getOnePost(id).then((post) => {
-            setPost(post);
-            console.log(post.categories[0].name);
+          post.categories = [];
+          setPost(post);
         });
     }, [id])
 
@@ -50,20 +49,30 @@ const UpdatePostPage = () => {
         setPost({ ...post, [e.target.name]: e.target.value });
       };
     
+    const onChangeCategories = (e) => {
+      const newCategories = [...post.categories];
+      if (e.target.checked) {
+        let index = {id: +e.target.value};
+        newCategories.push(index);
+      } else {
+        const index = newCategories.indexOf(e.target.value);
+        newCategories.splice(index, 1);
+      }
+      setPost({ ...post, categories: newCategories });
+    };
+    
       const handleUpdatePost = (e) => {
         e.preventDefault();
-          if (post.category !== "") {
-            if (post.category2 !== "" && post.category2 !== post.category){ 
-              post.categories = [{id: +post.category}, {id: +post.category2}]
-            } else {   
-              post.categories = [{id: +post.category}]
-            }
-          } else {
-            post.categories = [];
-          }
-          updatePost(id, post)
+
+        if (post.categories.length === 0){
+          post.categories = [];
+        }
+
+        console.log(post);
+
+        updatePost(id, post)
             .then(() => {
-            //   navigate(`/`);
+              navigate(`/`);
             })
             .catch((err) => {
               console.log(err);
@@ -78,7 +87,7 @@ const UpdatePostPage = () => {
             {post?.author?.id === user?.id &&(
 
                 <div className="createPost">
-            <h1>Creation d'un post</h1>
+            <h1>Modification d'un post</h1>
             <form onSubmit={handleUpdatePost} className="formCreatePost">
                 <div className="formStep">
                   <div className="separator"/>
@@ -124,30 +133,15 @@ const UpdatePostPage = () => {
                   <div className="separator"/>
                   <h2>Les catégories</h2>
                   <div className="oneLabel">
-                    <label>
-                      <select name="category" onChange={onChangePost} className="select">
-                          <option value={post?.categories[0]?.name}>{post.category}</option>
-                          {categories?.map((category) => (
-                              <option value={category.id} key={category.id}>--{category.name}--</option>
-                              ))}
-                      </select>
-                    </label>
+                    {categories?.map((category) => (
+                        <div key={category.id}>
+                          <label>
+                            <input type="checkbox" onChange={onChangeCategories} value={category.id} name="categories" />
+                            {category.name}
+                          </label>
+                        </div>
+                      ))}
                   </div>
-                        
-                  
-                  {post.category? 
-                    <div className="oneLabel"> 
-                      <label>            
-                        <p>Choix catégory 2</p>
-                        <select name="category2" onChange={onChangePost} className="select">
-                            <option value={post?.categories[1]?.name}>--Aucun--</option>
-                            {categories?.map((category) => (
-                                <option value={category.id} key={category.id}>--{category.name}--</option>
-                                ))}
-                        </select>
-                      </label>
-                    </div>
-                  : <></>}
                 </div>
      
     

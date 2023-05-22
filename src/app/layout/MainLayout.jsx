@@ -1,9 +1,9 @@
 import NavbarMain from "../components/ui/NavBar";
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, user, setUser }) => {
     return (
       <>
-        <NavbarMain />
+        <NavbarMain user={user} setUser={setUser} />
         <div>{children}</div>
       </>
     );

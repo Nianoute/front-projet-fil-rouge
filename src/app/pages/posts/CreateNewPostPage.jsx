@@ -33,12 +33,23 @@ const CreateNewPost = () => {
         description: "",
         priceNow: 0,
         priceInit: 0,
-        category: "",
-        category2: "",
+        categories: [],
     });
 
     const onChangePost = (e) => {
         setPost({ ...post, [e.target.name]: e.target.value });
+      };
+
+      const onChangeCategories = (e) => {
+        const newCategories = [...post.categories];
+        if (e.target.checked) {
+          let index = {id: +e.target.value};
+          newCategories.push(index);
+        } else {
+          const index = newCategories.indexOf(e.target.value);
+          newCategories.splice(index, 1);
+        }
+        setPost({ ...post, categories: newCategories });
       };
     
       const handleCreatePost = (e) => {
@@ -50,13 +61,11 @@ const CreateNewPost = () => {
               post.author = "";
             }
           }
-          if (post.category !== "") {
-            if (post.category2 !== "" && post.category2 !== post.category){ 
-              post.categories = [{id: +post.category}, {id: +post.category2}]
-            } else {   
-              post.categories = [{id: +post.category}]
-            }
+
+          if (post.categories.length === 0){
+            post.categories = [];
           }
+          
           createPost(post)
             .then(() => {
               navigate(`/`);
@@ -115,30 +124,15 @@ const CreateNewPost = () => {
               <div className="separator"/>
               <h2>Les catégories</h2>
               <div className="oneLabel">
-                <label>
-                  <select name="category" onChange={onChangePost} className="select">
-                      <option value="">--Aucun--</option>
-                      {categories?.map((category) => (
-                          <option value={category.id} key={category.id}>--{category.name}--</option>
+                    {categories?.map((category) => (
+                      <div key={category.id}>
+                        <label>
+                          <input type="checkbox" onChange={onChangeCategories} value={category.id} name="categories" />
+                          {category.name}
+                        </label>
+                      </div>
                     ))}
-                  </select>
-                </label>
               </div>
-                    
-              
-              {post.category? 
-                <div className="oneLabel"> 
-                  <label>            
-                    <p>Choix catégory 2</p>
-                    <select name="category2" onChange={onChangePost} className="select">
-                        <option value="">--Aucun--</option>
-                        {categories?.map((category) => (
-                            <option value={category.id} key={category.id}>--{category.name}--</option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-              : <></>}
             </div>
  
 
