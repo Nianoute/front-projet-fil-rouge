@@ -1,21 +1,28 @@
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../../setup/services/auth.services";
 import TokenService from "../../../setup/services/token.services";
+import { useState } from "react";
 
 const LoginPage = ({user, setUser}) => {
     const navigate = useNavigate();
+
+    const [userLogin, setUserLogin] = useState({
+      email: "",
+      password: "",
+    });
   
     const onChangeUser = (e) => {
-      setUser({ ...user, [e.target.name]: e.target.value });
+      setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
     };
   
     const onSubmitForm = async (e) => {
       e.preventDefault();
       try {
-        const res = await login(user);
+        const res = await login(userLogin);
         TokenService.setTokenInLocalStorage(res.access_token);
         const userToken = TokenService.getUserInToken(res.access_token);
-        setUser(userToken)
+        setUserLogin(userToken)
+        setUser(userLogin)
         navigate("/")
       } catch (error) {
         console.log(error);
@@ -30,8 +37,8 @@ const LoginPage = ({user, setUser}) => {
 
         <form className="formAuth" onSubmit={onSubmitForm}>
           <div className="formAuthUserInfos">
-                <input type="email" onChange={onChangeUser} value={user.email} name="email" className="inputForm" placeholder="Ton adresse email"/>
-                <input type="password" onChange={onChangeUser} value={user.password} name="password" className="inputForm" placeholder="Ton mot de passe"/>
+                <input type="email" onChange={onChangeUser} value={userLogin.email} name="email" className="inputForm" placeholder="Ton adresse email"/>
+                <input type="password" onChange={onChangeUser} value={userLogin.password} name="password" className="inputForm" placeholder="Ton mot de passe"/>
                 <Link to="/auth/forgot-password">Mot de passe oublié ?</Link>
           </div>
             <input type="submit" value="Je me connecte" className="primaryBouton"/>

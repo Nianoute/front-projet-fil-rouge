@@ -1,18 +1,11 @@
-import jwtDecode from "jwt-decode";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const NavbarMain = ({user, setUser}) => {
 
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      setUser(decodedToken);
+  if (user) {
+    if (user.email === "" || user.password === "") {
+      setUser(null);
     }
-  }, []);
-  if (user.email === "" || user.password === "") {
-    user = null;
   }
 
   return (

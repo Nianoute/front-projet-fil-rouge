@@ -22,7 +22,7 @@ const MainRouter = ({user, setUser}) => {
                 <Route path="/newpost" element={<CreateNewPost />} />
                 <Route path="/editpost/:id" element={<UpdatePostPage />} />
 
-                <Route path="/myaccount" element={<AccountPage />} />
+                <Route path="/myaccount" element={<AccountPage user={user} setUser={setUser}/>} />
                 <Route path="/myaccount-edit" element={<EditUserPage />} />
 
                 <Route path="/auth/register" element={<RegisterPage />} />

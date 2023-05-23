@@ -5,9 +5,10 @@ import { getAllPosts } from '../../../setup/services/post.services';
 import GetAllPostDesign from '../../components/post/DesignPost';
 import TokenService from '../../../setup/services/token.services';
 
-const AccountPage = () => {
+const AccountPage = ({user, setUser}) => {
+    console.log(user)
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+    const [userToken, setUserToken] = useState(null);
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -24,28 +25,34 @@ const AccountPage = () => {
       const token = localStorage.getItem("access_token");
       if (token) {
         const decodedToken = jwtDecode(token);
-        setUser(decodedToken);
+        setUserToken(decodedToken);
       }
     }, []);
 
-    const disconnect = async() => {
-      TokenService.removeTokenFromLocalStorage();
-      setUser({});
-      navigate("/auth/login");
-    }
+    const disconnect = async (e) => {
+      e.preventDefault();
+      try {
+        TokenService.removeTokenFromLocalStorage();
+        setUserToken(null);
+        setUser(null);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     return (
         <div className='myAccount'>
-            {user && (
+            {userToken && (
               <div className='userInfos'>
                 <div className='userAvatar'>
                   <img src="logo.png" alt='avatar' />
                 </div>
                 <div className='userInfosPrimary'>
-                  <h1>{user.userName}</h1>
+                  <h1>{userToken.userName}</h1>
                 </div>
                 <div className='userInfosSecondary'>
-                  <p>{user.email}</p>
+                  <p>{userToken.email}</p>
                 </div>
                 <div className='userInfosEdit'>
                   <Link to='/myaccount-edit'>
@@ -70,7 +77,7 @@ const AccountPage = () => {
                   <h2>Listes de mes posts:</h2>
                     {posts?.map((post) => (
                       <div key={post.id} className='onePost'>
-                        {post.author?.id === user.id && (
+                        {post.author?.id === userToken.id && (
                           <>
                             <div className='updatePost'>
                               <Link to={`/editpost/${post.id}`}>
