@@ -52,7 +52,7 @@ const CreateNewPost = () => {
         setPost({ ...post, categories: newCategories });
       };
     
-      const handleCreatePost = (e) => {
+      const handleCreatePost = async (e) => {
         e.preventDefault();
           if (user){
             if (user.id){
@@ -65,14 +65,13 @@ const CreateNewPost = () => {
           if (post.categories.length === 0){
             post.categories = [];
           }
-          
-          createPost(post)
-            .then(() => {
-              navigate(`/`);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+
+          try {
+            await createPost(post)
+            navigate(`/`);
+          } catch (error) {
+            console.log(error);
+          }
       };
       
       
