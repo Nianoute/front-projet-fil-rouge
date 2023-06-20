@@ -2,10 +2,6 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 
 export default function GetAllPostDesign({post}) {
-    let pricePercent = 0;
-    if(post.priceInit){
-      pricePercent = Math.round((post.priceInit - post.priceNow) / post.priceInit * 100);
-    }
     return (
         <div className='post'>
           <div className='postInfos'>
@@ -17,15 +13,6 @@ export default function GetAllPostDesign({post}) {
                 <div className='postPrixTitle'>
                   <div className='postTitle'>
                     <h2>{post.title}</h2>
-                  </div>
-                  <div className='postPrix'>
-                    <p className='priceNow'>{post.priceNow}€</p>
-                    {post.priceInit?
-                      <>
-                        <p className='priceInit'>{post.priceInit}€</p>
-                        <p className='pricePercent'>{pricePercent}%</p>
-                      </>
-                    : <></>}
                   </div>
                 </div>
               </div>
@@ -39,7 +26,12 @@ export default function GetAllPostDesign({post}) {
                 <div className='postAuthor'>
                   {post.author?
                     <>
-                      <img src="logo512.png" className='postAuthorAvatar' alt='avatar' />
+                      {post.author.avatar === "" && (
+                        <img src="logo.png" className='postAuthorAvatar' alt='avatar' />
+                      )}
+                      {post.author.avatar !== "" && (
+                        <img src={post.author.avatar} className='postAuthorAvatar' alt='avatar' />
+                      )}
                       <p>{post.author.userName}</p>
                     </>
                   : <></>}

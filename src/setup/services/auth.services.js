@@ -9,24 +9,22 @@ const login = async (data) => {
 };
 
 const register = async (data) => {
-    // convert the post object to a FormData object
-    if(!data.files){
-      console.log('posts without files');
-      const response = await axios.post(`${process.env.REACT_APP_API}/auth/signup`, data)
-      return response.data
-    }
-    const formData = new FormData();
+  console.log('data', data);
+  if(data.files.length === 0){
+    console.log('user without files');
+    const response = await axios.post(`${process.env.REACT_APP_API}/auth/signup`, data)
+    return response.data
+  }
   
-    formData.append('avatar', data.avatar)  
+  const formData = new FormData();
 
-    // FILES
-    const files = Array.from(data.files)
-    files.forEach((file, index) => {
-      // console.log(file);
-      formData.append('files', file)
-    })
-    
-    const response = await axios.post(`${process.env.REACT_APP_API}/auth/signup`, formData, { formData: true })
+  formData.append('userName', data.userName)
+  formData.append('email', data.email)
+  formData.append('password', data.password)
+
+  formData.append('files', data.files)
+  
+  const response = await axios.post(`${process.env.REACT_APP_API}/auth/signup`, formData, { formData: true })
   return response.data;
 };
 

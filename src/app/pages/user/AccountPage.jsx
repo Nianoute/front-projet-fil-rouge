@@ -6,7 +6,6 @@ import GetAllPostDesign from '../../components/post/DesignPost';
 import TokenService from '../../../setup/services/token.services';
 
 const AccountPage = ({user, setUser}) => {
-    console.log(user)
     const navigate = useNavigate();
     const [userToken, setUserToken] = useState(null);
     const [posts, setPosts] = useState([]);
@@ -46,7 +45,12 @@ const AccountPage = ({user, setUser}) => {
             {userToken && (
               <div className='userInfos'>
                 <div className='userAvatar'>
-                  <img src="logo.png" alt='avatar' />
+                  {userToken.avatar === "" && (
+                    <img src="logo.png" alt='avatar' />
+                  )}
+                  {userToken.avatar !== "" && (
+                    <img src={userToken.avatar} alt='avatar' />
+                  )}
                 </div>
                 <div className='userInfosPrimary'>
                   <h1>{userToken.userName}</h1>
@@ -75,7 +79,7 @@ const AccountPage = ({user, setUser}) => {
 
               <div className='userPosts'>
                   <h2>Listes de mes posts:</h2>
-                    {posts?.map((post) => (
+                    {/* {posts?.map((post) => (
                       <div key={post.id} className='onePost'>
                         {post.author?.id === userToken.id && (
                           <>
@@ -88,7 +92,7 @@ const AccountPage = ({user, setUser}) => {
                           </>
                         )}
                       </div>
-                    ))}
+                    ))} */}
                     {posts?.length === 0 && (
                       <div>
                           Aucun résultat

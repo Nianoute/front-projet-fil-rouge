@@ -2,12 +2,6 @@ import { Link } from "react-router-dom";
 
 const NavbarMain = ({user, setUser}) => {
 
-  if (user) {
-    if (user.email === "" || user.password === "") {
-      setUser(null);
-    }
-  }
-
   return (
     <>
     <div className="navBar">
@@ -19,8 +13,6 @@ const NavbarMain = ({user, setUser}) => {
 
       <div className="navBar__center">
         <div className="searchBar">
-          <input type="search" placeholder="Recherche" />
-          <button><img src="/search.png" className="imgHeader" alt="search" /></button>
         </div>
       </div>
 
