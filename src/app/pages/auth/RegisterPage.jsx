@@ -7,30 +7,27 @@ const RegisterPage = () => {
     const [user, setUser] = useState({
       email: "",
       password: "",
-      userName: "",
-      files: [],
+      userName: ""
     });
+
+    const [files, setFiles] = useState([]);
   
     const onChangeUser = (e) => {
-      const files = [...user.files];
-      if (e.target.name === "file") {
-        if (files.length > 0) {
-          files.splice(0, files.length);
-        }
-        files.push(e.target.files[0]);
-        setUser({ ...user, files });
-        return;
-      }
       setUser({ ...user, [e.target.name]: e.target.value });
-      console.log(user);
+    };
+
+    const onChangeFile = (e) => {
+      setFiles(e.target.files);
+      console.log(files);
     };
   
     const onSubmitForm = async (e) => {
       console.log(user);
+      console.log(files);
       e.preventDefault();
       try {
-        await register(user);
-        // navigate("/auth/login");
+        await register(user, files);
+        navigate("/auth/login");
       } catch (error) {
         console.log(error);
       }
@@ -53,7 +50,7 @@ const RegisterPage = () => {
                   Images : png, jpeg <br />
                 </p>
                 <label htmlFor="file">Fichiers</label>
-                <input type="file" name="file" placeholder="Image" limit="5" size="5" accept="image/png, image/jpeg" onChange={(e) => { onChangeUser(e) }}
+                <input type="file" name="file" placeholder="Image" limit="5" size="5" accept="image/png, image/jpeg" onChange={(e) => { onChangeFile(e) }}
                 />
           </div>
             <input type="submit" value="Je m'inscris" className="primaryBouton"/>
