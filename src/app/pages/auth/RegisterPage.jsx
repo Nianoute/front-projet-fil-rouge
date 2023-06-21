@@ -18,12 +18,9 @@ const RegisterPage = () => {
 
     const onChangeFile = (e) => {
       setFiles(e.target.files);
-      console.log(files);
     };
   
     const onSubmitForm = async (e) => {
-      console.log(user);
-      console.log(files);
       e.preventDefault();
       try {
         await register(user, files);

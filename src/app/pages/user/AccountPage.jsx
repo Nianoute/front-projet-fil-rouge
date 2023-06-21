@@ -79,7 +79,7 @@ const AccountPage = ({user, setUser}) => {
 
               <div className='userPosts'>
                   <h2>Listes de mes posts:</h2>
-                    {/* {posts?.map((post) => (
+                    {posts?.map((post) => (
                       <div key={post.id} className='onePost'>
                         {post.author?.id === userToken.id && (
                           <>
@@ -92,7 +92,7 @@ const AccountPage = ({user, setUser}) => {
                           </>
                         )}
                       </div>
-                    ))} */}
+                    ))}
                     {posts?.length === 0 && (
                       <div>
                           Aucun résultat

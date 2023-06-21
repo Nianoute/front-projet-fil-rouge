@@ -9,5 +9,17 @@ const updateUser = async (id, data) => {
     const response = await axios.put(`${process.env.REACT_APP_API}/users/${id}`, data);
     return response.data;
   };
+
+const updateFileUser = async (id, files) => {
+    
+    const formData = new FormData();
+    //append files
+    for (let i = 0; i < files.length; i++) {
+      formData.append('file', files[i])
+    }
+    
+    const response = await axios.patch(`${process.env.REACT_APP_API}/users/${id}`, formData, { formData: true })
+    return response.data
+  };
   
-export { getAllUsers, updateUser };
+export { getAllUsers, updateUser, updateFileUser };

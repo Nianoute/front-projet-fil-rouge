@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { updateUser } from "../../../setup/services/user.services";
+import { updateFileUser, updateUser } from "../../../setup/services/user.services";
 
 const EditUserPage = () => {
     const navigate = useNavigate();
@@ -37,6 +37,23 @@ const EditUserPage = () => {
         }
     };
 
+    const [files, setFiles] = useState(null);
+
+    const onChangeFile = (e) => {
+        setFiles(e.target.files)
+    };
+
+    const onSubmitFile = async (e) => {
+        e.preventDefault();
+        try {
+            localStorage.removeItem("access_token");
+            await updateFileUser(userToken.id, files);
+            navigate("/myaccount");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
   return (
     <>
         {userToken && (
@@ -55,6 +72,19 @@ const EditUserPage = () => {
                 </form>
 
                 <div className="auth__footer">
+                <div className="auth__footer__separator">
+                    <div className="separator"/>
+                    <p className="separatorText">OU</p>
+                    <div className="separator"/>
+                </div>
+
+                <form className="formAuth" onSubmit={onSubmitFile}>
+                    <div className="formAuthUserInfos">
+                        <input type="file" name="file" placeholder="Image" limit="5" size="5" accept="image/png, image/jpeg" onChange={(e) => { onChangeFile(e) }}/>
+                    </div>
+                    <input type="submit" value="Je modifie mon avatar" className="primaryBouton"/>
+                </form>
+
                 <div className="auth__footer__separator">
                     <div className="separator"/>
                     <p className="separatorText">OU</p>

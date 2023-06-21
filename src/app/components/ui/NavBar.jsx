@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const NavbarMain = ({user, setUser}) => {
-
   return (
     <>
     <div className="navBar">
@@ -27,7 +26,6 @@ const NavbarMain = ({user, setUser}) => {
                 <img src="/default_userlogo.jpg" className="icon" alt="default_userlogo" />
               </Link>
           </>
-
         )}
 
         {!user && (
@@ -41,8 +39,9 @@ const NavbarMain = ({user, setUser}) => {
                 Register
               </Link>
           </>
-
         )}
+
+
       </div>
 
     </div>
