@@ -43,6 +43,32 @@ const OnePostPage = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="detailPostInfosSecondary">
+                        <div className="detailPostDescription">
+                            <p>{post.description}</p>
+                        </div>
+                        <div className="detailPostComments">
+                            <p>Commentaires</p>
+                            {/* {post.comments.map((comment) => (
+                                <div className="detailPostComment" key={comment.id}>
+                                    <div className="detailPostCommentAvatar">
+                                        {console.log(comment)}
+                                        {comment.author?.avatar === "" && (
+                                            <img src="logo.png" className='postAuthorAvatar' alt='avatar' />
+                                        )}
+                                        {comment.author?.avatar !== "" && (
+                                            <img src={comment.author?.avatar} className='postAuthorAvatar' alt='avatar' />
+                                        )}
+                                    </div>
+                                    <div className="detailPostCommentContent">
+                                        <div className="detailPostCommentAuthor">
+                                            <p>{comment.author.userName}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))} */}
+                        </div>
+                    </div>
                 </div>
             )}
         </>

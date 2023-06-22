@@ -79,7 +79,7 @@ export default function GetAllPostDesign({post}) {
               <div className='postBoutonCommentIcon'>
                 <img src="comment.png" alt='avatar' />
               </div>
-              <p>0</p>
+              <p>{post.comments?.length}</p>
             </div>
 
             <div className='postBoutonUrl'>

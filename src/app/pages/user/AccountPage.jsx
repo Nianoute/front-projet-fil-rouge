@@ -1,24 +1,14 @@
 import jwtDecode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAllPosts } from '../../../setup/services/post.services';
 import GetAllPostDesign from '../../components/post/DesignPost';
 import TokenService from '../../../setup/services/token.services';
+import { getUserById } from '../../../setup/services/user.services';
 
 const AccountPage = ({user, setUser}) => {
     const navigate = useNavigate();
     const [userToken, setUserToken] = useState(null);
-    const [posts, setPosts] = useState([]);
-
-    useEffect(() => {
-      getAllPosts()
-        .then((posts) => {
-          setPosts([...posts]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, []);
+    const [me, setMe] = useState(null);
 
     useEffect(() => {
       const token = localStorage.getItem("access_token");
@@ -39,6 +29,14 @@ const AccountPage = ({user, setUser}) => {
         console.log(error);
       }
     };
+
+    useEffect(() => {
+      if (userToken){
+        getUserById(userToken.id).then((data) => {
+          setMe(data);
+        });
+      }
+    }, [userToken]);
 
     return (
         <div className='myAccount'>
@@ -72,35 +70,30 @@ const AccountPage = ({user, setUser}) => {
                     <h2>Statistiques</h2>
                   </div>
                   <div className='userStatsSecondary'>
-                    <p>Nombre de post: {posts?.length}</p>
+                    <p>Nombre de post: {me?.posts?.length}</p>
                     <p onClick={disconnect}>Déconnexion</p>
                   </div>
               </div>
 
               <div className='userPosts'>
                   <h2>Listes de mes posts:</h2>
-                    {posts?.map((post) => (
-                      <div key={post.id} className='onePost'>
-                        {post.author?.id === userToken.id && (
-                          <>
-                            <div className='updatePost'>
-                              <Link to={`/editpost/${post.id}`}>
-                                <div className='updateButton'>Modifier</div>
-                              </Link>
-                            </div>
-                            <GetAllPostDesign post={post} />
-                          </>
-                        )}
-                      </div>
-                    ))}
-                    {posts?.length === 0 && (
-                      <div>
-                          Aucun résultat
-                      </div>
-                    )}
+                      {me?.posts?.map((post) => (
+                        <div key={post.id} className='onePost'>
+                              <div className='updatePost'>
+                                <Link to={`/editpost/${post.id}`}>
+                                  <div className='updateButton'>Modifier</div>
+                                </Link>
+                              </div>
+                              <GetAllPostDesign post={post} />
+                        </div>
+                      ))}
+                      {me?.posts?.length === 0 && (
+                        <div>
+                            Aucun résultat
+                        </div>
+                      )}
               </div>
             </div>
-
         </div>
     );
 };

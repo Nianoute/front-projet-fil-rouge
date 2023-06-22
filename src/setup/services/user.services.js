@@ -5,6 +5,11 @@ const getAllUsers = async () => {
     return response.data;
   };
 
+const getUserById = async (id) => {
+    const response = await axios.get(`${process.env.REACT_APP_API}/users/${id}`);
+    return response.data;
+  };
+
 const updateUser = async (id, data) => {
     const response = await axios.put(`${process.env.REACT_APP_API}/users/${id}`, data);
     return response.data;
@@ -22,4 +27,4 @@ const updateFileUser = async (id, files) => {
     return response.data
   };
   
-export { getAllUsers, updateUser, updateFileUser };
+export { getAllUsers, updateUser, updateFileUser, getUserById };
