@@ -49,6 +49,7 @@ const OnePostPage = () => {
                         </div>
                         <div className="detailPostComments">
                             <p>Commentaires</p>
+                            <p>{console.log(post.comments)}</p>
                             {/* {post.comments.map((comment) => (
                                 <div className="detailPostComment" key={comment.id}>
                                     <div className="detailPostCommentAvatar">

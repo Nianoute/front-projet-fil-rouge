@@ -44,10 +44,10 @@ const RegisterPage = () => {
                 <input type="text" onChange={onChangeUser} value={user.userName} name="userName" className="inputForm" placeholder="Ton speudo"/>
                 <p className="extentions">
                   Extensions autorisées : <br />
-                  Images : png, jpeg <br />
+                  Images : png, jpeg, webp <br />
                 </p>
                 <label htmlFor="file">Fichiers</label>
-                <input type="file" name="file" placeholder="Image" limit="5" size="5" accept="image/png, image/jpeg" onChange={(e) => { onChangeFile(e) }}
+                <input type="file" name="file" placeholder="Image" limit="5" size="5" accept="image/png, image/jpeg, image/webp" onChange={(e) => { onChangeFile(e) }}
                 />
           </div>
             <input type="submit" value="Je m'inscris" className="primaryBouton"/>

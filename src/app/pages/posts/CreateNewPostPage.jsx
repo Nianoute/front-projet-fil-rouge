@@ -51,6 +51,13 @@ const CreateNewPost = () => {
         }
         setPost({ ...post, categories: newCategories });
       };
+
+      const [files, setFiles] = useState([]);
+
+      const onChangeFile = (e) => {
+        setFiles(e.target.files);
+        console.log(files);
+      };
     
       const handleCreatePost = async (e) => {
         e.preventDefault();
@@ -67,7 +74,7 @@ const CreateNewPost = () => {
           }
 
           try {
-            await createPost(post)
+            await createPost(post, files)
             navigate(`/`);
           } catch (error) {
             console.log(error);
@@ -109,12 +116,12 @@ const CreateNewPost = () => {
               <h2>Les prix</h2>
               <div className="oneLabel">
                 <label>
-                    <input type="number" onChange={onChangePost} value={post.priceNow} name="priceNow" className="inputForm" placeholder="Le prix actuel"/>
+                    <input type="number" onChange={onChangePost} value={post.priceNow} name="pricePromo" className="inputForm" placeholder="Le prix actuel"/>
                 </label>
               </div>
               <div className="oneLabel">
               <label>
-                  <input type="number" onChange={onChangePost} value={post.priceInit} name="priceInit" className="inputForm" placeholder="Le prix initial"/>
+                  <input type="number" onChange={onChangePost} value={post.priceInit} name="price" className="inputForm" placeholder="Le prix initial"/>
               </label>
               </div>
             </div>
@@ -131,6 +138,20 @@ const CreateNewPost = () => {
                         </label>
                       </div>
                     ))}
+              </div>
+            </div>
+
+            <div className="formStep">
+              <div className="separator"/>
+              <h2>Les images</h2>
+              <div className="oneLabel">
+                <p className="extentions">
+                  Extensions autorisées : <br />
+                  Images : png, jpeg, webp <br />
+                </p>
+                <label htmlFor="file">Fichiers</label>
+                <input type="file" name="file" placeholder="Image" limit="5" size="5" accept="image/png, image/jpeg, image/webp" onChange={(e) => { onChangeFile(e) }}
+                />
               </div>
             </div>
  

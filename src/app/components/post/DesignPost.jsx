@@ -7,8 +7,13 @@ export default function GetAllPostDesign({post}) {
           <div className='postInfos'>
             <Link to={`/${post?.id}`} className="link">
               <div className='postInfosPrimary'>
-                <div className='postLogo'>
-                  <img src="logo192.png" alt='avatar' />
+                <div>
+                      {post.imagePost === "" && (
+                        <img src="logo.png" className='postLogo' alt='no' />
+                      )}
+                      {post.imagePost !== "" && (
+                        <img src={post.imagePost} className='postLogo' alt='not found' />
+                      )}            
                 </div>
                 <div className='postPrixTitle'>
                   <div className='postTitle'>
@@ -32,7 +37,6 @@ export default function GetAllPostDesign({post}) {
                       {post.author.avatar !== "" && (
                         <img src={post.author.avatar} className='postAuthorAvatar' alt='avatar' />
                       )}
-                      <p>{post.author.userName}</p>
                     </>
                   : <></>}
                 </div>
