@@ -20,6 +20,7 @@ const register = async (data, files) => {
   formData.append('userName', data.userName)
   formData.append('email', data.email)
   formData.append('password', data.password)
+
   //append files
   for (let i = 0; i < files.length; i++) {
     formData.append('file', files[i])

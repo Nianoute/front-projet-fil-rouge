@@ -9,6 +9,7 @@ import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage"
 import ResetPasswordPage from "../pages/auth/ResetPasswordPage"
 import EditUserPage from "../pages/user/EditUserPage"
 import UpdatePostPage from "../pages/posts/UpdatePostPage"
+import CreatePostVariant from "../pages/posts/postVariants/CreatePostVariant"
 
 
 const MainRouter = ({user, setUser}) => {
@@ -21,6 +22,7 @@ const MainRouter = ({user, setUser}) => {
                 <Route path="/:id" element={<OnePostPage/>} />
                 <Route path="/newpost" element={<CreateNewPost />} />
                 <Route path="/editpost/:id" element={<UpdatePostPage />} />
+                <Route path="/newpost-variant" element={<CreatePostVariant />} />
 
                 <Route path="/myaccount" element={<AccountPage user={user} setUser={setUser}/>} />
                 <Route path="/myaccount-edit" element={<EditUserPage />} />

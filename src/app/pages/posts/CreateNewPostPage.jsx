@@ -31,55 +31,66 @@ const CreateNewPost = () => {
         webSite: "",
         title: "",
         description: "",
-        priceNow: 0,
-        priceInit: 0,
+        price: 0,
+        promoPrice: 0,
         categories: [],
+        postVariants: [],
     });
 
     const onChangePost = (e) => {
         setPost({ ...post, [e.target.name]: e.target.value });
       };
 
-      const onChangeCategories = (e) => {
-        const newCategories = [...post.categories];
-        if (e.target.checked) {
-          let index = {id: +e.target.value};
-          newCategories.push(index);
-        } else {
-          const index = newCategories.indexOf(e.target.value);
-          newCategories.splice(index, 1);
+    const onChangeCategories = (e) => {
+      const newCategories = [...post.categories];
+      if (e.target.checked) {
+        let index = {id: +e.target.value};
+        newCategories.push(index);
+      } else {
+        const index = newCategories.indexOf(e.target.value);
+        newCategories.splice(index, 1);
+      }
+      setPost({ ...post, categories: newCategories });
+    };
+
+    const [files, setFiles] = useState([]);
+
+    const onChangeFile = (e) => {
+      setFiles(e.target.files);
+      console.log(files);
+    };
+  
+    const handleCreatePost = async (e) => {
+      e.preventDefault();
+        if (user){
+          if (user.id){
+            post.author = user.id;
+          } else {
+            post.author = "";
+          }
         }
-        setPost({ ...post, categories: newCategories });
-      };
 
-      const [files, setFiles] = useState([]);
+        if (post.categories.length === 0){
+          post.categories = [];
+        }
 
-      const onChangeFile = (e) => {
-        setFiles(e.target.files);
-        console.log(files);
-      };
-    
-      const handleCreatePost = async (e) => {
-        e.preventDefault();
-          if (user){
-            if (user.id){
-              post.author = user.id;
-            } else {
-              post.author = "";
-            }
-          }
-
-          if (post.categories.length === 0){
-            post.categories = [];
-          }
-
-          try {
-            await createPost(post, files)
-            navigate(`/`);
-          } catch (error) {
+        try {
+          await createPost(post, files)
+          .then((response) => {
+            console.log(response);
+            navigate('/newpost-variant', {
+              state: {
+                post: response,
+              }
+            });
+          })
+          .catch((error) => {
             console.log(error);
-          }
-      };
+          });
+        } catch (error) {
+          console.log(error);
+        }
+    };
       
       
     return (
@@ -116,30 +127,32 @@ const CreateNewPost = () => {
               <h2>Les prix</h2>
               <div className="oneLabel">
                 <label>
-                    <input type="number" onChange={onChangePost} value={post.priceNow} name="pricePromo" className="inputForm" placeholder="Le prix actuel"/>
+                    <input type="number" onChange={onChangePost} value={post.promoPrice} name="promoPrice" className="inputForm" placeholder="Le prix actuel"/>
                 </label>
               </div>
               <div className="oneLabel">
               <label>
-                  <input type="number" onChange={onChangePost} value={post.priceInit} name="price" className="inputForm" placeholder="Le prix initial"/>
+                  <input type="number" onChange={onChangePost} value={post.price} name="price" className="inputForm" placeholder="Le prix avant promotion"/>
               </label>
               </div>
             </div>
 
-            <div className="formStep">
-              <div className="separator"/>
-              <h2>Les catégories</h2>
-              <div className="oneLabel">
-                    {categories?.map((category) => (
-                      <div key={category.id}>
-                        <label>
-                          <input type="checkbox" onChange={onChangeCategories} value={category.id} name="categories" />
-                          {category.name}
-                        </label>
-                      </div>
-                    ))}
+            {categories?.length !== 0 && (
+              <div className="formStep">
+                <div className="separator"/>
+                <h2>Les catégories</h2>
+                <div className="oneLabel">
+                      {categories?.map((category) => (
+                        <div key={category.id}>
+                          <label>
+                            <input type="checkbox" onChange={onChangeCategories} value={category.id} name="categories" />
+                            {category.name}
+                          </label>
+                        </div>
+                      ))}
+                </div>
               </div>
-            </div>
+              )}
 
             <div className="formStep">
               <div className="separator"/>
@@ -154,7 +167,11 @@ const CreateNewPost = () => {
                 />
               </div>
             </div>
- 
+
+            <div className="formStep">
+              <div className="separator"/>
+              <h2>Les variantes</h2>
+            </div>
 
             <input type="submit" value="Submit" className="primaryBouton"/>
         </form>
