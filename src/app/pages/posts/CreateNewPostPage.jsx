@@ -57,7 +57,6 @@ const CreateNewPost = () => {
 
     const onChangeFile = (e) => {
       setFiles(e.target.files);
-      console.log(files);
     };
   
     const handleCreatePost = async (e) => {

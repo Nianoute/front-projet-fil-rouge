@@ -1,56 +1,88 @@
-.detailPost{
-    text-align: center;
+.onePostPage{
+    width: 100%;
     height: auto;
-    width: 50%;
-    margin: auto;
-    margin-top: 50px;
-    padding-bottom: 10px;
-    border-radius: 10px;
-    box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
-    .detailPostInfosPrimary{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        margin-top: 20px;
-        .detailPostImages{
-            width: 50%;
-            img{
-                width: 100%;
-                height: 100%;
-            }
-        }
-        .detailPostContent{
-            .postPrice{
-                font-size: 1.2em;
+    margin: 20px 0;
+    .detailPostHeader{  
+        display: inline-flex;
+        .detailPost{
+            text-align: center;
+            height: auto;
+            width: 70%;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+            .detailPostInfosPrimary{
                 display: flex;
-                p{
-                    margin: 0 5px;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                margin-top: 20px;
+                .detailPostImages{
+                    width: 50%;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
-                .priceNow{
-                    color: $red;
-                }
-                .priceInit{
-                    text-decoration: line-through;
-                    color: black;
+                .detailPostContent{
+                    .postPrice{
+                        font-size: 1.2em;
+                        display: flex;
+                        p{
+                            margin: 0 5px;
+                        }
+                        .priceNow{
+                            color: $red;
+                        }
+                        .priceInit{
+                            text-decoration: line-through;
+                            color: black;
+                        }
+                    }
+                    .postBoutonUrl{
+                        padding: 5px 25px;
+                        background-color: $secondary;
+                        text-align: center;
+                        border-radius: 10px;
+                        .postBoutonUrlIcon img{
+                            width: 50px;
+                            height: 50px;
+                        }
+                        &:hover{
+                            background-color: $secondaryHover;
+                        }
+                    }
                 }
             }
-            .postBoutonUrl{
-                padding: 5px 25px;
-                background-color: $secondary;
-                text-align: center;
-                border-radius: 10px;
-                .postBoutonUrlIcon img{
-                    width: 50px;
-                    height: 50px;
-                }
-                &:hover{
-                    background-color: $secondaryHover;
-                }
+            .detailPostInfosSecondary{
+                display: flex;
             }
         }
-    }
-    .detailPostInfosSecondary{
-        display: flex;
+        .postVariants{
+            display: block;
+            width: 30%;
+            margin: 10px;
+            .primaryPost{
+                border-radius: 10px;
+                box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+                border: 1px solid $secondary;
+                margin: 10px 0px;
+            } 
+            .primaryPost:hover{
+                cursor: pointer;
+            }
+
+            .secondaryPost{
+                border-radius: 10px;
+                box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+                box-sizing: border-box;
+                border: 1px solid $white;
+                margin: 10px 0px;
+            } 
+            .secondaryPost:hover{
+                cursor: pointer;
+                border: 1px solid $black;
+            }
+        }
     }
 }
