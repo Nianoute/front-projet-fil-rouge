@@ -11,10 +11,20 @@ const OnePostPage = () => {
         getOnePost(id).then((post) => {
             setPost(post);
             setPostActive(post);
-            console.log(post);
         });
     }, [id])
 
+    const changePostActifToVariant = (e) => {
+        const indexOfVariant = e.target.id;
+        setPostActive(post.postVariants[indexOfVariant]);
+        if (post.postVariants[indexOfVariant].imagePostV === "") {
+            setPostActive({...post.postVariants[indexOfVariant], imagePostV: post.imagePost});
+        }
+    }
+
+    const changePostActifToPrimary = () => {
+        setPostActive(post);
+    }
 
     return (
         <>
@@ -25,14 +35,19 @@ const OnePostPage = () => {
                             <h1>{postActive.title}</h1>
                             <div className="detailPostInfosPrimary">
                                 <div className="detailPostImage">
-                                    <img src="logo192.png" alt={post.title} />
+                                    {postActive.imagePost && (
+                                        <img src={postActive.imagePost} alt="not found" />
+                                    )}
+                                    {postActive.imagePostV && (
+                                        <img src={postActive.imagePostV} alt="not found" />
+                                    )}
                                 </div>
                                 <div className="detailPostContent">
                                     <div className="postPrice">
-                                        <p className="priceNow">{post.priceNow}</p>
-                                        {post.price?
+                                        <p className="priceNow">{postActive.priceNow}</p>
+                                        {postActive.price?
                                             <>
-                                                <p className='priceInit'>{post.priceInit}</p>
+                                                <p className='priceInit'>{postActive.priceInit}</p>
                                             </>
                                             : <></>
                                         }
@@ -51,44 +66,50 @@ const OnePostPage = () => {
                             </div>
                             <div className="detailPostInfosSecondary">
                                 <div className="detailPostDescription">
-                                    <p>{post.description}</p>
+                                    <p>{postActive.description}</p>
                                 </div>
                             </div>
                         </div>
+                        
                         <div className="postVariants">
-                            <div className="primaryPost">
+                            <div className="primaryPost" onClick={changePostActifToPrimary}>
                                 <div className="primaryPostTitle">
-                                    <p>{post.title}</p>
+                                    <h3>{post.title}</h3>
                                 </div>
-                                <div className="primaryPostImage">
-                                    <img src={post.image} alt="not found" />
+                                <div className="primaryPostInfos">
+                                    <div className="primaryPostImage">
+                                        <img src={post.imagePost} alt="not found" />
+                                    </div>
+                                    <div className="primaryPostPrice">
+                                        <p className="promoPrice">{post.promoPrice}€</p>
+                                        <p className="price">{post.price}€</p>
+                                    </div>
                                 </div>
-                                <div className="primaryPostPrice">
-                                    <p>{post.price}</p>
-                                    <p>{post.pricePromo}</p>
-                                </div>
-                                <div className="primaryPostDescription">
-                                    <p>{post.description}</p>
+                                <div className="onClickPost">
+                                    <div className="onClickPostDiv" />
                                 </div>
                             </div>
-                            {post.postVariants.map((variant) => (
-                                <div className="secondaryPost" key={variant.id}>
-                                    <div className="secondaryPostTitle">
-                                        <p>{variant.title}</p>
+
+                            {post.postVariants.map((variant, index) => (
+                                <div className="secondaryPost" key={variant.id} id={index} onClick={changePostActifToVariant}>
+                                    <div className="secondaryPostTitle" id={index}>
+                                        <h3 id={index}>{variant.title}</h3>
                                     </div>
-                                    <div className="secondaryPostImage">
-                                        <img src={variant.image} alt="not found" />
-                                    </div>
-                                    <div className="secondaryPostPrice">
-                                        <p>{variant.price}</p>
-                                        <p>{variant.pricePromo}</p>
-                                    </div>
-                                    <div className="secondaryPostDescription">
-                                        <p>{variant.description}</p>
+                                    <div className="secondaryPostInfos" id={index}>
+                                        <div className="secondaryPostImage" id={index}>
+                                            {variant.imagePostV === ""?
+                                                <img src={post.imagePost} alt="not found" id={index}/>
+                                                :
+                                                <img src={variant.imagePostV} alt="not found" id={index}/>
+                                            }       
+                                        </div>
+                                        <div className="secondaryPostPrice" id={index}>
+                                            <p className="promoPrice" id={index}>{variant.promoPrice}€</p>
+                                            <p className="price" id={index}>{variant.price}€</p>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
-
                         </div>
                     </div>
 
