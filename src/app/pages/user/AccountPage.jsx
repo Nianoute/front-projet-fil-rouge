@@ -1,81 +1,96 @@
-import jwtDecode from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getAllPosts } from '../../../setup/services/post.services';
-import GetAllPostDesign from '../../components/post/DesignPost';
+import jwtDecode from "jwt-decode";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import GetAllPostDesign from "../../components/post/DesignPost";
+import TokenService from "../../../setup/services/token.services";
+import { getUserById } from "../../../setup/services/user.services";
+import { UserContext } from "../../../setup/contexts/UserContext";
 
 const AccountPage = () => {
-    const [user, setUser] = useState(null);
-    const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
+  const [userToken, setUserToken] = useState(null);
+  const [me, setMe] = useState(null);
 
-    useEffect(() => {
-      getAllPosts()
-        .then((posts) => {
-          setPosts([...posts]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, []);
+  const { setUser } = useContext(UserContext);
 
-    useEffect(() => {
-      const token = localStorage.getItem("access_token");
-      if (token) {
-        const decodedToken = jwtDecode(token);
-        setUser(decodedToken);
-      }
-    }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setUserToken(decodedToken);
+    }
+  }, []);
 
-    return (
-        <div className='myAccount'>
-            {user && (
-              <div className='userInfos'>
-                <div className='userAvatar'>
-                  <img src="logo.png" alt='avatar' />
-                </div>
-                <div className='userInfosPrimary'>
-                  <h1>{user.userName}</h1>
-                </div>
-                <div className='userInfosSecondary'>
-                  <p>{user.email}</p>
-                </div>
-                <div className='userInfosEdit'>
-                  <Link to='/account/edit'>
-                    <div className="primaryBouton">Modifier</div>
-                  </Link>
-                </div>
-              </div>
-            )}
+  const disconnect = async (e) => {
+    e.preventDefault();
+    try {
+      TokenService.removeTokenFromLocalStorage();
+      setUserToken(null);
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-            <div className='userBlock'>
-              <div className='userStats'>
-                  <div className='userStatsPrimary'>
-                    <h2>Statistiques</h2>
-                  </div>
-                  <div className='userStatsSecondary'>
-                    <p>Nombre de post: {posts?.length}</p>
-                  </div>
-              </div>
+  useEffect(() => {
+    if (userToken) {
+      getUserById(userToken.id).then((data) => {
+        setMe(data);
+      });
+    }
+  }, [userToken]);
 
-              <div className='userPosts'>
-                  <h2>Listes de mes posts:</h2>
-                    {posts?.map((post) => (
-                      <div key={post.id} className='onePost'>
-                        {post.author?.id === user.id && (
-                            <GetAllPostDesign post={post} />
-                        )}
-                      </div>
-                    ))}
-                    {posts?.length === 0 && (
-                      <div>
-                          Aucun résultat
-                      </div>
-                    )}
-              </div>
-            </div>
-
+  return (
+    <div className="myAccount">
+      {me && (
+        <div className="userInfos">
+          <div className="userAvatar">
+            {me.avatar === "" && <img src="logo.png" alt="avatar" />}
+            {me.avatar !== "" && <img src={me.avatar} alt="avatar" />}
+          </div>
+          <div className="userInfosPrimary">
+            <h1>{me.userName}</h1>
+          </div>
+          <div className="userInfosSecondary">
+            <p>{me.email}</p>
+          </div>
+          <div className="userInfosEdit">
+            <Link to="/myaccount-edit">
+              <div className="primaryBouton">Modifier</div>
+            </Link>
+          </div>
         </div>
-    );
+      )}
+
+      <div className="userBlock">
+        <div className="userStats">
+          <div className="userStatsPrimary">
+            <h2>Statistiques</h2>
+          </div>
+          <div className="userStatsSecondary">
+            <p>Nombre de post: {me?.posts?.length}</p>
+            <p onClick={disconnect}>Déconnexion</p>
+          </div>
+        </div>
+
+        <div className="userPosts">
+          <h2>Listes de mes posts:</h2>
+          {me?.posts?.map((post) => (
+            <div key={post.id} className="onePost">
+              <div className="updatePost">
+                <Link to={`/editpost/${post.id}`}>
+                  <div className="updateButton">Modifier</div>
+                </Link>
+              </div>
+              <GetAllPostDesign post={post} />
+            </div>
+          ))}
+          {me?.posts?.length === 0 && <div>Aucun résultat</div>}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AccountPage;

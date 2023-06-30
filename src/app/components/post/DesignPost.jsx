@@ -2,30 +2,22 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 
 export default function GetAllPostDesign({post}) {
-    let pricePercent = 0;
-    if(post.priceInit){
-      pricePercent = Math.round((post.priceInit - post.priceNow) / post.priceInit * 100);
-    }
     return (
         <div className='post'>
           <div className='postInfos'>
             <Link to={`/${post?.id}`} className="link">
               <div className='postInfosPrimary'>
-                <div className='postLogo'>
-                  <img src="logo192.png" alt='avatar' />
+                <div>
+                      {post.imagePost === "" && (
+                        <img src="logo.png" className='postLogo' alt='no' />
+                      )}
+                      {post.imagePost !== "" && (
+                        <img src={post.imagePost} className='postLogo' alt='not found' />
+                      )}            
                 </div>
                 <div className='postPrixTitle'>
                   <div className='postTitle'>
                     <h2>{post.title}</h2>
-                  </div>
-                  <div className='postPrix'>
-                    <p className='priceNow'>{post.priceNow}€</p>
-                    {post.priceInit?
-                      <>
-                        <p className='priceInit'>{post.priceInit}€</p>
-                        <p className='pricePercent'>{pricePercent}%</p>
-                      </>
-                    : <></>}
                   </div>
                 </div>
               </div>
@@ -39,8 +31,12 @@ export default function GetAllPostDesign({post}) {
                 <div className='postAuthor'>
                   {post.author?
                     <>
-                      <img src="logo512.png" className='postAuthorAvatar' alt='avatar' />
-                      <p>{post.author.userName}</p>
+                      {post.author.avatar === "" && (
+                        <img src="logo.png" className='postAuthorAvatar' alt='avatar' />
+                      )}
+                      {post.author.avatar !== "" && (
+                        <img src={post.author.avatar} className='postAuthorAvatar' alt='avatar' />
+                      )}
                     </>
                   : <></>}
                 </div>
@@ -87,7 +83,7 @@ export default function GetAllPostDesign({post}) {
               <div className='postBoutonCommentIcon'>
                 <img src="comment.png" alt='avatar' />
               </div>
-              <p>0</p>
+              <p>{post.comments?.length}</p>
             </div>
 
             <div className='postBoutonUrl'>

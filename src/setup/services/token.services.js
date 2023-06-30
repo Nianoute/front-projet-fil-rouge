@@ -32,7 +32,8 @@ const isValidToken = (access_token) => {
 const TokenService = {
     getUserInToken,
     setTokenInLocalStorage,
-    getTokenFromLocalStorage
+    getTokenFromLocalStorage,
+    removeTokenFromLocalStorage
 }
 
 export default TokenService;

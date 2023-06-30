@@ -7,17 +7,23 @@ const RegisterPage = () => {
     const [user, setUser] = useState({
       email: "",
       password: "",
-      userName: "",
+      userName: ""
     });
+
+    const [files, setFiles] = useState([]);
   
     const onChangeUser = (e) => {
       setUser({ ...user, [e.target.name]: e.target.value });
+    };
+
+    const onChangeFile = (e) => {
+      setFiles(e.target.files);
     };
   
     const onSubmitForm = async (e) => {
       e.preventDefault();
       try {
-        await register(user);
+        await register(user, files);
         navigate("/auth/login");
       } catch (error) {
         console.log(error);
@@ -36,6 +42,13 @@ const RegisterPage = () => {
                 <input type="email" onChange={onChangeUser} value={user.email} name="email" className="inputForm" placeholder="Ton adresse email"/>
                 <input type="password" onChange={onChangeUser} value={user.password} name="password" className="inputForm" placeholder="Ton mot de passe"/>
                 <input type="text" onChange={onChangeUser} value={user.userName} name="userName" className="inputForm" placeholder="Ton speudo"/>
+                <p className="extentions">
+                  Extensions autorisées : <br />
+                  Images : png, jpeg, webp <br />
+                </p>
+                <label htmlFor="file">Fichiers</label>
+                <input type="file" name="file" placeholder="Image" limit="5" size="5" accept="image/png, image/jpeg, image/webp" onChange={(e) => { onChangeFile(e) }}
+                />
           </div>
             <input type="submit" value="Je m'inscris" className="primaryBouton"/>
         </form>

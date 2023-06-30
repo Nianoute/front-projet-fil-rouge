@@ -1,15 +1,13 @@
-import GetAllPostHome from "../components/post/GetAllPost"
-import TokenService from "../../setup/services/token.services";
+import GetAllPostHome from "../components/post/GetAllPost";
 
 const HomePage = () => {
-  TokenService.getTokenFromLocalStorage();
-    return (
-      <div className="homePage">
-        <div className="getAllPost">
-          <GetAllPostHome></GetAllPostHome>
-        </div>
+  return (
+    <div className="homePage">
+      <div className="getAllPost">
+        <GetAllPostHome></GetAllPostHome>
       </div>
-    )
-}
+    </div>
+  );
+};
 
-export default HomePage
+export default HomePage;

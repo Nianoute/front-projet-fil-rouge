@@ -9,8 +9,6 @@ const GetAllPostHome = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [title, setTitle] = useState("");
 
-
-
   const handleCategories = (e) => {
     setCategories(e.target.value);
   };
