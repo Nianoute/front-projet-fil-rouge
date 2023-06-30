@@ -167,11 +167,6 @@ const CreateNewPost = () => {
               </div>
             </div>
 
-            <div className="formStep">
-              <div className="separator"/>
-              <h2>Les variantes</h2>
-            </div>
-
             <input type="submit" value="Submit" className="primaryBouton"/>
         </form>
       </div>

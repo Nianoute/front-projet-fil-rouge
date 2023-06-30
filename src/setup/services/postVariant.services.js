@@ -12,8 +12,8 @@ import axios from "axios";
     formData.append('webSite', data.webSite)
     formData.append('price', data.price)
     formData.append('promoPrice', data.promoPrice)
-    formData.append('author', data.author)
-    formData.append('categories', data.categories)
+    formData.append('post', data.post)
+
 
     for (let i = 0; i < files.length; i++) {
       formData.append('file', files[i])
