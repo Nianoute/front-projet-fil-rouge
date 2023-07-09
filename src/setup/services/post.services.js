@@ -1,5 +1,5 @@
 import axios from "axios";
-//get token from local storage
+
 const token = localStorage.getItem("access_token");
 const config = {
   headers: { Authorization: `Bearer ${token}` },

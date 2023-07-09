@@ -1,171 +1,185 @@
-.onePostPage{
-    width: 100%;
-    height: auto;
-    margin: 20px 0;
-    .detailPostHeader{  
+.onePostPage {
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
+  .detailPostHeader {
+    display: flex;
+    justify-content: center;
+    .detailPost {
+      position: relative;
+      text-align: center;
+      height: auto;
+      width: 65%;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+      .detailPostInfosPrimary {
         display: flex;
-        justify-content: center;
-        .detailPost{
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 20px;
+        .detailPostImage {
+          width: 200px;
+          height: 200px;
+          img {
+            width: 200px;
+            height: 200px;
+          }
+        }
+        .detailPostContent {
+          .postPrice {
+            font-size: 1.2em;
+            display: flex;
+            p {
+              margin: 0 5px;
+            }
+            .priceNow {
+              color: $red;
+            }
+            .priceInit {
+              text-decoration: line-through;
+              color: black;
+            }
+          }
+          .postBoutonUrl {
+            padding: 5px 25px;
+            background-color: $secondary;
             text-align: center;
-            height: auto;
-            width: 65%;
-            margin: 10px;
             border-radius: 10px;
-            box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
-            .detailPostInfosPrimary{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: center;
-                margin-top: 20px;
-                .detailPostImage{
-                    width: 200px;
-                    height: 200px;
-                    img{
-                        width: 200px;
-                        height: 200px;
-                    }
-                }
-                .detailPostContent{
-                    .postPrice{
-                        font-size: 1.2em;
-                        display: flex;
-                        p{
-                            margin: 0 5px;
-                        }
-                        .priceNow{
-                            color: $red;
-                        }
-                        .priceInit{
-                            text-decoration: line-through;
-                            color: black;
-                        }
-                    }
-                    .postBoutonUrl{
-                        padding: 5px 25px;
-                        background-color: $secondary;
-                        text-align: center;
-                        border-radius: 10px;
-                        .postBoutonUrlIcon img{
-                            width: 50px;
-                            height: 50px;
-                        }
-                        &:hover{
-                            background-color: $secondaryHover;
-                        }
-                    }
-                }
+            .postBoutonUrlIcon img {
+              width: 50px;
+              height: 50px;
             }
-            .detailPostInfosSecondary{
-                display: flex;
+            &:hover {
+              background-color: $secondaryHover;
             }
+          }
         }
-        .postVariants{
-            display: block;
-            width: 25%;
-            .primaryPost{
-                border-radius: 10px;
-                box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
-                border: 1px solid $secondary;
-                margin: 10px 0px;
-                text-align: center;
-                padding: 0 20px;
-                .primaryPostInfos{
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    margin: 10px 0;
-                    .primaryPostImage {
-                        width: 100px;
-                        height: 100px;
-                        img{
-                            width: 100%;
-                            height: 100%;
-                        }
-                    }
-                    .primaryPostPrice {
-                        font-size: 1.2em;
-                        display: flex;
-                        p{
-                            margin: 0 5px;
-                        }
-                        .promoPrice{
-                            color: $red;
-                        }
-                        .price{
-                            text-decoration: line-through;
-                            color: black;
-                        }
-                    }
-                }
-                .onClickPost{
-                    position: relative;
-                    width: 100%;
-                    .onClickPostDiv{
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
-            } 
-            .primaryPost:hover{
-                cursor: pointer;
-            }
-
-            .secondaryPost{
-                border-radius: 10px;
-                box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
-                box-sizing: border-box;
-                border: 1px solid $white;
-                margin: 10px 0px;
-                text-align: center;
-                padding: 0 20px;
-                .secondaryPostInfos{
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    margin: 10px 0;
-                    .secondaryPostImage{
-                        width: 100px;
-                        height: 100px;
-                        img{
-                            width: 100%;
-                            height: 100%;
-                        }
-                    }
-                    .secondaryPostPrice{
-                        font-size: 1.2em;
-                        display: flex;
-                        p{
-                            margin: 0 5px;
-                        }
-                        .promoPrice{
-                            color: $red;
-                        }
-                        .price{
-                            text-decoration: line-through;
-                            color: black;
-                        }
-                
-                    }
-                    .onClickPost{
-                        position: relative;
-                        .onClickPostDiv{
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                            width: 100%;
-                            height: 100%;
-                        }
-                    }
-                }
-            } 
-            .secondaryPost:hover{
-                cursor: pointer;
-                border: 1px solid $black;
-            }
+      }
+      .detailPostInfosSecondary {
+        display: flex;
+      }
+      .like {
+        position: absolute;
+        margin: 10px 0;
+        right: 25px;
+        top: 5px;
+        .likeIcon {
+          width: 25px;
+          height: 25px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
+      }
     }
+    .postVariants {
+      display: block;
+      width: 25%;
+      .primaryPost {
+        border-radius: 10px;
+        box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+        border: 1px solid $secondary;
+        margin: 10px 0px;
+        text-align: center;
+        padding: 0 20px;
+        .primaryPostInfos {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin: 10px 0;
+          .primaryPostImage {
+            width: 100px;
+            height: 100px;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .primaryPostPrice {
+            font-size: 1.2em;
+            display: flex;
+            p {
+              margin: 0 5px;
+            }
+            .promoPrice {
+              color: $red;
+            }
+            .price {
+              text-decoration: line-through;
+              color: black;
+            }
+          }
+        }
+        .onClickPost {
+          position: relative;
+          width: 100%;
+          .onClickPostDiv {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .primaryPost:hover {
+        cursor: pointer;
+      }
+
+      .secondaryPost {
+        border-radius: 10px;
+        box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+        box-sizing: border-box;
+        border: 1px solid $white;
+        margin: 10px 0px;
+        text-align: center;
+        padding: 0 20px;
+        .secondaryPostInfos {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin: 10px 0;
+          .secondaryPostImage {
+            width: 100px;
+            height: 100px;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .secondaryPostPrice {
+            font-size: 1.2em;
+            display: flex;
+            p {
+              margin: 0 5px;
+            }
+            .promoPrice {
+              color: $red;
+            }
+            .price {
+              text-decoration: line-through;
+              color: black;
+            }
+          }
+          .onClickPost {
+            position: relative;
+            .onClickPostDiv {
+              position: absolute;
+              top: 0;
+              right: 0;
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+      .secondaryPost:hover {
+        cursor: pointer;
+        border: 1px solid $black;
+      }
+    }
+  }
 }
