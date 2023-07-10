@@ -182,4 +182,128 @@
       }
     }
   }
+  .detailPostComments {
+    display: flex;
+    justify-content: center;
+    .postCommentsForm {
+      text-align: center;
+      height: auto;
+      width: 40%;
+      margin: 5px;
+      border-radius: 10px;
+      box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .commentTitle {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 70%;
+          height: 40px;
+          margin: auto;
+          margin-top: 20px;
+          border-radius: 12px;
+        }
+        .commentDescription {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 70% !important;
+          margin: auto;
+          margin-top: 20px;
+          border-radius: 12px;
+          resize: none;
+        }
+        .submit {
+          margin: 20px 0;
+          width: 70%;
+          height: 40px;
+          border-radius: 12px;
+          background-color: $primary;
+          &:hover {
+            background-color: $primaryHover;
+          }
+        }
+      }
+    }
+    .detailPostCommentsList {
+      text-align: center;
+      height: auto;
+      width: 50%;
+      margin: 5px;
+      border-radius: 10px;
+      box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+      .detailPostOneComment {
+        margin: 20px 0;
+        .commentHeader {
+          border-top: 1px solid $black;
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          .commentHeaderUserAvatar {
+            width: 50px;
+            height: 50px;
+            margin: 0 10px;
+          }
+          .commentHeaderUserName {
+            font-size: 1.2em;
+            margin: 0 10px;
+          }
+          .commentHeaderDate {
+            font-size: 0.8em;
+            margin: 0 10px;
+          }
+        }
+        .commentBody {
+          padding: 0 10px;
+          text-align: left;
+          margin: 0 10px;
+          .commentBodyName {
+            font-size: 1.2em;
+            font-weight: 600;
+          }
+          .commentBodyDescription {
+            font-size: 1em;
+            margin: 10px 0;
+          }
+          .repondre {
+            margin: 10px 0;
+          }
+        }
+        .detailPostCommentsChildForm {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .formChild {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            .commentDescription {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              width: 90% !important;
+              margin: auto;
+              margin-top: 20px;
+              border-radius: 12px;
+              resize: none;
+            }
+            .submit {
+              margin: 20px 0;
+              width: 70%;
+              height: 40px;
+              border-radius: 12px;
+              background-color: $primary;
+              &:hover {
+                background-color: $primaryHover;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

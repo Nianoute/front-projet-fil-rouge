@@ -44,6 +44,7 @@ const createPost = async (data, files) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API}/posts`,
     formData,
+    config,
     { formData: true }
   );
   return response.data;

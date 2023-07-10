@@ -7,12 +7,24 @@ import {
   deletePostLikeByUser,
   getOnePostLikeByUser,
 } from "../../../setup/services/like.service";
+import {
+  createPostCommentByUser,
+  getAllPostComments,
+} from "../../../setup/services/comment.service";
 
 const OnePostPage = () => {
   const [post, setPost] = useState();
   const [postActive, setPostActive] = useState();
   const { id } = useParams();
   const [postIsLiked, setPostIsLiked] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState({
+    name: "",
+    description: "",
+  });
+  const [commentChild, setCommentChild] = useState({
+    description: "",
+  });
 
   const { user } = useContext(UserContext);
 
@@ -24,6 +36,9 @@ const OnePostPage = () => {
         if (like) {
           setPostIsLiked(like);
         }
+      });
+      getAllPostComments(post.id).then((allComments) => {
+        setComments(allComments);
       });
     });
   }, [id]);
@@ -49,7 +64,6 @@ const OnePostPage = () => {
         postLikes: post.id,
       };
       createPostLikeByUser(data).then((like) => {
-        console.log("like");
         setPostIsLiked(like);
       });
     }
@@ -58,10 +72,72 @@ const OnePostPage = () => {
   const removeLikePost = () => {
     if (user && postIsLiked) {
       deletePostLikeByUser(postIsLiked.id).then(() => {
-        console.log("unlike");
         setPostIsLiked(false);
       });
     }
+  };
+
+  const onChangeComment = (e) => {
+    setComment({ ...comment, [e.target.name]: e.target.value });
+  };
+
+  const onChangeCommentChild = (e) => {
+    setCommentChild({ ...commentChild, [e.target.name]: e.target.value });
+  };
+
+  const handleCreateComment = (e) => {
+    e.preventDefault();
+    const data = {
+      name: comment.name,
+      description: comment.description,
+      post: post.id,
+    };
+
+    createPostCommentByUser(data).then(() => {
+      getAllPostComments(post.id).then((allComments) => {
+        setComments(allComments);
+      });
+    });
+
+    setComment({
+      name: "",
+      description: "",
+    });
+  };
+
+  const showFormCommentChidl = (e) => {
+    const id = e.target.id;
+    const forms = document.querySelectorAll(".formChild");
+    const form = document.querySelector(`.formChild${id}`);
+    forms.forEach((oneForm) => {
+      if (oneForm !== form) {
+        oneForm.style.display = "none";
+      }
+    });
+
+    if (form.style.display === "flex") {
+      form.style.display = "none";
+    } else {
+      form.style.display = "flex";
+    }
+    setCommentChild({
+      description: "",
+    });
+  };
+
+  const handleCreateCommentChild = (e) => {
+    e.preventDefault();
+    const data = {
+      name: "",
+      description: commentChild.description,
+      post: post.id,
+      parent: e.target.id,
+    };
+    createPostCommentByUser(data).then(() => {
+      getAllPostComments(post.id).then((allComments) => {
+        setComments(allComments);
+      });
+    });
   };
 
   return (
@@ -181,7 +257,114 @@ const OnePostPage = () => {
           </div>
 
           <div className="detailPostComments">
-            <p>Commentaires</p>
+            <div className="postCommentsForm">
+              <h2>Commentaires</h2>
+              <form onSubmit={handleCreateComment} className="form">
+                <input
+                  type="text"
+                  placeholder="Nom"
+                  name="name"
+                  onChange={onChangeComment}
+                  value={comment.name}
+                  className="commentTitle"
+                />
+                <textarea
+                  name="description"
+                  minLength="1"
+                  maxLength="144"
+                  rows="10"
+                  placeholder="Commentaire"
+                  onChange={onChangeComment}
+                  value={comment.description}
+                  className="commentDescription"
+                ></textarea>
+                <input type="submit" className="submit" />
+              </form>
+            </div>
+
+            {comments ? (
+              <div className="detailPostCommentsList">
+                <h2>Listes de Commentaires</h2>
+                {comments?.map((oneComment) => (
+                  <div className="detailPostOneComment" key={oneComment.id}>
+                    {oneComment.parent === null ? (
+                      <>
+                        <div className="commentHeader">
+                          {oneComment.author.avatar === "" && (
+                            <img
+                              src="logo.png"
+                              alt="avatar"
+                              className="commentHeaderUserAvatar"
+                            />
+                          )}
+                          {oneComment.author.avatar !== "" && (
+                            <img
+                              src={oneComment.author.avatar}
+                              alt="avatar"
+                              className="commentHeaderUserAvatar"
+                            />
+                          )}
+                          <p className="commentHeaderUserName">
+                            {oneComment.author.userName}
+                          </p>
+                          <p className="commentHeaderDate">
+                            {oneComment.createdAt}
+                          </p>
+                        </div>
+                        <div className="commentBody">
+                          <p className="commentBodyName">{oneComment.name}</p>
+                          <p className="commentBodyDescription">
+                            {oneComment.description}
+                          </p>
+                          <p
+                            className="repondre"
+                            onClick={showFormCommentChidl}
+                            id={oneComment.id}
+                          >
+                            Répondre
+                          </p>
+                        </div>
+                        <div className="detailPostCommentsChildForm">
+                          <form
+                            onSubmit={handleCreateCommentChild}
+                            id={oneComment.id}
+                            className={`formChild formChild${oneComment.id}`}
+                          >
+                            <textarea
+                              name="description"
+                              minLength="1"
+                              maxLength="144"
+                              rows="5"
+                              placeholder="Commentaire"
+                              onChange={onChangeCommentChild}
+                              value={commentChild.description}
+                              className="commentDescription"
+                            ></textarea>
+                            <input type="submit" className="submit" />
+                          </form>
+                        </div>
+                        {oneComment.children?.length > 0 && (
+                          <div className="detailPostCommentsChildList">
+                            {oneComment.children?.map((child) => (
+                              <div
+                                className="detailPostOneCommentsChild"
+                                key={child.id}
+                              >
+                                <p>{child.description}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       )}
