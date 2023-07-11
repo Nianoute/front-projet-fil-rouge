@@ -5,11 +5,13 @@ import GetAllPostDesign from "../../components/post/DesignPost";
 import TokenService from "../../../setup/services/token.services";
 import { getUserById } from "../../../setup/services/user.services";
 import { UserContext } from "../../../setup/contexts/UserContext";
+import { getAllPostsByUser } from "../../../setup/services/post.services";
 
 const AccountPage = () => {
   const navigate = useNavigate();
   const [userToken, setUserToken] = useState(null);
   const [me, setMe] = useState(null);
+  const [posts, setPosts] = useState(null);
 
   const { setUser } = useContext(UserContext);
 
@@ -37,6 +39,10 @@ const AccountPage = () => {
     if (userToken) {
       getUserById(userToken.id).then((data) => {
         setMe(data);
+        getAllPostsByUser(userToken.id).then((data) => {
+          setPosts(data);
+        }
+        );
       });
     }
   }, [userToken]);
@@ -76,7 +82,7 @@ const AccountPage = () => {
 
         <div className="userPosts">
           <h2>Listes de mes posts:</h2>
-          {me?.posts?.map((post) => (
+          {posts?.map((post) => (
             <div key={post.id} className="onePost">
               <div className="updatePost">
                 <Link to={`/editpost/${post.id}`}>

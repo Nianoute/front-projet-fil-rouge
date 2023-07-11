@@ -16,12 +16,17 @@ export default function GetAllPostDesign({ post }) {
   const [postIsLiked, setPostIsLiked] = useState(false);
 
   useEffect(() => {
-    getOnePostLikeByUser(post.id).then((like) => {
-      if (like) {
-        setPostIsLiked(like);
-      }
-    });
-  }, [post.id]);
+    if (user) {
+      getOnePostLikeByUser(post.id).then((like) => {
+        if (like) {
+          setPostIsLiked(like);
+        }
+      }).catch((error) => {
+        console.log(error);
+        window.location.reload();
+      });
+    }
+  }, [post.id, user]);
 
   const likePost = () => {
     if (user) {

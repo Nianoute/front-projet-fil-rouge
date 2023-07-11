@@ -14,6 +14,8 @@ const NavbarMain = () => {
     }
   }, [setUser]);
 
+  console.log(user);
+
   return (
     <>
       <div className="navBar">

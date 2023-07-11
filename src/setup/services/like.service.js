@@ -5,6 +5,8 @@ const config = {
   headers: { Authorization: `Bearer ${token}` },
 };
 
+console.log(config);
+
 const createPostLikeByUser = async (data) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API}/likes`,

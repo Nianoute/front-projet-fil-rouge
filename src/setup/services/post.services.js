@@ -5,10 +5,19 @@ const config = {
   headers: { Authorization: `Bearer ${token}` },
 };
 
+console.log(config);
+
 const getAllPosts = async (filter = { categories: "", title: "" }) => {
   const { categories, title } = filter;
   const response = await axios.get(
     `${process.env.REACT_APP_API}/posts?categories=${categories}&title=${title}`
+  );
+  return response.data;
+};
+
+const getAllPostsByUser = async (id) => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_API}/posts/user/${id}`
   );
   return response.data;
 };
@@ -67,4 +76,4 @@ const deletePost = async (id) => {
   return response.data;
 };
 
-export { getAllPosts, getOnePost, updatePost, deletePost, createPost };
+export { getAllPosts, getAllPostsByUser, getOnePost, updatePost, deletePost, createPost };
