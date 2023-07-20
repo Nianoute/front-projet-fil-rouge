@@ -71,8 +71,12 @@ const UpdatePostPage = () => {
     console.log(post);
 
     updatePost(id, post, files)
-      .then(() => {
-        navigate(`/`);
+      .then((response) => {
+        navigate("/updatepost-variant", {
+          state: {
+            post: response,
+          },
+        });
       })
       .catch((err) => {
         console.log(err);

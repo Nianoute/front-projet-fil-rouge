@@ -34,7 +34,6 @@ export default function GetAllPostDesign({ post }) {
         postLikes: post.id,
       };
       createPostLikeByUser(data).then((like) => {
-        console.log("like");
         setPostIsLiked(like);
         post.likesPost.push(like);
       });
@@ -44,7 +43,6 @@ export default function GetAllPostDesign({ post }) {
   const removeLikePost = () => {
     if (user && postIsLiked) {
       deletePostLikeByUser(postIsLiked.id).then(() => {
-        console.log("unlike");
         setPostIsLiked(false);
         post.likesPost.pop();
       });
@@ -81,7 +79,7 @@ export default function GetAllPostDesign({ post }) {
           <div className="separator" />
           <div className="postInfosTertiary">
             <div className="postAuthor">
-              {post.author ? (
+              {post.author && (
                 <>
                   {post.author.avatar === "" && (
                     <img
@@ -97,9 +95,8 @@ export default function GetAllPostDesign({ post }) {
                       alt="avatar"
                     />
                   )}
+                  <p>{post.author.userName}</p>
                 </>
-              ) : (
-                <></>
               )}
             </div>
 

@@ -10,6 +10,7 @@ import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
 import EditUserPage from "../pages/user/EditUserPage";
 import UpdatePostPage from "../pages/posts/UpdatePostPage";
 import CreatePostVariant from "../pages/posts/postVariants/CreatePostVariant";
+import UpdatePostVariant from "../pages/posts/postVariants/UpdatePostVariant";
 
 const MainRouter = () => {
   return (
@@ -22,6 +23,7 @@ const MainRouter = () => {
         <Route path="/newpost" element={<CreateNewPost />} />
         <Route path="/editpost/:id" element={<UpdatePostPage />} />
         <Route path="/newpost-variant" element={<CreatePostVariant />} />
+        <Route path="/updatepost-variant" element={<UpdatePostVariant />} />
 
         <Route path="/myaccount" element={<AccountPage />} />
         <Route path="/myaccount-edit" element={<EditUserPage />} />
