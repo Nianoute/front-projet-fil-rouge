@@ -1,46 +1,47 @@
 import { useState } from "react";
 import { createPostCommentByUser, getAllPostComments } from "../../../setup/services/comment.service";
 
-export default function GetAllCommentPost ({oneComment, post, setComments}) {
-    const [commentChild, setCommentChild] = useState({
-        description: "",
-        });
+export default function GetAllCommentPost({ oneComment, post, setComments }) {
+  const [commentChild, setCommentChild] = useState({
+    description: "",
+  });
 
-    const onChangeCommentChild = (e) => {
-        setCommentChild({ ...commentChild, [e.target.name]: e.target.value });
-        };
-    
-    const [showFormCommentChild, setShowFormCommentChild] = useState(false);
+  const onChangeCommentChild = (e) => {
+    setCommentChild({ ...commentChild, [e.target.name]: e.target.value });
+  };
 
-    const [showCommentChild, setShowCommentChild] = useState(false);
+  const [showFormCommentChild, setShowFormCommentChild] = useState(false);
 
-    const handleCreateCommentChild = (e) => {
-        e.preventDefault();
-        const data = {
-            name: "",
-            description: commentChild.description,
-            post: post.id,
-            parent: e.target.id,
-        };
-        createPostCommentByUser(data).then(() => {
-            getAllPostComments(post.id).then((allComments) => {
-            setComments(allComments);
-            });
-        });
+  const [showCommentChild, setShowCommentChild] = useState(false);
+
+  const handleCreateCommentChild = (e) => {
+    e.preventDefault();
+    const data = {
+      name: "",
+      description: commentChild.description,
+      post: post.id,
+      parent: e.target.id,
     };
+    createPostCommentByUser(data).then(() => {
+      getAllPostComments(post.id).then((allComments) => {
+        setComments(allComments);
+      });
+    });
+    setCommentChild({ ...commentChild, description: "" });
+  };
 
-    const showAndHideFormComment= (e) => {
-      setShowFormCommentChild(!showFormCommentChild);
-    };
+  const showAndHideFormComment = (e) => {
+    setShowFormCommentChild(!showFormCommentChild);
+  };
 
-    const showAndHideCommentChild = (e) => {
-      setShowCommentChild(!showCommentChild);
-    };
+  const showAndHideCommentChild = (e) => {
+    setShowCommentChild(!showCommentChild);
+  };
 
 
-    return (
+  return (
     <div className="separator">
-        <div className="commentHeader">
+      <div className="commentHeader">
         {oneComment.author.avatar === "" && (
           <img
             src="logo.png"
@@ -105,45 +106,45 @@ export default function GetAllCommentPost ({oneComment, post, setComments}) {
             Voir les réponse(s) : {oneComment.children?.length}
           </p>
           {showCommentChild && (
-          <div className="detailPostCommentsChildList">
-            {oneComment.children?.map((child) => (
-              <div
-                className="detailPostOneCommentsChild"
-                key={child.id}
-              >
-                <div className="commentHeader">
-                  {child.author.avatar === "" && (
-                    <img
-                      src="logo.png"
-                      alt="avatar"
-                      className="commentHeaderUserAvatar"
-                    />
-                  )}
-                  {child.author.avatar !== "" && (
-                    <img
-                      src={child.author.avatar}
-                      alt="avatar"
-                      className="commentHeaderUserAvatar"
-                    />
-                  )}
-                  <p className="commentHeaderUserName">
-                    {child.author.userName}
-                  </p>
-                  <p className="commentHeaderDate">
-                    {child.createdAt}
-                  </p>
+            <div className="detailPostCommentsChildList">
+              {oneComment.children?.map((child) => (
+                <div
+                  className="detailPostOneCommentsChild"
+                  key={child.id}
+                >
+                  <div className="commentHeader">
+                    {child.author.avatar === "" && (
+                      <img
+                        src="logo.png"
+                        alt="avatar"
+                        className="commentHeaderUserAvatar"
+                      />
+                    )}
+                    {child.author.avatar !== "" && (
+                      <img
+                        src={child.author.avatar}
+                        alt="avatar"
+                        className="commentHeaderUserAvatar"
+                      />
+                    )}
+                    <p className="commentHeaderUserName">
+                      {child.author.userName}
+                    </p>
+                    <p className="commentHeaderDate">
+                      {child.createdAt}
+                    </p>
+                  </div>
+                  <div className="commentBody">
+                    <p className="commentBodyDescription">
+                      {child.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="commentBody">
-                  <p className="commentBodyDescription">
-                    {child.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
           )}
         </>
       )}
     </div>
-    )
+  )
 }

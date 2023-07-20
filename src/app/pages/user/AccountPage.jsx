@@ -5,7 +5,7 @@ import GetAllPostDesign from "../../components/post/DesignPost";
 import TokenService from "../../../setup/services/token.services";
 import { getUserById } from "../../../setup/services/user.services";
 import { UserContext } from "../../../setup/contexts/UserContext";
-import { getAllPostsByUser } from "../../../setup/services/post.services";
+import { deletePost, getAllPostsByUser } from "../../../setup/services/post.services";
 
 const AccountPage = () => {
   const navigate = useNavigate();
@@ -41,11 +41,22 @@ const AccountPage = () => {
         setMe(data);
         getAllPostsByUser(userToken.id).then((data) => {
           setPosts(data);
-        }
-        );
+        });
       });
     }
   }, [userToken]);
+
+  const handleDeletePost = (e) => {
+    e.preventDefault();
+    const postId = e.target.id;
+    console.log(postId);
+    deletePost(postId).then(() => {
+      getAllPostsByUser(userToken.id).then((data) => {
+        setPosts(data);
+      });
+    }
+    );
+  }
 
   return (
     <div className="myAccount">
@@ -88,6 +99,7 @@ const AccountPage = () => {
                 <Link to={`/editpost/${post.id}`}>
                   <div className="updateButton">Modifier</div>
                 </Link>
+                <div className="deleteButton" id={post.id} onClick={handleDeletePost}>Supprimer</div>
               </div>
               <GetAllPostDesign post={post} />
             </div>
