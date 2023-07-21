@@ -1,14 +1,9 @@
 import axios from "axios";
 
-const token = localStorage.getItem("access_token");
-const config = {
-  headers: { Authorization: `Bearer ${token}` },
-};
-
-const getAllPosts = async (filter = { categories: "", title: "" }) => {
-  const { categories, title } = filter;
+const getAllPosts = async (filter = { categories: "", title: "", like: "" }) => {
+  const { categories, title, like } = filter;
   const response = await axios.get(
-    `${process.env.REACT_APP_API}/posts?categories=${categories}&title=${title}`
+    `${process.env.REACT_APP_API}/posts?categories=${categories}&title=${title}&like=${like}`
   );
   return response.data;
 };
@@ -26,6 +21,10 @@ const getOnePost = async (id) => {
 };
 
 const createPost = async (data, files) => {
+  const token = localStorage.getItem("access_token");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   if (files.length === 0) {
     const response = await axios.post(
       `${process.env.REACT_APP_API}/posts`,
@@ -58,6 +57,11 @@ const createPost = async (data, files) => {
 };
 
 const updatePost = async (id, data, files) => {
+  const token = localStorage.getItem("access_token");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
   if (files.length === 0) {
     const response = await axios.put(
       `${process.env.REACT_APP_API}/posts/${id}`,
@@ -89,6 +93,10 @@ const updatePost = async (id, data, files) => {
 };
 
 const deletePost = async (id) => {
+  const token = localStorage.getItem("access_token");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   const response = await axios.delete(
     `${process.env.REACT_APP_API}/posts/${id}`,
     config

@@ -7,7 +7,7 @@ import { UserContext } from "../../../setup/contexts/UserContext";
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -24,7 +24,9 @@ const LoginPage = () => {
       const res = await login(userLogin);
       TokenService.setTokenInLocalStorage(res.access_token);
       const userToken = TokenService.getUserInToken(res.access_token);
+      console.log(userToken)
       setUser(userToken);
+      console.log(user)
       navigate("/");
     } catch (error) {
       console.log(error);
