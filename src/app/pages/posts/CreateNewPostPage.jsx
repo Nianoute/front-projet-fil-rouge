@@ -22,6 +22,7 @@ const CreateNewPost = () => {
     webSite: "",
     title: "",
     description: "",
+    promoDuration: "",
     price: 0,
     promoPrice: 0,
     categories: [],
@@ -121,6 +122,18 @@ const CreateNewPost = () => {
                 name="description"
                 className="inputForm"
                 placeholder="La description"
+              />
+            </label>
+          </div>
+          <div className="oneLabel">
+            <label>
+              <input
+                type="date"
+                onChange={onChangePost}
+                value={post.promoDuration}
+                name="promoDuration"
+                className="inputForm"
+                placeholder="La date de fin de promotion"
               />
             </label>
           </div>

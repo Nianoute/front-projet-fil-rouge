@@ -29,13 +29,7 @@ const UpdatePostPage = () => {
       });
   }, []);
 
-  const [post, setPost] = useState({
-    webSite: "",
-    description: "",
-    price: 0,
-    promoPrice: 0,
-    categories: []
-  });
+  const [post, setPost] = useState({});
 
   useEffect(() => {
     getOnePost(id).then((post) => {
@@ -116,6 +110,11 @@ const UpdatePostPage = () => {
                   <div className="oneLabel">
                     <label>
                       <input type="text" onChange={onChangePost} value={post.description} name="description" className="inputForm" placeholder="La description" />
+                    </label>
+                  </div>
+                  <div className="oneLabel">
+                    <label>
+                      <input type="date" onChange={onChangePost} value={post.promoDuration} name="date" className="inputForm" placeholder="La date" />
                     </label>
                   </div>
                 </div>
