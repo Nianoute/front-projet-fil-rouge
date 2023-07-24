@@ -15,6 +15,8 @@ const CreatePostVariant = () => {
     });
     const [files, setFiles] = useState([]);
 
+    const [error, setError] = useState(false);
+
     useEffect(() => {
         getAllPostVariantOfPostByParentId(post.id).then((postAllVariants) => {
             setPostVariants(postAllVariants);
@@ -44,6 +46,10 @@ const CreatePostVariant = () => {
                 });
                 setFiles([]);
             })
+            .catch((err) => {
+                console.log(err);
+                setError(true);
+            });
     }
 
     const handleCreatePostVariantes = async (e) => {
@@ -119,6 +125,7 @@ const CreatePostVariant = () => {
                 </div>
 
                 <input type="submit" value="Ajouter" className="primaryBouton" />
+                {error && <p className="error">Une erreur est survenue</p>}
             </form>
 
             {postVariants.length !== 0 && (

@@ -6,6 +6,8 @@ const UpdateOnePostVariant = (onePostVariant) => {
 
     const [files, setFiles] = useState([]);
 
+    const [error, setError] = useState(false);
+
     useEffect(() => {
         setPostVariant(onePostVariant.onePostVariant);
     }, [onePostVariant]);
@@ -27,6 +29,7 @@ const UpdateOnePostVariant = (onePostVariant) => {
             })
             .catch((err) => {
                 console.log(err);
+                setError(true);
             });
     };
 
@@ -91,8 +94,9 @@ const UpdateOnePostVariant = (onePostVariant) => {
                             </div>
                         )}
 
-
                         <input type="submit" value="Modifier" className="primaryBouton" />
+                        {error && <p className="error">Une erreur est survenue</p>}
+
                     </form>
                 </div>
 

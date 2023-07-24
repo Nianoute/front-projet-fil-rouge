@@ -14,6 +14,8 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
 
   const [showCommentChild, setShowCommentChild] = useState(false);
 
+  const [error, setError] = useState(false);
+
   const handleCreateCommentChild = (e) => {
     e.preventDefault();
     const data = {
@@ -25,8 +27,14 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
     createPostCommentByUser(data).then(() => {
       getAllPostComments(post.id).then((allComments) => {
         setComments(allComments);
+      })
+    })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+        return;
       });
-    });
+
     setCommentChild({ ...commentChild, description: "" });
   };
 
@@ -94,6 +102,11 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
               className="commentDescription"
             ></textarea>
             <input type="submit" className="submit" />
+            {error && (
+              <p className="error">
+                Une erreur est survenue
+              </p>
+            )}
           </form>
         </div>
       )}

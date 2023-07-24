@@ -14,6 +14,8 @@ const LoginPage = () => {
     password: "",
   });
 
+  const [error, setError] = useState(false);
+
   const onChangeUser = (e) => {
     setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
   };
@@ -30,6 +32,7 @@ const LoginPage = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+      setError(true);
     }
   };
 
@@ -60,6 +63,7 @@ const LoginPage = () => {
           <Link to="/auth/forgot-password">Mot de passe oublié ?</Link>
         </div>
         <input type="submit" value="Je me connecte" className="primaryBouton" />
+        {error && <p className="error">Une erreur est survenue</p>}
       </form>
 
       <div className="auth__footer">

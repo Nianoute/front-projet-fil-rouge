@@ -6,6 +6,7 @@ import { createPost } from "../../../setup/services/post.services";
 const CreateNewPost = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     getAllCategories()
@@ -68,6 +69,7 @@ const CreateNewPost = () => {
         })
         .catch((error) => {
           console.log(error);
+          setError(true);
         });
     } catch (error) {
       console.log(error);
@@ -199,6 +201,7 @@ const CreateNewPost = () => {
         </div>
 
         <input type="submit" value="Submit" className="primaryBouton" />
+        {error && <p className="error">Une erreur est survenue</p>}
       </form>
     </div>
   );

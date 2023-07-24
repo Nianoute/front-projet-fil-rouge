@@ -9,6 +9,7 @@ const UpdatePostPage = () => {
   const [user, setUser] = useState(null);
   const [categories, setCategories] = useState([]);
   const { id } = useParams();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -80,6 +81,7 @@ const UpdatePostPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        setError(true);
       });
   };
 
@@ -177,6 +179,7 @@ const UpdatePostPage = () => {
 
 
                 <input type="submit" value="Submit" className="primaryBouton" />
+                {error && <p className="error">Une erreur est survenue</p>}
               </form>
             </div>
           )}
