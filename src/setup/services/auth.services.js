@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const login = async (data) => {
   const response = await axios.post(
@@ -9,12 +9,13 @@ const login = async (data) => {
 };
 
 const register = async (data, files) => {
-  if(files.length === 0){
+  if (files.length === 0) {
     console.log('user without files');
     const response = await axios.post(`${process.env.REACT_APP_API}/auth/signup`, data)
     return response.data
   }
-  
+
+
   const formData = new FormData();
 
   formData.append('userName', data.userName)
@@ -25,7 +26,7 @@ const register = async (data, files) => {
   for (let i = 0; i < files.length; i++) {
     formData.append('file', files[i])
   }
-  
+
   const response = await axios.post(`${process.env.REACT_APP_API}/auth/signup`, formData, { formData: true })
   return response.data
 };
