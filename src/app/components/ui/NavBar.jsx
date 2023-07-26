@@ -2,12 +2,13 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../setup/contexts/UserContext";
 import jwtDecode from "jwt-decode";
+import TokenService from "../../../setup/services/token.services";
 
 const NavbarMain = () => {
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
+    const token = TokenService.getTokenFromLocalStorage();
     if (token) {
       const decodedToken = jwtDecode(token);
       setUser(decodedToken);

@@ -11,6 +11,9 @@ import EditUserPage from "../pages/user/EditUserPage";
 import UpdatePostPage from "../pages/posts/UpdatePostPage";
 import CreatePostVariant from "../pages/posts/postVariants/CreatePostVariant";
 import UpdatePostVariant from "../pages/posts/postVariants/UpdatePostVariant";
+import ProtectedRoute from "./ProtectedRoute";
+import CreateNewCategory from "../pages/categories/CreateNewCategory"
+import AdminProtectedRoute from "./AdminProtectedRoute";
 
 const MainRouter = () => {
   return (
@@ -20,21 +23,59 @@ const MainRouter = () => {
         <Route path="*" element={<h1>404</h1>} />
 
         <Route path="/:id" element={<OnePostPage />} />
-        <Route path="/newpost" element={<CreateNewPost />} />
-        <Route path="/editpost/:id" element={<UpdatePostPage />} />
-        <Route path="/newpost-variant" element={<CreatePostVariant />} />
-        <Route path="/updatepost-variant" element={<UpdatePostVariant />} />
 
-        <Route path="/myaccount" element={<AccountPage />} />
-        <Route path="/myaccount-edit" element={<EditUserPage />} />
+        <Route path="/newpost" element={
+          <ProtectedRoute to="/auth/login" bool={false}>
+            <CreateNewPost />
+          </ProtectedRoute>
+        } />
+        <Route path="/editpost/:id" element={
+          <ProtectedRoute to="/auth/login" bool={false}>
+            <UpdatePostPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/newpost-variant" element={
+          <ProtectedRoute to="/auth/login" bool={false}>
+            <CreatePostVariant />
+          </ProtectedRoute>} />
+        <Route path="/updatepost-variant" element={
+          <ProtectedRoute to="/auth/login" bool={false}>
+            <UpdatePostVariant />
+          </ProtectedRoute>
+        } />
 
-        <Route path="/auth/register" element={<RegisterPage />} />
-        <Route path="/auth/login" element={<LoginPage />} />
+        <Route path="/myaccount" element={
+          <ProtectedRoute to="/auth/login" bool={false}>
+            <AccountPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/myaccount-edit" element={
+          <ProtectedRoute to="/auth/login" bool={false}>
+            <EditUserPage />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/auth/register" element={
+          <ProtectedRoute to="/myaccount" bool={true}>
+            <RegisterPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/auth/login" element={
+          <ProtectedRoute to="/myaccount" bool={true}>
+            <LoginPage />
+          </ProtectedRoute>
+        } />
         <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
         <Route
           path="/auth/reset-password/:token"
           element={<ResetPasswordPage />}
         />
+
+        <Route path="/create-category" element={
+          <AdminProtectedRoute to="/auth/login" bool={false}>
+            <CreateNewCategory />
+          </AdminProtectedRoute>
+        } />
       </Routes>
     </>
   );

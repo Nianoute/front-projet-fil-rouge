@@ -23,12 +23,25 @@ const GetAllPostHome = () => {
 
   const [like, setLike] = useState("");
 
-  const handleLike = (e) => {
-    setLike(e.target.checked);
+  const [date, setDate] = useState("");
+
+  const handleFilter = (e) => {
+    if (e.target.value === "true") {
+      setLike("like");
+      setDate("");
+    }
+    if (e.target.value === "asc") {
+      setDate("asc");
+      setLike("");
+    }
+    if (e.target.value === "desc") {
+      setDate("desc");
+      setLike("");
+    }
   };
 
   useEffect(() => {
-    const filter = { categories, title, like };
+    const filter = { categories, title, like, date };
 
     getAllPosts(filter)
       .then((posts) => {
@@ -40,7 +53,7 @@ const GetAllPostHome = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [categories, title, like, user]);
+  }, [categories, title, like, user, date]);
 
   useEffect(() => {
     getAllCategories()
@@ -65,10 +78,11 @@ const GetAllPostHome = () => {
                 FilterByTitle:
                 <input type="text" onChange={handleTitle} value={title} name="title" />
               </label>
-              <label>
-                FilterByLike:
-                <input type="checkbox" onChange={handleLike} value={like} name="like" />
-              </label>
+              <select onChange={handleFilter}>
+                <option value="desc">Plus récent</option>
+                <option value="true">Tendances</option>
+                <option value="asc">Plus ancien</option>
+              </select>
               {allCategories?.length !== 0 && (
                 <select name="categories" onChange={handleCategories} className="selectOption">
                   <option value="">Categorie</option>
