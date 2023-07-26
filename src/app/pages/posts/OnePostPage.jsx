@@ -24,6 +24,8 @@ const OnePostPage = () => {
     description: "",
   });
 
+  const [error, setError] = useState(false);
+
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -91,7 +93,12 @@ const OnePostPage = () => {
       getAllPostComments(post.id).then((allComments) => {
         setComments(allComments);
       });
-    });
+    })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+        return;
+      });
 
     setComment({
       name: "",
@@ -240,6 +247,7 @@ const OnePostPage = () => {
                   className="commentDescription"
                 ></textarea>
                 <input type="submit" className="submit" />
+                {error && <p className="error">Une erreur est survenue</p>}
               </form>
             </div>
 
@@ -250,7 +258,7 @@ const OnePostPage = () => {
                   <div className="detailPostOneComment" key={oneComment.id}>
                     {oneComment.parent === null && (
                       <>
-                        <GetAllCommentPost oneComment={oneComment} post={post} setComments={setComments}/>
+                        <GetAllCommentPost oneComment={oneComment} post={post} setComments={setComments} />
                       </>
                     )}
                   </div>

@@ -1,9 +1,14 @@
 import axios from "axios";
 
 const createPostLikeByUser = async (data) => {
+  const token = localStorage.getItem("access_token");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   const response = await axios.post(
     `${process.env.REACT_APP_API}/likes`,
-    data
+    data,
+    config
   );
   return response.data;
 };

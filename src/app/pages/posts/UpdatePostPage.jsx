@@ -9,6 +9,7 @@ const UpdatePostPage = () => {
   const [user, setUser] = useState(null);
   const [categories, setCategories] = useState([]);
   const { id } = useParams();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -28,13 +29,7 @@ const UpdatePostPage = () => {
       });
   }, []);
 
-  const [post, setPost] = useState({
-    webSite: "",
-    description: "",
-    price: 0,
-    promoPrice: 0,
-    categories: []
-  });
+  const [post, setPost] = useState({});
 
   useEffect(() => {
     getOnePost(id).then((post) => {
@@ -80,6 +75,7 @@ const UpdatePostPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        setError(true);
       });
   };
 
@@ -114,6 +110,11 @@ const UpdatePostPage = () => {
                   <div className="oneLabel">
                     <label>
                       <input type="text" onChange={onChangePost} value={post.description} name="description" className="inputForm" placeholder="La description" />
+                    </label>
+                  </div>
+                  <div className="oneLabel">
+                    <label>
+                      <input type="date" onChange={onChangePost} value={post.promoDuration} name="date" className="inputForm" placeholder="La date" />
                     </label>
                   </div>
                 </div>
@@ -177,6 +178,7 @@ const UpdatePostPage = () => {
 
 
                 <input type="submit" value="Submit" className="primaryBouton" />
+                {error && <p className="error">Une erreur est survenue</p>}
               </form>
             </div>
           )}
