@@ -42,7 +42,6 @@ const GetAllPostHome = () => {
 
   useEffect(() => {
     const filter = { categories, title, like, date };
-
     getAllPosts(filter)
       .then((posts) => {
         setPosts([...posts]);
@@ -85,7 +84,7 @@ const GetAllPostHome = () => {
               </select>
               {allCategories?.length !== 0 && (
                 <select name="categories" onChange={handleCategories} className="selectOption">
-                  <option value="">Categorie</option>
+                  <option value="">--Aucun--</option>
                   {allCategories?.map((category) => (
                     <option value={category.name} key={category.id}>{category.name}</option>
                   ))}

@@ -48,6 +48,7 @@ export default function GetAllPostDesign({ post }) {
       });
     }
   };
+
   return (
     <div className="post">
       <div className="postInfos">
@@ -81,14 +82,13 @@ export default function GetAllPostDesign({ post }) {
             <div className="postAuthor">
               {post.author && (
                 <>
-                  {post.author.avatar === "" && (
+                  {post.author.avatar === "" ? (
                     <img
                       src="logo.png"
                       className="postAuthorAvatar"
                       alt="avatar"
                     />
-                  )}
-                  {post.author.avatar !== "" && (
+                  ) : (
                     <img
                       src={post.author.avatar}
                       className="postAuthorAvatar"
