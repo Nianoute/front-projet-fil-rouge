@@ -2,72 +2,95 @@
   width: 100%;
   height: auto;
   margin: 20px 0;
+
   .detailPostHeader {
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: $tablette) {
+      flex-direction: column;
+    }
+
     .detailPost {
       position: relative;
       text-align: center;
       height: auto;
-      width: 65%;
       margin: 10px;
       border-radius: 10px;
       box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+
+      @media screen and (min-width: $tablette) {
+        width: 65%;
+      }
+
       .detailPostInfosPrimary {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
         margin-top: 20px;
+
         .detailPostImage {
           width: 200px;
           height: 200px;
+
           img {
             width: 200px;
             height: 200px;
           }
         }
+
         .detailPostContent {
           .postPrice {
             font-size: 1.2em;
             display: flex;
+
             p {
               margin: 0 5px;
             }
+
             .priceNow {
               color: $red;
             }
+
             .priceInit {
               text-decoration: line-through;
               color: black;
             }
           }
+
           .postBoutonUrl {
             padding: 5px 25px;
             background-color: $secondary;
             text-align: center;
             border-radius: 10px;
+
             .postBoutonUrlIcon img {
               width: 50px;
               height: 50px;
             }
+
             &:hover {
               background-color: $secondaryHover;
             }
           }
         }
       }
+
       .detailPostInfosSecondary {
         display: flex;
       }
+
       .like {
         position: absolute;
         margin: 10px 0;
         right: 25px;
         top: 5px;
+
         .likeIcon {
           width: 25px;
           height: 25px;
+
           img {
             width: 100%;
             height: 100%;
@@ -75,47 +98,66 @@
         }
       }
     }
+
     .postVariants {
       display: block;
       width: 25%;
+
+      @media screen and (max-width: $tablette) {
+        width: 50%;
+      }
+
+      @media screen and (max-width: $mobile) {
+        width: 100%;
+      }
+
       .primaryPost {
         border-radius: 10px;
         box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
         border: 1px solid $secondary;
-        margin: 10px 0px;
+        margin: 10px;
         text-align: center;
         padding: 0 20px;
+
         .primaryPostInfos {
           display: flex;
           justify-content: space-around;
           align-items: center;
           margin: 10px 0;
+
           .primaryPostImage {
             width: 100px;
             height: 100px;
+
             img {
               width: 100%;
               height: 100%;
             }
           }
+
           .primaryPostPrice {
             font-size: 1.2em;
             display: flex;
+
             p {
               margin: 0 5px;
             }
+
             .promoPrice {
               color: $red;
             }
+
             .price {
               text-decoration: line-through;
               color: black;
             }
           }
         }
+
         .onClickPost {
           position: relative;
           width: 100%;
+
           .onClickPostDiv {
             position: absolute;
             top: 0;
@@ -125,6 +167,7 @@
           }
         }
       }
+
       .primaryPost:hover {
         cursor: pointer;
       }
@@ -134,38 +177,47 @@
         box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
         box-sizing: border-box;
         border: 1px solid $white;
-        margin: 10px 0px;
+        margin: 10px;
         text-align: center;
         padding: 0 20px;
+
         .secondaryPostInfos {
           display: flex;
           justify-content: space-around;
           align-items: center;
           margin: 10px 0;
+
           .secondaryPostImage {
             width: 100px;
             height: 100px;
+
             img {
               width: 100%;
               height: 100%;
             }
           }
+
           .secondaryPostPrice {
             font-size: 1.2em;
             display: flex;
+
             p {
               margin: 0 5px;
             }
+
             .promoPrice {
               color: $red;
             }
+
             .price {
               text-decoration: line-through;
               color: black;
             }
           }
+
           .onClickPost {
             position: relative;
+
             .onClickPostDiv {
               position: absolute;
               top: 0;
@@ -176,26 +228,37 @@
           }
         }
       }
+
       .secondaryPost:hover {
         cursor: pointer;
         border: 1px solid $black;
       }
     }
   }
+
   .detailPostComments {
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: $tablette) {
+      flex-direction: column;
+    }
+
     .postCommentsForm {
       text-align: center;
       height: auto;
       width: 40%;
-      margin: 5px;
+      margin: 10px;
       border-radius: 10px;
       box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+
+
+
       .form {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         .commentTitle {
           display: flex;
           flex-direction: column;
@@ -206,6 +269,7 @@
           margin-top: 20px;
           border-radius: 12px;
         }
+
         .commentDescription {
           display: flex;
           flex-direction: column;
@@ -216,76 +280,98 @@
           border-radius: 12px;
           resize: none;
         }
+
         .submit {
           margin: 20px 0;
           width: 70%;
           height: 40px;
           border-radius: 12px;
           background-color: $primary;
+
           &:hover {
             background-color: $primaryHover;
           }
         }
       }
     }
+
     .detailPostCommentsList {
       text-align: center;
       height: auto;
       width: 50%;
-      margin: 5px;
+      margin: 10px;
       border-radius: 10px;
       box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+      padding: 0 20px;
+
+      @media screen and (max-width: $tablette) {
+        width: 100%;
+      }
+
       .detailPostOneComment {
         margin: 20px 0;
+
         .separator {
           border-top: 1px solid $black;
         }
+
         .detailPostCommentsChildList {
           margin-left: 20px;
           border-left: 1px solid black;
         }
+
         .commentHeader {
           display: flex;
           align-items: center;
           padding: 10px;
+
           .commentHeaderUserAvatar {
             width: 50px;
             height: 50px;
             margin: 0 10px;
           }
+
           .commentHeaderUserName {
             font-size: 1.2em;
             margin: 0 10px;
           }
+
           .commentHeaderDate {
             font-size: 0.8em;
             margin: 0 10px;
           }
         }
+
         .commentBody {
           padding: 0 10px;
           text-align: left;
           margin: 0 10px;
+
           .commentBodyName {
             font-size: 1.2em;
             font-weight: 600;
           }
+
           .commentBodyDescription {
             font-size: 1em;
             margin: 10px 0;
           }
+
           .repondre {
             margin: 10px 0;
           }
         }
+
         .detailPostCommentsChildForm {
           display: flex;
           flex-direction: column;
           align-items: center;
+
           .formChild {
             flex-direction: column;
             align-items: center;
             width: 100%;
+
             .commentDescription {
               display: flex;
               flex-direction: column;
@@ -296,12 +382,14 @@
               border-radius: 12px;
               resize: none;
             }
+
             .submit {
               margin: 20px 0;
               width: 70%;
               height: 40px;
               border-radius: 12px;
               background-color: $primary;
+
               &:hover {
                 background-color: $primaryHover;
               }

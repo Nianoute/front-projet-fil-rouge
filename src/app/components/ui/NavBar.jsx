@@ -15,8 +15,6 @@ const NavbarMain = () => {
     }
   }, [setUser]);
 
-  console.log(user);
-
   return (
     <>
       <div className="navBar">
@@ -39,7 +37,7 @@ const NavbarMain = () => {
 
               <Link to="/myaccount">
                 <img
-                  src="/default_userlogo.jpg"
+                  src={user.avatar ? user.avatar : "/default_userlogo.jpg"}
                   className="icon"
                   alt="default_userlogo"
                 />
@@ -52,8 +50,6 @@ const NavbarMain = () => {
               <Link to="/auth/login">
                 <img src="/user.png" className="imgHeader" alt="user" />
               </Link>
-
-              <Link to="/auth/register">Register</Link>
             </>
           )}
         </div>

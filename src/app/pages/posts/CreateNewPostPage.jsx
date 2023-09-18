@@ -58,6 +58,10 @@ const CreateNewPost = () => {
       post.categories = [];
     }
 
+    if (post.promoDuration === "") {
+      post.promoDuration = null;
+    }
+
     try {
       await createPost(post, files)
         .then((response) => {

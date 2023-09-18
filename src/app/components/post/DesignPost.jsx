@@ -13,6 +13,22 @@ import { useEffect } from "react";
 export default function GetAllPostDesign({ post }) {
   const { user } = useContext(UserContext);
 
+  let promoPercent = 0;
+  const promoPrice = post.promoPrice;
+  const price = post.price;
+  if (promoPrice !== 0 && price !== 0) {
+    const promo = promoPrice * 100 / price;
+    promoPercent = Math.round(promo);
+  }
+
+  //si post.description est trop long, on coupe le texte et on ajoute "..."
+  let description = post.description;
+  if (description.length > 100) {
+    description = description.substring(0, 100) + "...";
+  }
+  post.description = description;
+
+
   const [postIsLiked, setPostIsLiked] = useState(false);
 
   useEffect(() => {
@@ -70,104 +86,94 @@ export default function GetAllPostDesign({ post }) {
               <div className="postTitle">
                 <h2>{post.title}</h2>
               </div>
+              <p>{post.description}</p>
+              <div className="postPrix">
+                <p className="promoPrice">{post.promoPrice}€</p>
+                <p className="price">{post.price}€</p>
+                {promoPercent !== 0 && (
+                  <p className="promoPercent">-{promoPercent}%</p>
+                )}
+              </div>
             </div>
           </div>
 
-          <div className="postInfosSecondary">
-            <p>Description: {post.description}</p>
-          </div>
 
           <div className="separator" />
           <div className="postInfosTertiary">
-            <div className="postAuthor">
-              {post.author && (
-                <>
-                  {post.author.avatar === "" ? (
-                    <img
-                      src="logo.png"
-                      className="postAuthorAvatar"
-                      alt="avatar"
-                    />
-                  ) : (
-                    <img
-                      src={post.author.avatar}
-                      className="postAuthorAvatar"
-                      alt="avatar"
-                    />
-                  )}
-                  <p>{post.author.userName}</p>
-                </>
-              )}
-            </div>
-
-            <div className="postCategories">
-              {post.categories ? (
-                <>
-                  {post.categories?.map((category) => {
-                    return (
-                      <p key={category.id} className="postCategory">
-                        {category.name}
-                      </p>
-                    );
-                  })}
-                </>
-              ) : (
-                <></>
-              )}
+            <div className="leftInfos">
+              <div className="postAuthor">
+                {post.author && (
+                  <>
+                    {post.author.avatar === "" ? (
+                      <img
+                        src="logo.png"
+                        className="postAuthorAvatar"
+                        alt="avatar"
+                      />
+                    ) : (
+                      <img
+                        src={post.author.avatar}
+                        className="postAuthorAvatar"
+                        alt="avatar"
+                      />
+                    )}
+                    <p>{post.author.userName}</p>
+                  </>
+                )}
+              </div>
+              <div className="postBoutonComment">
+                <div className="postBoutonCommentIcon">
+                  <img src="comment.png" alt="avatar" />
+                </div>
+                <p>{post.comments?.length}</p>
+              </div>
             </div>
 
             <div className="postDates">
               <div className="postDate">
-                <p>Créé le: {post.createdAt}</p>
+                <p>Créé le: {new Date(post.createdAt).toLocaleDateString()}</p>
               </div>
               <div className="postDate">
-                <p>{post.promoDuration}</p>
+                <p>Fin de promotion: {new Date(post.promoDuration).toLocaleDateString()}</p>
               </div>
             </div>
+
+
+            {/* <div className="postBoutonUrl">
+              <Link to={post.webSite}>
+                <div className="postBoutonUrlIcon">
+                  <img src="url.png" alt="avatar" />
+                </div>
+              </Link>
+            </div> */}
           </div>
         </Link>
-      </div>
+      </div >
 
-      <div className="postBouton">
-        <div className="postBoutonLike">
-          {user && (
-            <div className="like">
-              {!postIsLiked ? (
-                <div className="likeIcon" onClick={likePost}>
-                  <img src="coeur-vide.png" alt="coeur_vide" />
-                </div>
-              ) : (
-                <div className="likeIcon" onClick={removeLikePost}>
-                  <img src="coeur-remplie.png" alt="coeur_remplie" />
-                </div>
-              )}
-            </div>
-          )}
-          {!user && (
-            <div className="like">
-              <div className="likeIcon">
+      <div className="postBoutonLike">
+        {user && (
+          <div className="like">
+            {!postIsLiked ? (
+              <div className="likeIcon" onClick={likePost}>
                 <img src="coeur-vide.png" alt="coeur_vide" />
               </div>
-            </div>
-          )}
-          <p>{post.likesPost?.length}</p>
-        </div>
-
-        <div className="postBoutonComment">
-          <div className="postBoutonCommentIcon">
-            <img src="comment.png" alt="avatar" />
+            ) : (
+              <div className="likeIcon" onClick={removeLikePost}>
+                <img src="coeur-remplie.png" alt="coeur_remplie" />
+              </div>
+            )}
+            <p>{post.likesPost?.length}</p>
           </div>
-          <p>{post.comments?.length}</p>
-        </div>
-
-        <div className="postBoutonUrl">
-          <Link to={post.webSite}>
-            <div className="postBoutonUrlIcon">
-              <img src="url.png" alt="avatar" />
+        )}
+        {!user && (
+          <div className="like">
+            <div className="likeIcon">
+              <img src="coeur-vide.png" alt="coeur_vide" />
             </div>
-          </Link>
-        </div>
+            <p>{post.likesPost?.length}</p>
+          </div>
+        )}
       </div>
-    </div>
+    </div >
   );
 }

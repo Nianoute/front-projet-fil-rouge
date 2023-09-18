@@ -2,7 +2,6 @@ import axios from "axios";
 
 const getAllCategories = async () => {
   const response = await axios.get(`${process.env.REACT_APP_API}/categories`);
-  console.log(response.data);
   return response.data;
 };
 
