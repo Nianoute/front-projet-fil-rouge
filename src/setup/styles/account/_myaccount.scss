@@ -7,38 +7,45 @@
     margin: 0 auto;
     width: 90%;
     margin-top: 20px;
-    .userInfos{ 
+
+    .userInfos {
         width: 90%;
         background-color: $white;
         box-shadow: 0 0 0.5rem rgba($black, 0.2);
         display: flex;
         padding: 12px;
         border-radius: 10px;
-        .userAvatar{
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .userAvatar {
             width: auto;
             margin: 0 auto;
             background-color: $white;
             box-shadow: 0 0 0.5rem rgba($black, 0.2);
             padding: 10px;
-            img{
+
+            img {
                 width: 100px;
                 height: 100px;
             }
         }
-        .userInfosPrimary{
-            width: 10%;
+
+        .userInfosPrimary {
             margin: auto;
         }
-        .userInfosSecondary{
-            width: 60%;
+
+        .userInfosSecondary {
             margin: auto;
         }
-        .userInfosEdit{
-            width: 10%;
+
+        .userInfosEdit {
             margin: auto;
-            a{
+
+            a {
                 text-decoration: none;
-                .primaryBouton{
+
+                .primaryBouton {
                     background: $primary;
                     border-radius: 10px;
                     color: $white;
@@ -47,7 +54,8 @@
                     width: 100%;
                     text-align: center;
                     padding: 10px 0px;
-                    &:hover{
+
+                    &:hover {
                         background: $primaryHover;
                         border-radius: 10px;
                         cursor: pointer;
@@ -56,13 +64,20 @@
             }
         }
     }
-    .userBlock{
+
+    .userBlock {
         display: flex;
         width: 90%;
         background-color: $white;
         margin: 10px 0px;
         padding: 12px;
-        .userStats{
+
+        @media screen and (max-width: $tablette) {
+            flex-direction: column;
+            padding: 0px;
+        }
+
+        .userStats {
             width: 20%;
             margin: 20px 10px;
             display: flex;
@@ -71,8 +86,15 @@
             padding: 12px;
             box-shadow: 0 0 0.5rem rgba($black, 0.2);
             border-radius: 10px;
+
+            @media screen and (max-width: $tablette) {
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
         }
-        .userPosts{
+
+        .userPosts {
             width: 80%;
             margin: 20px 10px;
             display: flex;
@@ -81,15 +103,29 @@
             padding: 12px;
             box-shadow: 0 0 0.5rem rgba($black, 0.2);
             border-radius: 10px;
-            .link{
+
+            @media screen and (max-width: $tablette) {
+                width: 100%;
+                padding: 0;
+                margin: 20px 0px;
+            }
+
+            .link {
                 text-decoration: none;
                 color: black;
             }
-            .onePost{
+
+            .onePost {
                 width: 80%;
-                .updatePost{
+
+                @media screen and (max-width: $tablette) {
+                    width: 100%;
+                }
+
+                .updatePost {
                     position: relative;
-                    .updateButton{
+
+                    .updateButton {
                         position: absolute;
                         top: 25px;
                         right: 45%;
@@ -101,7 +137,8 @@
                         width: 10%;
                         text-align: center;
                         padding: 10px 0px;
-                        &:hover{
+
+                        &:hover {
                             background: $primaryHover;
                             border-radius: 10px;
                             cursor: pointer;

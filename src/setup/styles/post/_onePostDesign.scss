@@ -103,8 +103,12 @@
       display: block;
       width: 25%;
 
-      @media screen and (max-width: $tablette) {
-        width: 50%;
+      @media screen and (max-width: $tablette) and (min-width: $mobile) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
       }
 
       @media screen and (max-width: $mobile) {
@@ -244,6 +248,17 @@
       flex-direction: column;
     }
 
+    .connexion {
+      a {
+        text-decoration: none;
+        color: $black;
+      }
+    }
+
+    .relative {
+      position: relative;
+    }
+
     .postCommentsForm {
       text-align: center;
       height: auto;
@@ -252,7 +267,9 @@
       border-radius: 10px;
       box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
 
-
+      @media screen and (max-width: $tablette) {
+        width: 95%;
+      }
 
       .form {
         display: flex;
@@ -302,10 +319,9 @@
       margin: 10px;
       border-radius: 10px;
       box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
-      padding: 0 20px;
 
       @media screen and (max-width: $tablette) {
-        width: 100%;
+        width: 95%;
       }
 
       .detailPostOneComment {
