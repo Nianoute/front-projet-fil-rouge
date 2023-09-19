@@ -49,11 +49,11 @@
               margin: 0 5px;
             }
 
-            .priceNow {
+            .promoPrice {
               color: $red;
             }
 
-            .priceInit {
+            .price {
               text-decoration: line-through;
               color: black;
             }
@@ -61,7 +61,7 @@
 
           .postBoutonUrl {
             padding: 5px 25px;
-            background-color: $secondary;
+            background-color: $primary;
             text-align: center;
             border-radius: 10px;
 
@@ -71,7 +71,7 @@
             }
 
             &:hover {
-              background-color: $secondaryHover;
+              background-color: $primaryHover;
             }
           }
         }
@@ -79,7 +79,54 @@
 
       .detailPostInfosSecondary {
         display: flex;
+        margin: 20px;
+
+        h3 {
+          text-decoration: underline;
+          text-align: left;
+        }
       }
+
+      .detailPostDate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media screen and (max-width: $tablette) {
+          flex-direction: column;
+        }
+
+        .promoDuration {
+          display: flex;
+          align-items: center;
+          margin: 0 10px;
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+
+      .detailPostAuthor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+
+        .author {
+          font-weight: 700;
+          margin: 20px;
+        }
+
+        .postAuthorAvatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+      }
+
 
       .like {
         position: absolute;
@@ -249,14 +296,38 @@
     }
 
     .connexion {
+      position: relative;
+      text-align: center;
+      height: auto;
+      width: 40%;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+      text-decoration: none;
+      color: $black;
+      height: 400px;
+
+      @media screen and (max-width: $tablette) {
+        width: 95%;
+        height: 250px;
+      }
+
       a {
         text-decoration: none;
         color: $black;
       }
-    }
 
-    .relative {
-      position: relative;
+      .connexionMessage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
     }
 
     .postCommentsForm {
@@ -312,6 +383,10 @@
       }
     }
 
+    .heightComment {
+      height: 400px;
+    }
+
     .detailPostCommentsList {
       text-align: center;
       height: auto;
@@ -322,6 +397,18 @@
 
       @media screen and (max-width: $tablette) {
         width: 95%;
+      }
+
+      .notFound {
+        img {
+          width: 200px;
+          height: 200px;
+
+          @media screen and (max-width: $tablette) {
+            width: 100px;
+            height: 100px;
+          }
+        }
       }
 
       .detailPostOneComment {
@@ -413,6 +500,26 @@
           }
         }
       }
+    }
+  }
+
+  .primaryBouton {
+    background: $primary;
+    border-radius: 10px;
+    color: $white;
+    font-size: 1rem;
+    font-weight: 700;
+    width: 50%;
+    height: 40px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background: $primaryHover;
+      border-radius: 10px;
+      cursor: pointer;
     }
   }
 }

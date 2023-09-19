@@ -21,7 +21,7 @@ const CreateNewPost = () => {
   }, []);
 
   const [post, setPost] = useState({
-    webSite: "",
+    website: "",
     title: "",
     description: "",
     promoDuration: "",
@@ -101,10 +101,10 @@ const CreateNewPost = () => {
               <input
                 type="text"
                 onChange={onChangePost}
-                value={post.webSite}
-                name="webSite"
+                value={post.website}
+                name="website"
                 className="inputForm"
-                placeholder="webSite"
+                placeholder="website"
               />
             </label>
           </div>

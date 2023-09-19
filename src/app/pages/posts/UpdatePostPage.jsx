@@ -37,7 +37,7 @@ const UpdatePostPage = () => {
     getOnePost(id).then((post) => {
       post.categories = [];
       setPost(post);
-      console.log(post);
+      post.promoDuration = "";
     });
   }, [id])
 
@@ -64,8 +64,6 @@ const UpdatePostPage = () => {
     if (post.categories.length === 0) {
       post.categories = [];
     }
-
-    console.log(post);
 
     updatePost(id, post, files)
       .then((response) => {
@@ -106,7 +104,7 @@ const UpdatePostPage = () => {
                   <h2>Lien du site</h2>
                   <div className="oneLabel">
                     <label>
-                      <input type="text" onChange={onChangePost} value={post.webSite} name="webSite" className="inputForm" placeholder="webSite" />
+                      <input type="text" onChange={onChangePost} value={post.website} name="website" className="inputForm" placeholder="website" />
                     </label>
                   </div>
                 </div>

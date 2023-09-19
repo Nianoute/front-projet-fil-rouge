@@ -51,7 +51,7 @@ const OnePostPage = () => {
     if (post.postVariants[indexOfVariant].imagePostV === "") {
       setPostActive({
         ...post.postVariants[indexOfVariant],
-        imagePostV: post.imagePost,
+        imagePost: post.imagePost,
       });
     }
   };
@@ -108,8 +108,6 @@ const OnePostPage = () => {
     });
   };
 
-
-
   return (
     <>
       {post && (
@@ -119,11 +117,10 @@ const OnePostPage = () => {
               <h1>{postActive.title}</h1>
               <div className="detailPostInfosPrimary">
                 <div className="detailPostImage">
-                  {postActive.imagePost && (
+                  {postActive.imagePost !== "" ? (
                     <img src={postActive.imagePost} alt="not found" />
-                  )}
-                  {postActive.imagePostV && (
-                    <img src={postActive.imagePostV} alt="not found" />
+                  ) : (
+                    <img src="/notFoundImage.png" alt="not found" />
                   )}
                 </div>
                 <div className="detailPostContent">
@@ -137,23 +134,46 @@ const OnePostPage = () => {
                       <></>
                     )}
                   </div>
-                  {post.webSite ? (
+                  {post.website && (
                     <div className="postBoutonUrl">
                       <div className="postBoutonUrlIcon">
-                        <Link to={post.webSite}>
+                        <Link to={post.website}>
                           <img src="url.png" alt="avatar" />
                         </Link>
                       </div>
                     </div>
-                  ) : (
-                    <></>
                   )}
                 </div>
               </div>
               <div className="detailPostInfosSecondary">
                 <div className="detailPostDescription">
-                  <p>{postActive.description}</p>
+                  <h3>Description :</h3>
+                  {postActive.description === "" ? (
+                    <p className="description">Cette publication ne possède pas de description</p>
+                  ) : (
+                    <p className="description">{postActive.description}</p>
+                  )}
                 </div>
+              </div>
+
+              <div className="detailPostDate">
+                <p>Crée le: {new Date(post.createdAt).toLocaleDateString()}</p>
+                {post.promoDuration && (
+                  <p className="promoDuration">
+                    Promotion jusqu'au:{" "}
+                    {new Date(post.promoDuration).toLocaleDateString()}
+                    <img src="/temps.png" alt="temps" />
+                  </p>
+                )}
+              </div>
+
+              <div className="detailPostAuthor">
+                <p className="author">Par {post.author.userName}</p>
+                {post.author.avatar !== "" ? (
+                  <img src={post.author.avatar} alt="avatar" className="postAuthorAvatar" />
+                ) : (
+                  <img src="/logo.png" alt="avatar" className="postAuthorAvatar" />
+                )}
               </div>
 
               {user ? (
@@ -184,7 +204,11 @@ const OnePostPage = () => {
                 </div>
                 <div className="primaryPostInfos">
                   <div className="primaryPostImage">
-                    <img src={post.imagePost} alt="not found" />
+                    {post.imagePost !== "" ? (
+                      <img src={post.imagePost} alt="post parent" />
+                    ) : (
+                      <img src="/logo.png" alt="notFound" />
+                    )}
                   </div>
                   <div className="primaryPostPrice">
                     <p className="promoPrice">{post.promoPrice}€</p>
@@ -209,7 +233,7 @@ const OnePostPage = () => {
                   <div className="secondaryPostInfos" id={index}>
                     <div className="secondaryPostImage" id={index}>
                       {variant.imagePostV === "" ? (
-                        <img src={post.imagePost} alt="not found" id={index} />
+                        <img src="/logo.png" alt="not found" id={index} />
                       ) : (
                         <img
                           src={variant.imagePostV}
@@ -234,7 +258,7 @@ const OnePostPage = () => {
 
           <div className="detailPostComments">
             {user ? (
-              <div className="postCommentsForm">
+              <div className="postCommentsForm heightComment">
                 <h2>Commentaires</h2>
                 <form onSubmit={handleCreateComment} className="form">
                   <input
@@ -260,19 +284,25 @@ const OnePostPage = () => {
                 </form>
               </div>
             ) : (
-              <div className="connexion">
-                <Link to="/auth/login" className="postCommentsForm relative">
-                  <div className="postCommentsForm">
-                    <h2>Commentaires</h2>
-                    <p>Vous devez être connecté pour commenter</p>
-                  </div>
-                </Link>
-              </div>
+              <Link to="/auth/login" className="connexion">
+                <h2>Commentaires</h2>
+                <div className="connexionMessage">
+                  <p>Vous devez être connecté pour commenter</p>
+                  <div className="primaryBouton">Se connecter</div>
+                </div>
+              </Link>
             )}
 
             {comments && (
               <div className="detailPostCommentsList">
                 <h2>Listes de Commentaires</h2>
+                {comments.length === 0 && (
+                  <div className="notFound">
+                    <img src="notFoundComment.png" alt="not found" />
+                    <h3>Aucun commentaire trouvé</h3>
+                    <p>Soyez le premier à commenter !</p>
+                  </div>
+                )}
                 {comments?.map((oneComment) => (
                   <div className="detailPostOneComment" key={oneComment.id}>
                     {oneComment.parent === null && (

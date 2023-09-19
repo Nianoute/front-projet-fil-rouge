@@ -19,6 +19,7 @@ export default function GetAllPostDesign({ post }) {
   if (promoPrice !== 0 && price !== 0) {
     const promo = promoPrice * 100 / price;
     promoPercent = Math.round(promo);
+    promoPercent = 100 - promoPercent;
   }
 
   //si post.description est trop long, on coupe le texte et on ajoute "..."
@@ -147,11 +148,11 @@ export default function GetAllPostDesign({ post }) {
         {user && (
           <div className="like">
             {!postIsLiked ? (
-              <div className="likeIcon" onClick={likePost}>
+              <div className="likeIcon cursor" onClick={likePost}>
                 <img src="coeur-vide.png" alt="coeur_vide" />
               </div>
             ) : (
-              <div className="likeIcon" onClick={removeLikePost}>
+              <div className="likeIcon cursor" onClick={removeLikePost}>
                 <img src="coeur-remplie.png" alt="coeur_remplie" />
               </div>
             )}
