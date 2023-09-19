@@ -1,18 +1,18 @@
-.auth{
+.auth {
     align-items: center;
     text-align: center;
     height: auto;
-    width: 30%;
+    width: 60%;
     margin: auto;
     margin-top: 50px;
     padding-bottom: 10px;
 
-    .logo{
+    .logo {
         width: 80px;
         margin: auto;
     }
-    
-    .auth__title{
+
+    .auth__title {
         h1 {
             font-size: 2rem;
             font-weight: 700;
@@ -27,22 +27,26 @@
         font-size: 0.8rem;
         font-weight: 700;
         margin-bottom: 20px;
-        &:hover{
+
+        &:hover {
             color: $primaryHover;
             text-decoration: underline;
         }
     }
-    .formAuth{
+
+    .formAuth {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         margin: auto;
         margin-bottom: 20px;
-        .formAuthUserInfos{
+
+        .formAuthUserInfos {
             width: 100%;
             text-align: left;
-            .inputForm{
+
+            .inputForm {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -53,7 +57,8 @@
                 border-radius: 12px;
             }
         }
-        .primaryBouton{
+
+        .primaryBouton {
             background: $primary;
             border-radius: 10px;
             color: $white;
@@ -62,14 +67,16 @@
             width: 70%;
             height: 40px;
             margin: 20px;
-            &:hover{
+
+            &:hover {
                 background: $primaryHover;
                 border-radius: 10px;
                 cursor: pointer;
             }
         }
     }
-    .auth__footer__separator{
+
+    .auth__footer__separator {
         display: flex;
         box-sizing: border-box;
         margin-bottom: 40px;
@@ -77,12 +84,14 @@
         -webkit-box-align: center;
         align-items: center;
         width: 100%;
-        .separator{
+
+        .separator {
             flex: 1 1 0%;
             height: 1px;
             background-color: rgb(216, 218, 232);
         }
-        .separatorText{
+
+        .separatorText {
             display: flex;
             margin: 0px 16px;
             font-size: 20px;

@@ -1,118 +1,143 @@
 .post {
   display: flex;
-  justify-content: center;
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px;
+  position: relative;
+
   .postInfos {
     display: block;
-    width: 80%;
+    width: 100%;
+
     .separator {
       flex: 1 1 0%;
       height: 1px;
       background-color: rgb(216, 218, 232);
     }
+
     .postInfosPrimary {
       display: flex;
+
       .postLogo {
         width: 200px;
         height: 200px;
         border: 1px solid $black;
       }
+
+      @media screen and (max-width: $mobile) {
+        .postLogo {
+          width: 100px;
+          height: 100px;
+          border: 1px solid $black;
+        }
+      }
+
       .postPrixTitle {
         margin-left: 20px;
+
         .postPrix {
-          font-size: 1.2em;
+          font-size: 1.0em;
           display: flex;
+
           p {
             margin: 0 5px;
           }
-          .priceNow {
+
+          .promoPrice {
             color: $red;
           }
-          .priceInit {
+
+          .price {
             text-decoration: line-through;
             color: black;
           }
         }
       }
     }
-    .postInfosSecondary {
-      display: flex;
-      align-items: center;
-    }
+
     .postInfosTertiary {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 10px;
+
       p {
         margin: 10px;
+        font-size: 12px;
       }
-      .postAuthor {
-        font-weight: bold;
-        display: inline-flex;
-        .postAuthorAvatar {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          margin-right: 10px;
+
+      .leftInfos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .postAuthor {
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .postAuthorAvatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+          }
+
+        }
+
+        .postBoutonComment {
+          display: inline;
+          text-align: center;
+
+          .postBoutonCommentIcon img {
+            width: 50px;
+            height: 50px;
+          }
+
+          p {
+            margin: 0;
+          }
         }
       }
+
       .postCategories {
         display: inline-flex;
+
         .postCategory {
           margin: 0 10px;
         }
       }
+
       .postDates {
         display: inline-flex;
+
         .postDate {
           margin: 0 10px;
         }
       }
+
     }
-  }
-  .postBouton {
-    display: block;
-    width: 20%;
-    position: relative;
-    .postBoutonLike {
-      display: block;
-      text-align: center;
-      font-weight: bold;
-      margin-bottom: 20px;
-      border-radius: 50px;
-      .like {
-        text-align: center;
-        .likeIcon {
-          margin: auto;
-          width: 25px;
-          height: 25px;
-          img {
-            width: 100%;
-            height: 100%;
-          }
-        }
+
+    @media screen and (max-width: $mobile) {
+      .postInfosTertiary {
+        display: block;
       }
     }
-  }
-  .postBoutonComment {
-    position: absolute;
-    width: 80%;
-    top: 35%;
-    left: 10%;
-    display: inline;
-    text-align: center;
-    .postBoutonCommentIcon img {
-      width: 50px;
-      height: 50px;
-    }
-    p {
-      margin: 0;
+
+    @media screen and (min-width: $mobile) {
+      .leftInfos {
+        width: 30%;
+      }
+
     }
   }
+
+
+
+
+
   .postBoutonUrl {
     position: absolute;
     text-align: center;
@@ -126,14 +151,52 @@
     font-weight: 700;
     width: 70%;
     padding: 5px;
+
     &:hover {
       background: $primaryHover;
       border-radius: 10px;
       cursor: pointer;
     }
+
     .postBoutonUrlIcon img {
       width: 50px;
       height: 50px;
+    }
+  }
+
+
+
+
+
+
+
+  .postBoutonLike {
+    display: block;
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    top: 10px;
+    right: 10px;
+
+    p {
+      margin: 0;
+    }
+
+    .like {
+      text-align: center;
+
+      .likeIcon {
+        margin: auto;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        margin-bottom: 10px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
   }
 }

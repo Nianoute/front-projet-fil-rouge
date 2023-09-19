@@ -1,0 +1,138 @@
+.home {
+    .allPostDesign {
+        display: block;
+
+        .link {
+            text-decoration: none;
+            color: black;
+        }
+    }
+
+    .layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .filter_mobile {
+        display: none;
+    }
+
+    .filter {
+        display: flex;
+        align-items: center;
+
+        form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            width: 100%;
+
+            label {
+                padding: 0 10px;
+            }
+        }
+    }
+
+
+
+    @media screen and (max-width: $tablette) {
+        .filter_mobile {
+            display: flex;
+            align-items: center;
+
+            .bm-burger-button {
+                position: relative;
+                width: 50px;
+            }
+
+            .bm-menu {
+                background: #fffffff0 !important;
+                box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px !important;
+                border-radius: 0 25px;
+            }
+
+            .bm-item-list {
+                padding: 0 20px;
+                width: 150px;
+
+                .bm-item {
+                    height: 80px;
+                }
+            }
+
+            .bm-overlay {
+                display: none !important;
+            }
+
+
+        }
+
+        .filter {
+            display: none;
+        }
+    }
+
+    .selectOption {
+        height: 32px;
+        min-inline-size: max-content;
+        border: 1px solid rgb(216, 218, 232);
+        border-radius: 4px;
+        color: rgb(105, 103, 115);
+        margin: 0px 10px;
+    }
+
+    .noPost {
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+
+    .noPost_relative {
+        margin: 20px;
+        padding: 20px;
+        height: 500px;
+        box-shadow: rgba(39, 39, 39, 0.14) 0px 0px 8px !important;
+        border-radius: 25px;
+        position: relative;
+
+        .noPost_message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            img {
+                width: 200px;
+            }
+
+            .button {
+                text-align: center;
+                margin-top: 20px;
+                background: $primary;
+                border-radius: 10px;
+                color: $white;
+                font-size: 1rem;
+                font-weight: 700;
+                width: 70%;
+                padding: 5px;
+
+                &:hover {
+                    background: $primaryHover;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+
+
+}

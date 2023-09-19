@@ -32,16 +32,18 @@ const OnePostPage = () => {
     getOnePost(id).then((post) => {
       setPost(post);
       setPostActive(post);
-      getOnePostLikeByUser(post.id).then((like) => {
-        if (like) {
-          setPostIsLiked(like);
-        }
-      });
+      if (user) {
+        getOnePostLikeByUser(post.id).then((like) => {
+          if (like) {
+            setPostIsLiked(like);
+          }
+        });
+      }
       getAllPostComments(post.id).then((allComments) => {
         setComments(allComments);
       });
     });
-  }, [id]);
+  }, [id, user]);
 
   const changePostActifToVariant = (e) => {
     const indexOfVariant = e.target.id;
@@ -154,7 +156,7 @@ const OnePostPage = () => {
                 </div>
               </div>
 
-              {user && (
+              {user ? (
                 <div className="like">
                   {!postIsLiked ? (
                     <div className="likeIcon" onClick={likePost}>
@@ -165,6 +167,12 @@ const OnePostPage = () => {
                       <img src="coeur-remplie.png" alt="coeur_remplie" />
                     </div>
                   )}
+                </div>
+              ) : (
+                <div className="like">
+                  <div className="likeIcon">
+                    <img src="coeur-vide.png" alt="coeur_vide" />
+                  </div>
                 </div>
               )}
             </div>
@@ -225,31 +233,42 @@ const OnePostPage = () => {
           </div>
 
           <div className="detailPostComments">
-            <div className="postCommentsForm">
-              <h2>Commentaires</h2>
-              <form onSubmit={handleCreateComment} className="form">
-                <input
-                  type="text"
-                  placeholder="Nom"
-                  name="name"
-                  onChange={onChangeComment}
-                  value={comment.name}
-                  className="commentTitle"
-                />
-                <textarea
-                  name="description"
-                  minLength="1"
-                  maxLength="144"
-                  rows="10"
-                  placeholder="Commentaire"
-                  onChange={onChangeComment}
-                  value={comment.description}
-                  className="commentDescription"
-                ></textarea>
-                <input type="submit" className="submit" />
-                {error && <p className="error">Une erreur est survenue</p>}
-              </form>
-            </div>
+            {user ? (
+              <div className="postCommentsForm">
+                <h2>Commentaires</h2>
+                <form onSubmit={handleCreateComment} className="form">
+                  <input
+                    type="text"
+                    placeholder="Nom"
+                    name="name"
+                    onChange={onChangeComment}
+                    value={comment.name}
+                    className="commentTitle"
+                  />
+                  <textarea
+                    name="description"
+                    minLength="1"
+                    maxLength="144"
+                    rows="10"
+                    placeholder="Commentaire"
+                    onChange={onChangeComment}
+                    value={comment.description}
+                    className="commentDescription"
+                  ></textarea>
+                  <input type="submit" className="submit" />
+                  {error && <p className="error">Une erreur est survenue</p>}
+                </form>
+              </div>
+            ) : (
+              <div className="connexion">
+                <Link to="/auth/login" className="postCommentsForm relative">
+                  <div className="postCommentsForm">
+                    <h2>Commentaires</h2>
+                    <p>Vous devez être connecté pour commenter</p>
+                  </div>
+                </Link>
+              </div>
+            )}
 
             {comments && (
               <div className="detailPostCommentsList">

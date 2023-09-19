@@ -1,6 +1,13 @@
-.homePage{
-    .getAllPost{
+.homePage {
+    .getAllPost {
         width: 60%;
         padding: 0 16px;
+    }
+
+    @media screen and (max-width: $tablette) {
+        .getAllPost {
+            width: 100%;
+            padding: 0;
+        }
     }
 }

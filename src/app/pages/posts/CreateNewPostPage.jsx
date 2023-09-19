@@ -7,6 +7,8 @@ const CreateNewPost = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(false);
+  const [popUp, setPopUp] = useState(false);
+  const [response, setResponse] = useState(false);
 
   useEffect(() => {
     getAllCategories()
@@ -58,15 +60,15 @@ const CreateNewPost = () => {
       post.categories = [];
     }
 
+    if (post.promoDuration === "") {
+      post.promoDuration = null;
+    }
+
     try {
       await createPost(post, files)
         .then((response) => {
-          console.log(response);
-          navigate("/newpost-variant", {
-            state: {
-              post: response,
-            },
-          });
+          setPopUp(true);
+          setResponse(response);
         })
         .catch((error) => {
           console.log(error);
@@ -75,6 +77,16 @@ const CreateNewPost = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleCreatePostVariant = (e) => {
+    e.preventDefault();
+    console.log(response);
+    navigate("/newpost-variant", {
+      state: {
+        post: response,
+      },
+    });
   };
 
   return (
@@ -216,6 +228,25 @@ const CreateNewPost = () => {
         <input type="submit" value="Submit" className="primaryBouton" />
         {error && <p className="error">Une erreur est survenue</p>}
       </form>
+
+      {popUp && (
+        <div className="popUp">
+          <div className="popUpContent">
+            <div className="textPopUp">
+              <img src="postValide.png" alt="PostValide création" />
+              <h2>Le post a bien été créé</h2>
+              <div className="popUpButton">
+                <div className="backHome" onClick={() => navigate("/")}>
+                  Retour à l'accueil
+                </div>
+                <div className="createPostV" onClick={handleCreatePostVariant}>
+                  Créer un post variant
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -6,6 +6,8 @@ const HomePage = () => {
       <div className="getAllPost">
         <GetAllPostHome></GetAllPostHome>
       </div>
+      <div className="getCategories">
+      </div>
     </div>
   );
 };

@@ -10,6 +10,8 @@ const UpdatePostPage = () => {
   const [categories, setCategories] = useState([]);
   const { id } = useParams();
   const [error, setError] = useState(false);
+  const [popUp, setPopUp] = useState(false);
+  const [response, setResponse] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -67,11 +69,8 @@ const UpdatePostPage = () => {
 
     updatePost(id, post, files)
       .then((response) => {
-        navigate("/updatepost-variant", {
-          state: {
-            post: response,
-          },
-        });
+        setResponse(response);
+        setPopUp(true);
       })
       .catch((err) => {
         console.log(err);
@@ -83,6 +82,14 @@ const UpdatePostPage = () => {
 
   const onChangeFile = (e) => {
     setFiles(e.target.files);
+  };
+
+  const handleCreatePostVariant = (e) => {
+    navigate("/updatepost-variant", {
+      state: {
+        post: response,
+      },
+    });
   };
 
   return (
@@ -180,6 +187,25 @@ const UpdatePostPage = () => {
                 <input type="submit" value="Submit" className="primaryBouton" />
                 {error && <p className="error">Une erreur est survenue</p>}
               </form>
+
+              {popUp && (
+                <div className="popUp">
+                  <div className="popUpContent">
+                    <div className="textPopUp">
+                      <img src="/postValide.png" alt="PostValide création" />
+                      <h2>La publication a bien été modifier</h2>
+                      <div className="popUpButton">
+                        <div className="backHome" onClick={() => navigate("/")}>
+                          Retour à l'accueil
+                        </div>
+                        <div className="createPostV" onClick={handleCreatePostVariant}>
+                          Modifier les posts variants
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </>

@@ -5,7 +5,7 @@ import { createPostVariantOfPost, deletePostVariantOfPost, getAllPostVariantOfPo
 const CreatePostVariant = () => {
     const location = useLocation();
     const post = location.state.post
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const [postVariants, setPostVariants] = useState([]);
     const [postVariantActive, setPostVariantActive] = useState({
         title: "",
@@ -16,6 +16,7 @@ const CreatePostVariant = () => {
     const [files, setFiles] = useState([]);
 
     const [error, setError] = useState(false);
+    const [popUp, setPopUp] = useState(false);
 
     useEffect(() => {
         getAllPostVariantOfPostByParentId(post.id).then((postAllVariants) => {
@@ -45,16 +46,12 @@ const CreatePostVariant = () => {
                     promoPrice: post.promoPrice,
                 });
                 setFiles([]);
+                setPopUp(true);
             })
             .catch((err) => {
                 console.log(err);
                 setError(true);
             });
-    }
-
-    const handleCreatePostVariantes = async (e) => {
-        e.preventDefault();
-        navigation('/');
     }
 
     const deletePostVariant = async (e) => {
@@ -73,6 +70,10 @@ const CreatePostVariant = () => {
         getAllPostVariantOfPostByParentId(post.id).then((postAllVariants) => {
             setPostVariants(postAllVariants);
         });
+    }
+
+    const closePopUp = () => {
+        setPopUp(false);
     }
 
 
@@ -136,10 +137,9 @@ const CreatePostVariant = () => {
                         <div key={index} className="cardOnePost" id={index}>
                             <div className="wrapper">
                                 <div className="card__img">
-                                    {postVariant.imagePostV !== "" && (
+                                    {postVariant.imagePostV !== "" ? (
                                         <img src={postVariant.imagePostV} alt="PostVariantAvecImage" />
-                                    )}
-                                    {postVariant.imagePostV === "" && (
+                                    ) : (
                                         <>
                                             {post.imagePost !== "" && (
                                                 <img src={post.image} alt="PostVariantAvecImagePost" />
@@ -149,6 +149,7 @@ const CreatePostVariant = () => {
                                             )}
                                         </>
                                     )}
+
                                 </div>
                                 <div className="card__infos">
                                     <h2>{postVariant.title}</h2>
@@ -158,8 +159,24 @@ const CreatePostVariant = () => {
                             </div>
                         </div>
                     ))}
-
-                    <input type="submit" value="Créer" className="primaryBouton" onClick={handleCreatePostVariantes} />
+                </div>
+            )}
+            {popUp && (
+                <div className="popUp">
+                    <div className="popUpContent">
+                        <div className="textPopUp">
+                            <img src="postValide.png" alt="PostValide création" />
+                            <h2>Le post a bien été créé</h2>
+                            <div className="popUpButton">
+                                <div className="backHome" onClick={() => navigate("/")}>
+                                    Retour à l'accueil
+                                </div>
+                                <div className="createPostV" onClick={closePopUp}>
+                                    Créer un post variant
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
