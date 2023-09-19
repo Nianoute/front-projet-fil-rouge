@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { updatePostVariantOfPost } from "../../../../setup/services/postVariant.services";
 
-const UpdateOnePostVariant = (onePostVariant) => {
+const UpdateOnePostVariant = (onePostVariant, setPostVariants, postVariants) => {
     const [postVariant, setPostVariant] = useState();
 
     const [files, setFiles] = useState([]);
 
     const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         setPostVariant(onePostVariant.onePostVariant);
@@ -22,16 +23,21 @@ const UpdateOnePostVariant = (onePostVariant) => {
 
     const handleUpdatePostVariant = (e) => {
         e.preventDefault();
-        console.log(postVariant);
         updatePostVariantOfPost(postVariant.id, postVariant, files)
-            .then((response) => {
-                console.log(response);
+            .then(() => {
+                setSuccess(true);
+                setError(false);
             })
             .catch((err) => {
                 console.log(err);
                 setError(true);
             });
     };
+
+    const updateBack = () => {
+        setSuccess(false);
+        setError(false);
+    }
 
     return (
         <>
@@ -98,6 +104,17 @@ const UpdateOnePostVariant = (onePostVariant) => {
                         {error && <p className="error">Une erreur est survenue</p>}
 
                     </form>
+                    {success && (
+                        <div className="success" onClick={updateBack}>
+                            <div className="successText">
+                                <h2>Le post a bien été modifié</h2>
+                                <img src="/update.png" alt="update" />
+                                <div className="popUpButton">
+                                    <button className="primaryBouton">Modifier à nouveau</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
             )}

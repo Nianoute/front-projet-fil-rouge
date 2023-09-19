@@ -41,6 +41,33 @@
 
         .userInfosEdit {
             margin: auto;
+            display: flex;
+
+            @media screen and (min-width: $tablette) {
+                flex-direction: column;
+            }
+
+            .deconnexionBouton {
+                background: $red;
+                border-radius: 10px;
+                color: $white;
+                font-size: 1rem;
+                font-weight: 700;
+                width: 100%;
+                text-align: center;
+                padding: 10px 5px;
+                margin: 0px 10px;
+
+                @media screen and (min-width: $tablette) {
+                    margin: 10px 0px;
+                }
+
+                &:hover {
+                    background: $redHover;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+            }
 
             a {
                 text-decoration: none;
@@ -53,7 +80,12 @@
                     font-weight: 700;
                     width: 100%;
                     text-align: center;
-                    padding: 10px 0px;
+                    padding: 10px 5px;
+                    margin: 0px 10px;
+
+                    @media screen and (min-width: $tablette) {
+                        margin: 10px 0px;
+                    }
 
                     &:hover {
                         background: $primaryHover;
@@ -117,32 +149,91 @@
 
             .onePost {
                 width: 80%;
+                margin-bottom: 35px;
 
                 @media screen and (max-width: $tablette) {
                     width: 100%;
                 }
 
+                .action {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        width: 50px;
+                        height: 50px;
+                    }
+
+                }
+
+                .deleteButton {
+                    background: $red;
+                    border-radius: 10px;
+                    width: 100px;
+                    color: $white;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    text-align: center;
+                    padding: 10px;
+                    margin: 0px 10px;
+
+                    @media screen and (min-width: $tablette) {
+                        margin: 10px 0px;
+                    }
+
+                    &:hover {
+                        background: $redHover;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    }
+                }
+
                 .updatePost {
-                    position: relative;
+                    a {
+                        text-decoration: none;
+                    }
 
                     .updateButton {
-                        position: absolute;
-                        top: 25px;
-                        right: 45%;
+                        text-decoration: none;
                         background: $primary;
                         border-radius: 10px;
                         color: $white;
                         font-size: 1rem;
                         font-weight: 700;
-                        width: 10%;
                         text-align: center;
-                        padding: 10px 0px;
+                        padding: 10px;
+                        width: 100px;
+                        margin: 0px 10px;
 
                         &:hover {
                             background: $primaryHover;
                             border-radius: 10px;
                             cursor: pointer;
                         }
+                    }
+                }
+
+                .supBouton {
+                    background: $red;
+                    border-radius: 10px;
+                    color: $white;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    width: 100%;
+                    text-align: center;
+                    padding: 10px 5px;
+                    margin: 0px 10px;
+
+                    @media screen and (min-width: $tablette) {
+                        margin: 10px 0px;
+                    }
+
+                    &:hover {
+                        background: $redHover;
+                        border-radius: 10px;
+                        cursor: pointer;
                     }
                 }
             }

@@ -72,7 +72,9 @@ const AccountPage = () => {
           <div className="userInfosSecondary">
             <p>{me.email}</p>
           </div>
+
           <div className="userInfosEdit">
+            <div className="deconnexionBouton" onClick={disconnect}>Déconnexion</div>
             <Link to="/myaccount-edit">
               <div className="primaryBouton">Modifier</div>
             </Link>
@@ -87,7 +89,6 @@ const AccountPage = () => {
           </div>
           <div className="userStatsSecondary">
             <p>Nombre de post: {me?.posts?.length}</p>
-            <p onClick={disconnect}>Déconnexion</p>
           </div>
         </div>
 
@@ -95,13 +96,15 @@ const AccountPage = () => {
           <h2>Listes de mes posts:</h2>
           {posts?.map((post) => (
             <div key={post.id} className="onePost">
-              <div className="updatePost">
-                <Link to={`/editpost/${post.id}`}>
-                  <div className="updateButton">Modifier</div>
-                </Link>
-                <div className="deleteButton" id={post.id} onClick={handleDeletePost}>Supprimer</div>
-              </div>
               <GetAllPostDesign post={post} />
+              <div className="action">
+                <div className="deleteButton" id={post.id} onClick={handleDeletePost}>Supprimer</div>
+                <div className="updatePost">
+                  <Link to={`/editpost/${post.id}`}>
+                    <div className="updateButton">Modifier</div>
+                  </Link>
+                </div>
+              </div>
             </div>
           ))}
           {me?.posts?.length === 0 && <div>Aucun résultat</div>}

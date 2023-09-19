@@ -133,19 +133,12 @@ export default function GetAllPostDesign({ post }) {
               <div className="postDate">
                 <p>Créé le: {new Date(post.createdAt).toLocaleDateString()}</p>
               </div>
-              <div className="postDate">
-                <p>Fin de promotion: {new Date(post.promoDuration).toLocaleDateString()}</p>
-              </div>
-            </div>
-
-
-            {/* <div className="postBoutonUrl">
-              <Link to={post.webSite}>
-                <div className="postBoutonUrlIcon">
-                  <img src="url.png" alt="avatar" />
+              {post.promoDuration && (
+                <div className="postDate">
+                  <p>Fin de promotion: {new Date(post.promoDuration).toLocaleDateString()}</p>
                 </div>
-              </Link>
-            </div> */}
+              )}
+            </div>
           </div>
         </Link>
       </div >

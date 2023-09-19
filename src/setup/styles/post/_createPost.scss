@@ -1,11 +1,12 @@
-.createPost{
+.createPost {
     text-align: center;
     height: auto;
-    width: 60%;
+    width: 80%;
     margin: auto;
     margin-top: 50px;
     padding-bottom: 10px;
-    .formCreatePost{
+
+    .formCreatePost {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -13,20 +14,24 @@
         margin: auto;
         margin-top: 50px;
         margin-bottom: 50px;
-        .formStep{
+
+        .formStep {
             display: inline;
             width: 100%;
             margin: auto;
             margin-bottom: 50px;
-            .separator{
+
+            .separator {
                 flex: 1 1 0%;
                 height: 1px;
                 background-color: rgb(216, 218, 232);
             }
-            .oneLabel{
+
+            .oneLabel {
                 width: 100%;
                 text-align: left;
-                .inputForm{
+
+                .inputForm {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -36,7 +41,8 @@
                     margin-top: 20px;
                     border-radius: 12px;
                 }
-                .select{
+
+                .select {
                     display: flex;
                     width: 100%;
                     height: 40px;
@@ -46,19 +52,127 @@
                 }
             }
         }
-        .primaryBouton{ 
-            background: $primary;
+
+    }
+
+    .primaryBouton {
+        background: $primary;
+        border-radius: 10px;
+        color: $white;
+        font-size: 1rem;
+        font-weight: 700;
+        width: 70%;
+        height: 40px;
+        margin: 20px;
+
+        &:hover {
+            background: $primaryHover;
             border-radius: 10px;
-            color: $white;
-            font-size: 1rem;
-            font-weight: 700;
-            width: 70%;
-            height: 40px;
-            margin: 20px;
-            &:hover{
-                background: $primaryHover;
-                border-radius: 10px;
-                cursor: pointer;
+            cursor: pointer;
+        }
+    }
+
+    .popUp {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff50;
+        z-index: 100;
+
+        .popUpContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 50%;
+            height: 50%;
+            margin: auto;
+            background-color: $white;
+            border-radius: 12px;
+            box-shadow: 0 0 0.5rem rgba($black, 0.2);
+
+            .textPopUp {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 75%;
+
+                img {
+                    width: 200px;
+                    height: 200px;
+
+                    @media screen and (max-width: $tablette) {
+                        width: 100px;
+                        height: 100px;
+                    }
+                }
+
+                .popUpButton {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    margin: auto;
+                    margin-top: 20px;
+
+                    @media screen and (max-width: $tablette) {
+                        flex-direction: column;
+                    }
+
+                    .backHome {
+                        background: $red;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 10px;
+                        color: $white;
+                        font-size: 1rem;
+                        font-weight: 700;
+                        width: 70%;
+                        height: 40px;
+                        margin: 0 10px;
+
+                        @media screen and (max-width: $tablette) {
+                            margin: 10px 0px;
+                        }
+
+                        &:hover {
+                            background: $redHover;
+                            border-radius: 10px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .createPostV {
+                        background: $primary;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 10px;
+                        color: $white;
+                        font-size: 1rem;
+                        font-weight: 700;
+                        width: 70%;
+                        height: 40px;
+                        margin: 0 10px;
+
+                        @media screen and (max-width: $tablette) {
+                            margin: 10px 0px;
+                        }
+
+                        &:hover {
+                            background: $primaryHover;
+                            border-radius: 10px;
+                            cursor: pointer;
+                        }
+                    }
+                }
             }
         }
     }
