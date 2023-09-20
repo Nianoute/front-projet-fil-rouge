@@ -21,18 +21,26 @@ const CreateNewPost = () => {
   }, []);
 
   const [post, setPost] = useState({
-    website: "",
-    title: "",
-    description: "",
+    website: "https://www.google.com/",
+    title: "Un exemple de titre",
+    description: "Un exemple de description",
     promoDuration: "",
-    price: 0,
-    promoPrice: 0,
+    price: 10,
+    promoPrice: 8,
     categories: [],
     postVariants: [],
   });
 
+  const [percent, setPercent] = useState(25);
+
   const onChangePost = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
+    if (e.target.name === "promoPrice" && e.target.value !== "" & e.target.value !== 0) {
+      setPercent(Math.round((1 - e.target.value / post.price) * 100));
+    }
+    if (e.target.name === "price" && e.target.value !== "") {
+      setPercent(Math.round((1 - post.promoPrice / e.target.value) * 100));
+    }
   };
 
   const onChangeCategories = (e) => {
@@ -62,6 +70,10 @@ const CreateNewPost = () => {
 
     if (post.promoDuration === "") {
       post.promoDuration = null;
+    }
+
+    if (post.title === "") {
+      post.title = null;
     }
 
     try {
@@ -98,6 +110,7 @@ const CreateNewPost = () => {
           <h2>Lien du site</h2>
           <div className="oneLabel">
             <label>
+              <p className="labelTitle">Lien de la promotion:</p>
               <input
                 type="text"
                 onChange={onChangePost}
@@ -115,6 +128,7 @@ const CreateNewPost = () => {
           <h2>Informations du post</h2>
           <div className="oneLabel">
             <label>
+              <p className="labelTitle">Titre:</p>
               <input
                 type="text"
                 onChange={onChangePost}
@@ -122,23 +136,26 @@ const CreateNewPost = () => {
                 name="title"
                 className="inputForm"
                 placeholder="Le titre du post"
+                required
               />
             </label>
           </div>
           <div className="oneLabel">
             <label>
-              <input
-                type="text"
+              <p className="labelTitle">Description:</p>
+              <textarea
+                name="description"
+                rows="10"
+                placeholder="Description"
                 onChange={onChangePost}
                 value={post.description}
-                name="description"
-                className="inputForm"
-                placeholder="La description"
-              />
+                className="commentDescription"
+              ></textarea>
             </label>
           </div>
           <div className="oneLabel">
             <label>
+              <p className="labelTitle">Durée de la promotion:</p>
               <input
                 type="date"
                 onChange={onChangePost}
@@ -154,29 +171,39 @@ const CreateNewPost = () => {
         <div className="formStep">
           <div className="separator" />
           <h2>Les prix</h2>
-          <div className="oneLabel">
-            <label>
-              <input
-                type="number"
-                onChange={onChangePost}
-                value={post.promoPrice}
-                name="promoPrice"
-                className="inputForm"
-                placeholder="Le prix actuel"
-              />
-            </label>
+          <div className="twoLabel">
+            <div className="oneLabel margin">
+              <label>
+                <p className="labelTitle">Prix après la promotion:</p>
+                <input
+                  type="number"
+                  onChange={onChangePost}
+                  value={post.promoPrice}
+                  name="promoPrice"
+                  className="inputForm"
+                  placeholder="Le prix actuel"
+                  required
+                />
+              </label>
+            </div>
+            <div className="oneLabel margin">
+              <label>
+                <p className="labelTitle">Prix initial / Prix avant promotion:</p>
+                <input
+                  type="number"
+                  onChange={onChangePost}
+                  value={post.price}
+                  name="price"
+                  className="inputForm"
+                  placeholder="Le prix avant promotion"
+                  required
+                />
+              </label>
+            </div>
           </div>
-          <div className="oneLabel">
-            <label>
-              <input
-                type="number"
-                onChange={onChangePost}
-                value={post.price}
-                name="price"
-                className="inputForm"
-                placeholder="Le prix avant promotion"
-              />
-            </label>
+          <div className="percent">
+            <p className="labelTitle">Pourcentage de réduction:</p>
+            <p className="percentValue">{percent}%</p>
           </div>
         </div>
 

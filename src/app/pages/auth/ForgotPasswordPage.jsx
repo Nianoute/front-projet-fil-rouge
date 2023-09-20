@@ -27,9 +27,10 @@ const ForgotPasswordPage = () => {
         <h1>Forget password</h1>
       </div>
 
-      <form onSubmit={onSubmitForm} className="formReset">   
+      <form onSubmit={onSubmitForm} className="formReset">
         <div className="formResetUserInfos">
-          <input type="email" name="email" value={email} placeholder="Email" className="inputForm" onChange={(e) => {onChangeEmail(e)}} required/>
+          <p className="labelTitle">Adresse mail:</p>
+          <input type="email" name="email" value={email} placeholder="Email" className="inputForm" onChange={(e) => { onChangeEmail(e) }} required />
         </div>
         {result.type === "success" && (
           <p>
@@ -44,12 +45,12 @@ const ForgotPasswordPage = () => {
 
         <button type="submit" className="primaryBouton">Confirm</button>
       </form>
-      
+
       <div className="reset__footer">
         <div className="reset__footer__separator">
-          <div className="separator"/>
+          <div className="separator" />
           <p className="separatorText">OU</p>
-          <div className="separator"/>
+          <div className="separator" />
         </div>
         <p>Retour à la <Link to="/auth/login">Connexion</Link></p>
       </div>

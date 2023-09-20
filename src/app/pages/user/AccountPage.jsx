@@ -15,6 +15,8 @@ const AccountPage = () => {
 
   const { setUser } = useContext(UserContext);
 
+  const [gain, setGain] = useState(0);
+
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
@@ -46,10 +48,20 @@ const AccountPage = () => {
     }
   }, [userToken]);
 
+  useEffect(() => {
+    if (me) {
+      let totalGain = 0;
+      me.posts.forEach((post) => {
+        const oneGain = post.price - post.promoPrice
+        totalGain += oneGain;
+      });
+      setGain(totalGain);
+    }
+  }, [me]);
+
   const handleDeletePost = (e) => {
     e.preventDefault();
     const postId = e.target.id;
-    console.log(postId);
     deletePost(postId).then(() => {
       getAllPostsByUser(userToken.id).then((data) => {
         setPosts(data);
@@ -88,7 +100,11 @@ const AccountPage = () => {
             <h2>Statistiques</h2>
           </div>
           <div className="userStatsSecondary">
-            <p>Nombre de post: {me?.posts?.length}</p>
+            <p>Nombre de post: <b>{me?.posts?.length}</b></p>
+            <p>Nombre de commentaires: <b>{me?.comments?.length}</b></p>
+            <p>Nombre de likes: <b>{me?.likesUser?.length}</b></p>
+            <p>Argent économisé avec vos posts: <b>{gain}€</b></p>
+            <p>Nombre de categories likes: <b>{me?.categoriesUser?.length}</b></p>
           </div>
         </div>
 

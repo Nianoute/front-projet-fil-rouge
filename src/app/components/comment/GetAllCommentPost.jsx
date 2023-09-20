@@ -71,7 +71,7 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
           {oneComment.author.userName}
         </p>
         <p className="commentHeaderDate">
-          {oneComment.createdAt}
+          {new Date(oneComment.createdAt).toLocaleDateString()}
         </p>
       </div>
       <div className="commentBody">
@@ -149,7 +149,9 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
                       {child.author.userName}
                     </p>
                     <p className="commentHeaderDate">
-                      {child.createdAt}
+                      {new Date(
+                        child.createdAt
+                      ).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="commentBody">

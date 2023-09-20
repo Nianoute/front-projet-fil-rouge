@@ -23,10 +23,16 @@
         width: 65%;
       }
 
+      @media screen and (max-width: $mobile) {
+        h1 {
+          margin-top: 2em;
+        }
+      }
+
       .detailPostInfosPrimary {
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
         margin-top: 20px;
 
@@ -45,6 +51,10 @@
             font-size: 1.2em;
             display: flex;
 
+            .postPricePromo {
+              display: flex;
+            }
+
             p {
               margin: 0 5px;
             }
@@ -58,52 +68,61 @@
               color: black;
             }
           }
-
-          .postBoutonUrl {
-            padding: 5px 25px;
-            background-color: $primary;
-            text-align: center;
-            border-radius: 10px;
-
-            .postBoutonUrlIcon img {
-              width: 50px;
-              height: 50px;
-            }
-
-            &:hover {
-              background-color: $primaryHover;
-            }
-          }
         }
       }
 
       .detailPostInfosSecondary {
-        display: flex;
         margin: 20px;
+        text-align: left;
+
+        .detailPostSecondary {
+          margin-bottom: 40px;
+        }
 
         h3 {
           text-decoration: underline;
           text-align: left;
         }
+
+        .postBoutonUrl {
+          padding: 5px 25px;
+          background-color: $primary;
+          text-align: center;
+          border-radius: 10px;
+          width: 25%;
+
+          .postBoutonUrlIcon img {
+            width: 40px;
+            height: 40px;
+          }
+
+          &:hover {
+            background-color: $primaryHover;
+          }
+        }
       }
 
       .detailPostDate {
         display: flex;
-        justify-content: center;
+        justify-content: right;
         align-items: center;
 
         @media screen and (max-width: $tablette) {
           flex-direction: column;
         }
 
+        p {
+          margin: 5px 10px;
+          font-size: 12px;
+        }
+
         .promoDuration {
           display: flex;
           align-items: center;
-          margin: 0 10px;
 
           img {
-            width: 25px;
-            height: 25px;
+            width: 15px;
+            height: 15px;
           }
         }
       }
@@ -142,6 +161,25 @@
             width: 100%;
             height: 100%;
           }
+        }
+      }
+
+      .cursor {
+        cursor: pointer;
+      }
+
+      .promoPercent {
+        position: absolute;
+        margin: 10px 0;
+        left: 25px;
+        top: 5px;
+
+        .text {
+          margin: 0;
+          font-size: 1.2em;
+          font-weight: 700;
+          color: $red;
+          font-style: italic;
         }
       }
     }

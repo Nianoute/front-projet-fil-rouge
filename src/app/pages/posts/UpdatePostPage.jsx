@@ -12,6 +12,7 @@ const UpdatePostPage = () => {
   const [error, setError] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [response, setResponse] = useState(false);
+  const [promoDuration, setPromoDuration] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -32,18 +33,32 @@ const UpdatePostPage = () => {
   }, []);
 
   const [post, setPost] = useState({});
+  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
     getOnePost(id).then((post) => {
       post.categories = [];
       setPost(post);
-      post.promoDuration = "";
+      const thisPercent = Math.round((1 - post.promoPrice / post.price) * 100);
+      setPercent(thisPercent);
     });
   }, [id])
 
 
+
   const onChangePost = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
+    if (e.target.name === "promoPrice" && e.target.value !== "" & e.target.value !== 0) {
+      setPercent(Math.round((1 - e.target.value / post.price) * 100));
+    }
+    if (e.target.name === "price" && e.target.value !== "") {
+      setPercent(Math.round((1 - post.promoPrice / e.target.value) * 100));
+    }
+  };
+
+  const onChangePromoDuration = (e) => {
+    setPromoDuration(e.target.value);
+    setPost({ ...post, promoDuration: e.target.value });
   };
 
   const onChangeCategories = (e) => {
@@ -103,6 +118,7 @@ const UpdatePostPage = () => {
                   <div className="separator" />
                   <h2>Lien du site</h2>
                   <div className="oneLabel">
+                    <p className="labelTitle">Lien de la promotion:</p>
                     <label>
                       <input type="text" onChange={onChangePost} value={post.website} name="website" className="inputForm" placeholder="website" />
                     </label>
@@ -114,12 +130,14 @@ const UpdatePostPage = () => {
                   <h2>Informations du post</h2>
                   <div className="oneLabel">
                     <label>
+                      <p className="labelTitle">Description:</p>
                       <input type="text" onChange={onChangePost} value={post.description} name="description" className="inputForm" placeholder="La description" />
                     </label>
                   </div>
                   <div className="oneLabel">
+                    <p className="labelTitle">Durée de la promotion:</p>
                     <label>
-                      <input type="date" onChange={onChangePost} value={post.promoDuration} name="date" className="inputForm" placeholder="La date" />
+                      <input type="date" onChange={onChangePromoDuration} value={promoDuration} name="date" className="inputForm" placeholder="La date" />
                     </label>
                   </div>
                 </div>
@@ -127,15 +145,39 @@ const UpdatePostPage = () => {
                 <div className="formStep">
                   <div className="separator" />
                   <h2>Les prix</h2>
-                  <div className="oneLabel">
-                    <label>
-                      <input type="number" onChange={onChangePost} value={post.price} name="price" className="inputForm" placeholder="Le prix actuel" />
-                    </label>
+                  <div className="twoLabel">
+                    <div className="oneLabel margin">
+                      <label>
+                        <p className="labelTitle">Prix après la promotion:</p>
+                        <input
+                          type="number"
+                          onChange={onChangePost}
+                          value={post.promoPrice}
+                          name="promoPrice"
+                          className="inputForm"
+                          placeholder="Le prix actuel"
+                          required
+                        />
+                      </label>
+                    </div>
+                    <div className="oneLabel margin">
+                      <label>
+                        <p className="labelTitle">Prix initial / Prix avant promotion:</p>
+                        <input
+                          type="number"
+                          onChange={onChangePost}
+                          value={post.price}
+                          name="price"
+                          className="inputForm"
+                          placeholder="Le prix avant promotion"
+                          required
+                        />
+                      </label>
+                    </div>
                   </div>
-                  <div className="oneLabel">
-                    <label>
-                      <input type="number" onChange={onChangePost} value={post.promoPrice} name="promoPrice" className="inputForm" placeholder="Le prix initial" />
-                    </label>
+                  <div className="percent">
+                    <p className="labelTitle">Pourcentage de réduction:</p>
+                    <p className="percentValue">{percent}%</p>
                   </div>
                 </div>
 

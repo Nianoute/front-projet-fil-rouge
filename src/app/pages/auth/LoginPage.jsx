@@ -44,6 +44,7 @@ const LoginPage = () => {
 
       <form className="formAuth" onSubmit={onSubmitForm}>
         <div className="formAuthUserInfos">
+          <p className="labelTitle">Adresse mail:</p>
           <input
             type="email"
             onChange={onChangeUser}
@@ -51,7 +52,9 @@ const LoginPage = () => {
             name="email"
             className="inputForm"
             placeholder="Ton adresse email"
+            required
           />
+          <p className="labelTitle">Mot de passe:</p>
           <input
             type="password"
             onChange={onChangeUser}
@@ -59,6 +62,7 @@ const LoginPage = () => {
             name="password"
             className="inputForm"
             placeholder="Ton mot de passe"
+            required
           />
           <Link to="/auth/forgot-password">Mot de passe oublié ?</Link>
         </div>

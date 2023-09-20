@@ -21,11 +21,33 @@
             margin: auto;
             margin-bottom: 50px;
 
+            .twoLabel {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+                margin: auto;
+
+                @media screen and (max-width: $mobile) {
+                    flex-direction: column;
+                }
+            }
+
+            .margin {
+                margin: 0 20px;
+            }
 
 
             .oneLabel {
                 width: 100%;
                 text-align: left;
+                margin-top: 20px;
+
+                .labelTitle {
+                    font-size: 16px;
+                    margin: 5px;
+                    font-style: italic;
+                }
 
                 .inputForm {
                     display: flex;
@@ -34,7 +56,6 @@
                     width: 100%;
                     height: 40px;
                     margin: auto;
-                    margin-top: 20px;
                     border-radius: 12px;
                 }
 
@@ -45,6 +66,16 @@
                     margin: auto;
                     margin-top: 20px;
                     border-radius: 12px;
+                }
+
+                .commentDescription {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100% !important;
+                    margin: auto;
+                    border-radius: 12px;
+                    resize: none;
                 }
             }
         }
@@ -334,6 +365,9 @@
             width: 100%;
             background-color: #fffffff0;
             z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
             img {
                 width: 200px;

@@ -64,6 +64,7 @@ const EditUserPage = () => {
 
           <form className="formAuth" onSubmit={onSubmitForm}>
             <div className="formAuthUserInfos">
+              <p className="labelTitle">Adresse mail:</p>
               <input
                 type="email"
                 value={userToken.email}
@@ -71,7 +72,9 @@ const EditUserPage = () => {
                 className="inputForm"
                 placeholder="Ton adresse email"
                 readOnly
+                required
               />
+              <p className="labelTitle">Speudo:</p>
               <input
                 type="text"
                 onChange={onChangeUser}
@@ -79,7 +82,9 @@ const EditUserPage = () => {
                 name="userName"
                 className="inputForm"
                 placeholder="Ton speudo"
+                required
               />
+              <p className="labelTitle">Mot de passe:</p>
               <input
                 type="password"
                 onChange={onChangeUser}
@@ -87,6 +92,8 @@ const EditUserPage = () => {
                 name="password"
                 className="inputForm"
                 placeholder="password"
+                minLength={"8"}
+                required
               />
             </div>
             <input

@@ -28,10 +28,19 @@ const OnePostPage = () => {
 
   const { user } = useContext(UserContext);
 
+  const [promoPercent, setPromoPercent] = useState(0);
+
   useEffect(() => {
     getOnePost(id).then((post) => {
       setPost(post);
       setPostActive(post);
+      if (post.promoPrice !== 0 && post.price !== 0) {
+        let promo = post.promoPrice * 100 / post.price;
+        promo = Math.round(promo);
+        promo = 100 - promo;
+        setPromoPercent(promo);
+      }
+
       if (user) {
         getOnePostLikeByUser(post.id).then((like) => {
           if (like) {
@@ -43,7 +52,21 @@ const OnePostPage = () => {
         setComments(allComments);
       });
     });
+
   }, [id, user]);
+
+  useEffect(() => {
+    if (postActive) {
+      if (postActive.promoPrice !== 0 && postActive.price !== 0) {
+        let promo = postActive.promoPrice * 100 / postActive.price;
+        promo = Math.round(promo);
+        promo = 100 - promo;
+        setPromoPercent(promo);
+      } else {
+        setPromoPercent(0);
+      }
+    }
+  }, [postActive]);
 
   const changePostActifToVariant = (e) => {
     const indexOfVariant = e.target.id;
@@ -52,6 +75,11 @@ const OnePostPage = () => {
       setPostActive({
         ...post.postVariants[indexOfVariant],
         imagePost: post.imagePost,
+      });
+    } else {
+      setPostActive({
+        ...post.postVariants[indexOfVariant],
+        imagePost: post.postVariants[indexOfVariant].imagePostV,
       });
     }
   };
@@ -125,28 +153,35 @@ const OnePostPage = () => {
                 </div>
                 <div className="detailPostContent">
                   <div className="postPrice">
-                    <p className="priceNow">{postActive.priceNow}</p>
-                    {postActive.price ? (
-                      <>
-                        <p className="priceInit">{postActive.priceInit}</p>
-                      </>
+                    {postActive.promoPrice !== 0 && postActive.price !== 0 ? (
+                      <div className="postPricePromo">
+                        <p className="promoPrice">{postActive.promoPrice}€</p>
+                        <p className="price">{postActive.price}€</p>
+                      </div>
                     ) : (
-                      <></>
+                      <div className="postPricePromo">
+                        <p className="">La publication n'est pas une promotion sur un prix</p>
+                      </div>
                     )}
                   </div>
-                  {post.website && (
-                    <div className="postBoutonUrl">
-                      <div className="postBoutonUrlIcon">
-                        <Link to={post.website}>
-                          <img src="url.png" alt="avatar" />
-                        </Link>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
               <div className="detailPostInfosSecondary">
-                <div className="detailPostDescription">
+                <div className="detailPostSecondary">
+                  <h3>Site Web :</h3>
+                  {post.website ? (
+                    <div className="postBoutonUrl">
+                      <Link to={post.website}>
+                        <div className="postBoutonUrlIcon">
+                          <img src="url.png" alt="avatar" />
+                        </div>
+                      </Link>
+                    </div>
+                  ) : (
+                    <p className="description">Cette publication ne possède pas de lien pour la promotion</p>
+                  )}
+                </div>
+                <div className="detailPostSecondary">
                   <h3>Description :</h3>
                   {postActive.description === "" ? (
                     <p className="description">Cette publication ne possède pas de description</p>
@@ -154,6 +189,30 @@ const OnePostPage = () => {
                     <p className="description">{postActive.description}</p>
                   )}
                 </div>
+
+                <div className="detailPostSecondary">
+                  <h3>Categories :</h3>
+                  {post.categories.length === 0 ? (
+                    <p className="description">Cette publication ne possède pas de catégorie</p>
+                  ) : (
+                    <div className="categories">
+                      {post.categories.map((category) => (
+                        <div className="category" key={category.id}>
+                          <p>{category.name}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="detailPostAuthor">
+                <p className="author">Par {post.author.userName}</p>
+                {post.author.avatar !== "" ? (
+                  <img src={post.author.avatar} alt="avatar" className="postAuthorAvatar" />
+                ) : (
+                  <img src="/logo.png" alt="avatar" className="postAuthorAvatar" />
+                )}
               </div>
 
               <div className="detailPostDate">
@@ -167,24 +226,17 @@ const OnePostPage = () => {
                 )}
               </div>
 
-              <div className="detailPostAuthor">
-                <p className="author">Par {post.author.userName}</p>
-                {post.author.avatar !== "" ? (
-                  <img src={post.author.avatar} alt="avatar" className="postAuthorAvatar" />
-                ) : (
-                  <img src="/logo.png" alt="avatar" className="postAuthorAvatar" />
-                )}
-              </div>
-
               {user ? (
                 <div className="like">
                   {!postIsLiked ? (
-                    <div className="likeIcon" onClick={likePost}>
+                    <div className="likeIcon cursor" onClick={likePost}>
                       <img src="coeur-vide.png" alt="coeur_vide" />
+                      <p>{post.likesPost?.length}</p>
                     </div>
                   ) : (
-                    <div className="likeIcon" onClick={removeLikePost}>
+                    <div className="likeIcon cursor" onClick={removeLikePost}>
                       <img src="coeur-remplie.png" alt="coeur_remplie" />
+                      <p>{post.likesPost?.length}</p>
                     </div>
                   )}
                 </div>
@@ -192,7 +244,14 @@ const OnePostPage = () => {
                 <div className="like">
                   <div className="likeIcon">
                     <img src="coeur-vide.png" alt="coeur_vide" />
+                    <p>{post.likesPost?.length}</p>
                   </div>
+                </div>
+              )}
+
+              {promoPercent && promoPercent !== 0 && (
+                <div className="promoPercent">
+                  <p className="text">-{promoPercent}%</p>
                 </div>
               )}
             </div>

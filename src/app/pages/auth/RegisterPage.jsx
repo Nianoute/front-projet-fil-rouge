@@ -48,10 +48,14 @@ const RegisterPage = () => {
 
         <form className="formAuth" onSubmit={onSubmitForm}>
           <div className="formAuthUserInfos">
-            <input type="email" onChange={onChangeUser} value={user.email} name="email" className="inputForm" placeholder="Ton adresse email" />
-            <input type="text" onChange={onChangeUser} value={user.userName} name="userName" className="inputForm" placeholder="Ton speudo" />
-            <input type="password" onChange={onChangeUser} value={user.password} name="password" className="inputForm" placeholder="Ton mot de passe" />
-            <input type="password" onChange={onChangeUser} value={user.confirmPassword} name="confirmPassword" className="inputForm" placeholder="Confirme ton mot de passe" />
+            <p className="labelTitle">Adresse mail:</p>
+            <input type="email" onChange={onChangeUser} value={user.email} name="email" className="inputForm" placeholder="Ton adresse email" required />
+            <p className="labelTitle">Speudo:</p>
+            <input type="text" onChange={onChangeUser} value={user.userName} name="userName" className="inputForm" placeholder="Ton speudo" required />
+            <p className="labelTitle">Mot de passe:</p>
+            <input type="password" onChange={onChangeUser} value={user.password} name="password" className="inputForm" placeholder="Ton mot de passe" minLength={"8"} required />
+            <p className="labelTitle">Confirmer votre mot de passe:</p>
+            <input type="password" onChange={onChangeUser} value={user.confirmPassword} name="confirmPassword" className="inputForm" placeholder="Confirme ton mot de passe" required />
             {error === "password" && <p className="error">Les mots de passe ne sont pas identiques</p>}
             <p className="extentions">
               Extensions autorisées : <br />
