@@ -31,6 +31,11 @@ const NavbarMain = () => {
         <div className="navBar__right">
           {user && (
             <>
+              {user.admin && (
+                <Link to="/create-category">
+                  <img src="/category.png" className="icon" alt="category" />
+                </Link>
+              )}
               <Link to="/newpost">
                 <img src="/post.png" className="icon" alt="post" />
               </Link>

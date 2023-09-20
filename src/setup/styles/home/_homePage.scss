@@ -1,4 +1,8 @@
 .homePage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     .getAllPost {
         width: 60%;
         padding: 0 16px;
@@ -8,6 +12,15 @@
         .getAllPost {
             width: 100%;
             padding: 0;
+        }
+    }
+
+    .getAllCategories {
+        width: 40%;
+        padding: 0 16px;
+
+        @media screen and (max-width: $tablette) {
+            display: none;
         }
     }
 }

@@ -16,14 +16,17 @@
         .logo {
             width: 80px;
             margin: auto;
-        }
 
-        @media screen and (max-width: $mobile) {
-            .logo {
+            @media screen and (min-width: $mobile) and (max-width: $tablette) {
                 width: 60px;
-                margin: auto;
+            }
+
+            @media screen and (max-width: $mobile) {
+                width: 40px;
             }
         }
+
+
     }
 
     .navBar__right {
@@ -34,12 +37,15 @@
         .icon {
             width: 80px;
             height: 80px;
-        }
 
-        @media screen and (max-width: $mobile) {
-            .icon {
+            @media screen and (min-width: $mobile) and (max-width: $tablette) {
                 width: 60px;
                 height: 60px;
+            }
+
+            @media screen and (max-width: $mobile) {
+                width: 40px;
+                height: 40px;
             }
         }
     }

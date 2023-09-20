@@ -24,10 +24,12 @@ export default function GetAllPostDesign({ post }) {
 
   //si post.description est trop long, on coupe le texte et on ajoute "..."
   let description = post.description;
-  if (description.length > 100) {
-    description = description.substring(0, 100) + "...";
+  if (description) {
+    if (description.length > 100) {
+      description = description.substring(0, 100) + "...";
+    }
+    post.description = description;
   }
-  post.description = description;
 
 
   const [postIsLiked, setPostIsLiked] = useState(false);

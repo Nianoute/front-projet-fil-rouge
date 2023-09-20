@@ -14,6 +14,7 @@ import UpdatePostVariant from "../pages/posts/postVariants/UpdatePostVariant";
 import ProtectedRoute from "./ProtectedRoute";
 import CreateNewCategory from "../pages/categories/CreateNewCategory"
 import AdminProtectedRoute from "./AdminProtectedRoute";
+import OneCategoryPage from "../pages/categories/OneCategoryPage";
 
 const MainRouter = () => {
   return (
@@ -76,6 +77,7 @@ const MainRouter = () => {
             <CreateNewCategory />
           </AdminProtectedRoute>
         } />
+        <Route path="/category/:id" element={<OneCategoryPage />} />
       </Routes>
     </>
   );

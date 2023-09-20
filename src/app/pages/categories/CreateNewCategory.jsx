@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react"
 import { createCategory, getAllCategories } from "../../../setup/services/category.service"
+import { useNavigate } from "react-router-dom"
 
 const CreateNewCategory = () => {
     const [category, setCategory] = useState({
-        name: "",
-        description: "",
+        name: "Un nom de catégorie",
+        description: "Une description de catégorie",
         parent: null,
     })
 
     const [allCategories, setAllCategories] = useState([])
+    const [error, setError] = useState(false)
+    const [popUp, setPopUp] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         getAllCategories()
@@ -24,67 +28,143 @@ const CreateNewCategory = () => {
         setCategory({ ...category, [e.target.name]: e.target.value })
     }
 
+    const [files, setFiles] = useState([])
+
+    const onChangeFile = (e) => {
+        setFiles([...e.target.files])
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        createCategory(category)
+
+        createCategory(category, files)
             .then(() => {
-                setCategory({ name: "", description: "" })
+                setPopUp(true)
             }
             )
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                console.log(err);
+                setError(true)
+            })
     }
+
+    const handleCreateCategory = () => {
+        setPopUp(false)
+        setError(false)
+        category.value = ""
+        setAllCategories([...allCategories, category])
+        setCategory({
+            name: "Un nom de catégorie",
+            description: "Une description de catégorie",
+            parent: null,
+        })
+    }
+
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 offset-md-3 mt-5">
-                    <h1 className="text-center">Create New Category</h1>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="name">Category Name</label>
+        <div className="createPost">
+            <h1>Création d'une catégorie</h1>
+            <form onSubmit={handleSubmit} className="formCreatePost">
+                <div className="formStep">
+                    <div className="separator" />
+                    <h2>Informations générales</h2>
+                    <div className="oneLabel">
+                        <label htmlFor="name">
+                            <p className="labelTitle">Nom de la catégorie:</p>
                             <input
                                 type="text"
-                                className="form-control"
-                                id="name"
                                 name="name"
+                                id="name"
                                 value={category.name}
                                 onChange={handleChange}
+                                className="inputForm"
+                                required
                             />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="description">Category Description</label>
+                        </label>
+                    </div>
+                    <div className="oneLabel">
+                        <label>
+                            <p className="labelTitle">Description:</p>
                             <textarea
-                                className="form-control"
-                                id="description"
+                                type="text"
                                 name="description"
-                                rows="3"
+                                id="description"
+                                rows="10"
                                 value={category.description}
                                 onChange={handleChange}
-                            ></textarea>
-                        </div>
-                        {allCategories?.length > 0 && (
-                            <div className="form-group">
-                                <label htmlFor="parent">Parent Category</label>
+                                className="commentDescription"
+                            />
+                        </label>
+                    </div>
+                </div>
+
+                <div className="formStep">
+                    <div className="separator" />
+                    <h2>Image</h2>
+                    <div className="oneLabel">
+                        <label htmlFor="image">
+                            <p className="labelTitle">Image:</p>
+                            <input
+                                type="file"
+                                name="file"
+                                placeholder="Image"
+                                limit="5"
+                                size="5"
+                                accept="image/png, image/jpeg, image/webp"
+                                onChange={(e) => {
+                                    onChangeFile(e);
+                                }}
+                            />
+                        </label>
+                    </div>
+                </div>
+
+                {allCategories.length > 0 && (
+                    <div className="formStep">
+                        <div className="separator" />
+                        <h2>Catégorie parent</h2>
+                        <div className="oneLabel">
+                            <label>
+                                <p className="labelTitle">Catégorie parente:</p>
                                 <select
-                                    className="form-control"
-                                    id="parent"
                                     name="parent"
+                                    id="parent"
                                     onChange={handleChange}
+                                    className="select"
                                 >
-                                    <option>Select Parent Category</option>
-                                    {allCategories.map((cat) => (
-                                        <option key={cat.id} value={cat.id}>
-                                            {cat.name}
+                                    <option value={""}>--Aucune--</option>
+                                    {allCategories.map((category) => (
+                                        <option key={category.id} value={category.id}>
+                                            {category.name}
                                         </option>
                                     ))}
                                 </select>
+                            </label>
+                        </div>
+                    </div>
+                )}
+
+                <input type="submit" value="Submit" className="primaryBouton" />
+                {error && <p className="error">Une erreur est survenue</p>}
+            </form>
+
+            {popUp && (
+                <div className="popUp">
+                    <div className="popUpContent">
+                        <div className="textPopUp">
+                            <img src="postValide.png" alt="PostValide création" />
+                            <h2>La catégorie a bien été créé</h2>
+                            <div className="popUpButton">
+                                <div className="backHome" onClick={() => navigate("/")}>
+                                    Retour à l'accueil
+                                </div>
+                                <div className="createPostV" onClick={handleCreateCategory}>
+                                    Créer une autre catégorie
+                                </div>
                             </div>
-                        )}
-                        <button type="submit" className="btn btn-primary">
-                            Create Category
-                        </button>
-                    </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     )
 }
