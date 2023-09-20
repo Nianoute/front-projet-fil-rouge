@@ -19,14 +19,17 @@ export default function GetAllPostDesign({ post }) {
   if (promoPrice !== 0 && price !== 0) {
     const promo = promoPrice * 100 / price;
     promoPercent = Math.round(promo);
+    promoPercent = 100 - promoPercent;
   }
 
   //si post.description est trop long, on coupe le texte et on ajoute "..."
   let description = post.description;
-  if (description.length > 100) {
-    description = description.substring(0, 100) + "...";
+  if (description) {
+    if (description.length > 100) {
+      description = description.substring(0, 100) + "...";
+    }
+    post.description = description;
   }
-  post.description = description;
 
 
   const [postIsLiked, setPostIsLiked] = useState(false);
@@ -72,7 +75,7 @@ export default function GetAllPostDesign({ post }) {
           <div className="postInfosPrimary">
             <div>
               {post.imagePost === "" && (
-                <img src="logo.png" className="postLogo" alt="no" />
+                <img src="/logo.png" className="postLogo" alt="no" />
               )}
               {post.imagePost !== "" && (
                 <img
@@ -91,7 +94,7 @@ export default function GetAllPostDesign({ post }) {
                 <p className="promoPrice">{post.promoPrice}€</p>
                 <p className="price">{post.price}€</p>
                 {promoPercent !== 0 && (
-                  <p className="promoPercent">-{promoPercent}%</p>
+                  <p>-{promoPercent}%</p>
                 )}
               </div>
             </div>
@@ -106,7 +109,7 @@ export default function GetAllPostDesign({ post }) {
                   <>
                     {post.author.avatar === "" ? (
                       <img
-                        src="logo.png"
+                        src="/logo.png"
                         className="postAuthorAvatar"
                         alt="avatar"
                       />
@@ -123,7 +126,7 @@ export default function GetAllPostDesign({ post }) {
               </div>
               <div className="postBoutonComment">
                 <div className="postBoutonCommentIcon">
-                  <img src="comment.png" alt="avatar" />
+                  <img src="/comment.png" alt="avatar" />
                 </div>
                 <p>{post.comments?.length}</p>
               </div>
@@ -147,12 +150,12 @@ export default function GetAllPostDesign({ post }) {
         {user && (
           <div className="like">
             {!postIsLiked ? (
-              <div className="likeIcon" onClick={likePost}>
-                <img src="coeur-vide.png" alt="coeur_vide" />
+              <div className="likeIcon cursor" onClick={likePost}>
+                <img src="/coeur-vide.png" alt="coeur_vide" />
               </div>
             ) : (
-              <div className="likeIcon" onClick={removeLikePost}>
-                <img src="coeur-remplie.png" alt="coeur_remplie" />
+              <div className="likeIcon cursor" onClick={removeLikePost}>
+                <img src="/coeur-remplie.png" alt="coeur_remplie" />
               </div>
             )}
             <p>{post.likesPost?.length}</p>
@@ -161,7 +164,7 @@ export default function GetAllPostDesign({ post }) {
         {!user && (
           <div className="like">
             <div className="likeIcon">
-              <img src="coeur-vide.png" alt="coeur_vide" />
+              <img src="/coeur-vide.png" alt="coeur_vide" />
             </div>
             <p>{post.likesPost?.length}</p>
           </div>

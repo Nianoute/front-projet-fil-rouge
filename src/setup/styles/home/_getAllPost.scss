@@ -111,6 +111,10 @@
 
             img {
                 width: 200px;
+
+                @media screen and (max-width: $mobile) {
+                    width: 100px;
+                }
             }
 
             .button {

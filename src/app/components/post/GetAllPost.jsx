@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { getAllPosts } from "../../../setup/services/post.services";
+import { deletePost, getAllPosts } from "../../../setup/services/post.services";
 import GetAllPostDesign from "./DesignPost";
 import { getAllCategories } from "../../../setup/services/category.service";
 import { UserContext } from "../../../setup/contexts/UserContext";
@@ -65,6 +65,21 @@ const GetAllPostHome = () => {
         console.log(error);
       });
   }, []);
+
+  const handleDelete = (e) => {
+    if (window.confirm("Voulez-vous vraiment supprimer ce post ?")) {
+      deletePost(e.target.id)
+        .then(() => {
+          getAllPosts()
+            .then((posts) => {
+              setPosts([...posts]);
+            })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <div className="home">
@@ -135,10 +150,15 @@ const GetAllPostHome = () => {
       )}
       <div className="allPostDesign">
         {posts?.map((post) => (
-          <div key={post.id}>
+          <div key={post.id} className="relative">
             <div className='onePost'>
               <GetAllPostDesign post={post} />
             </div>
+            {user?.admin && (
+              <div className="supprimer" onClick={handleDelete} id={post.id}>
+                <img src="/sup.png" alt="sup" id={post.id} />
+              </div>
+            )}
           </div>
         ))}
         {posts?.length === 0 && (

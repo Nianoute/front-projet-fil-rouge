@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { createPostCommentByUser, getAllPostComments } from "../../../setup/services/comment.service";
+import { UserContext } from "../../../setup/contexts/UserContext";
 
 export default function GetAllCommentPost({ oneComment, post, setComments }) {
   const [commentChild, setCommentChild] = useState({
@@ -9,6 +10,8 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
   const onChangeCommentChild = (e) => {
     setCommentChild({ ...commentChild, [e.target.name]: e.target.value });
   };
+
+  const { user } = useContext(UserContext);
 
   const [showFormCommentChild, setShowFormCommentChild] = useState(false);
 
@@ -68,7 +71,7 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
           {oneComment.author.userName}
         </p>
         <p className="commentHeaderDate">
-          {oneComment.createdAt}
+          {new Date(oneComment.createdAt).toLocaleDateString()}
         </p>
       </div>
       <div className="commentBody">
@@ -76,13 +79,15 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
         <p className="commentBodyDescription">
           {oneComment.description}
         </p>
-        <p
-          className="repondre"
-          onClick={showAndHideFormComment}
-          id={oneComment.id}
-        >
-          Répondre
-        </p>
+        {user && (
+          <p
+            className="repondre"
+            onClick={showAndHideFormComment}
+            id={oneComment.id}
+          >
+            Répondre
+          </p>
+        )}
       </div>
       {showFormCommentChild && (
         <div className="detailPostCommentsChildForm">
@@ -144,7 +149,9 @@ export default function GetAllCommentPost({ oneComment, post, setComments }) {
                       {child.author.userName}
                     </p>
                     <p className="commentHeaderDate">
-                      {child.createdAt}
+                      {new Date(
+                        child.createdAt
+                      ).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="commentBody">

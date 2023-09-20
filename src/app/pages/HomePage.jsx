@@ -1,4 +1,5 @@
 import GetAllPostHome from "../components/post/GetAllPost";
+import GetAllCategoriesPage from "./categories/GetAllCategoriesPage";
 
 const HomePage = () => {
   return (
@@ -6,7 +7,8 @@ const HomePage = () => {
       <div className="getAllPost">
         <GetAllPostHome></GetAllPostHome>
       </div>
-      <div className="getCategories">
+      <div className="getAllCategories">
+        <GetAllCategoriesPage></GetAllCategoriesPage>
       </div>
     </div>
   );

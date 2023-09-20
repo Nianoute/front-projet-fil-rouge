@@ -8,9 +8,12 @@ const UpdateOnePostVariant = (onePostVariant, setPostVariants, postVariants) => 
 
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [percent, setPercent] = useState(0);
 
     useEffect(() => {
         setPostVariant(onePostVariant.onePostVariant);
+        const thisPercent = Math.round((1 - onePostVariant.onePostVariant.promoPrice / onePostVariant.onePostVariant.price) * 100);
+        setPercent(thisPercent);
     }, [onePostVariant]);
 
     const onChangePostVariant = (e) => {
@@ -50,12 +53,21 @@ const UpdateOnePostVariant = (onePostVariant, setPostVariants, postVariants) => 
                             <h2>Informations du post</h2>
                             <div className="oneLabel">
                                 <label>
+                                    <p className="labelTitle">Titre:</p>
                                     <input type="text" onChange={onChangePostVariant} value={postVariant.title} name="title" className="inputForm" placeholder="title" />
                                 </label>
                             </div>
                             <div className="oneLabel">
                                 <label>
-                                    <input type="text" onChange={onChangePostVariant} value={postVariant.description} name="description" className="inputForm" placeholder="La description" />
+                                    <p className="labelTitle">Description:</p>
+                                    <textarea
+                                        name="description"
+                                        rows="10"
+                                        placeholder="Description"
+                                        onChange={onChangePostVariant}
+                                        value={postVariant.description}
+                                        className="commentDescription"
+                                    ></textarea>
                                 </label>
                             </div>
                         </div>
@@ -63,15 +75,40 @@ const UpdateOnePostVariant = (onePostVariant, setPostVariants, postVariants) => 
                         <div className="formStep">
                             <div className="separator" />
                             <h2>Les prix</h2>
-                            <div className="oneLabel">
-                                <label>
-                                    <input type="number" onChange={onChangePostVariant} value={postVariant.price} name="price" className="inputForm" placeholder="Le prix actuel" />
-                                </label>
+                            <div className="twoLabel">
+                                <div className="oneLabel margin">
+                                    <label>
+                                        <p className="labelTitle">Prix après la promotion:</p>
+                                        <input
+                                            type="number"
+                                            onChange={onChangePostVariant}
+                                            value={postVariant.promoPrice}
+                                            name="promoPrice"
+                                            className="inputForm"
+                                            placeholder="Le prix actuel"
+                                            required
+                                        />
+                                    </label>
+                                </div>
+                                <div className="oneLabel margin">
+                                    <label>
+                                        <p className="labelTitle">Prix initial / Prix avant promotion:</p>
+                                        <input
+                                            type="number"
+                                            onChange={onChangePostVariant}
+                                            value={postVariant.price}
+                                            name="price"
+                                            className="inputForm"
+                                            placeholder="Le prix avant promotion"
+                                            required
+                                        />
+                                    </label>
+                                </div>
+
                             </div>
-                            <div className="oneLabel">
-                                <label>
-                                    <input type="number" onChange={onChangePostVariant} value={postVariant.promoPrice} name="promoPrice" className="inputForm" placeholder="Le prix initial" />
-                                </label>
+                            <div className="percent">
+                                <p className="labelTitle">Pourcentage de réduction:</p>
+                                <p className="percentValue">{percent}%</p>
                             </div>
                         </div>
 
