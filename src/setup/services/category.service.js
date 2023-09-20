@@ -38,4 +38,13 @@ const getOneCategory = async (id) => {
   return response.data;
 }
 
-export { getAllCategories, createCategory, getOneCategory };
+const deleteCategory = async (id) => {
+  const token = localStorage.getItem("access_token");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const response = await axios.delete(`${process.env.REACT_APP_API}/categories/${id}`, config);
+  return response.data;
+}
+
+export { getAllCategories, createCategory, getOneCategory, deleteCategory };

@@ -171,7 +171,7 @@ const OnePostPage = () => {
                   <h3>Site Web :</h3>
                   {post.website ? (
                     <div className="postBoutonUrl">
-                      <Link to={post.website}>
+                      <Link to={post.website} target="blank">
                         <div className="postBoutonUrlIcon">
                           <img src="url.png" alt="avatar" />
                         </div>
@@ -198,7 +198,14 @@ const OnePostPage = () => {
                     <div className="categories">
                       {post.categories.map((category) => (
                         <div className="category" key={category.id}>
-                          <p>{category.name}</p>
+                          <Link to={`/categories/${category.id}`}>
+                            {category.imageCategory !== "" ? (
+                              <img src={category.imageCategory} alt="category" />
+                            ) : (
+                              <img src="/noCat.png" alt="category" />
+                            )}
+                            <p>{category.name}</p>
+                          </Link>
                         </div>
                       ))}
                     </div>

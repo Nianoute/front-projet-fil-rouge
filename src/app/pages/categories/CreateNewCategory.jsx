@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom"
 
 const CreateNewCategory = () => {
     const [category, setCategory] = useState({
-        name: "Un nom de catégorie",
-        description: "Une description de catégorie",
+        name: "",
+        description: "",
         parent: null,
     })
 
@@ -54,8 +54,8 @@ const CreateNewCategory = () => {
         category.value = ""
         setAllCategories([...allCategories, category])
         setCategory({
-            name: "Un nom de catégorie",
-            description: "Une description de catégorie",
+            name: "",
+            description: "",
             parent: null,
         })
     }

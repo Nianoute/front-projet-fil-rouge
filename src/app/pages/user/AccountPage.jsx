@@ -104,7 +104,7 @@ const AccountPage = () => {
             <p>Nombre de commentaires: <b>{me?.comments?.length}</b></p>
             <p>Nombre de likes: <b>{me?.likesUser?.length}</b></p>
             <p>Argent économisé avec vos posts: <b>{gain}€</b></p>
-            <p>Nombre de categories likes: <b>{me?.categoriesUser?.length}</b></p>
+            <p>Nombre de categories likes: <b>{me?.likesCategoryUser?.length}</b></p>
           </div>
         </div>
 

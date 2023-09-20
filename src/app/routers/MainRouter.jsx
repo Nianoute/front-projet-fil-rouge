@@ -77,7 +77,7 @@ const MainRouter = () => {
             <CreateNewCategory />
           </AdminProtectedRoute>
         } />
-        <Route path="/category/:id" element={<OneCategoryPage />} />
+        <Route path="/categories/:id" element={<OneCategoryPage />} />
       </Routes>
     </>
   );
